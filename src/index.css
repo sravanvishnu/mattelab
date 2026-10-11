@@ -1937,3 +1937,37 @@ select {
 .fullcalendar-dark-theme .fc-timegrid-now-indicator-arrow {
   border-color: #e28743 !important;
 }
+
+/* ========================================================
+   FLOATING DOCK-STYLE NAVIGATION HEADER
+   - Editorial studio layout mechanics
+   - Geometry: Pill capsule with border-radius: 9999px
+   - Motion: Downward slide entrance, auto-hide scroll mechanics, spring scales
+   ======================================================== */
+@keyframes dockEntrance {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-dock-entrance {
+  animation: dockEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes badgeMicroBounce {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(0, -2px) scale(1.1);
+  }
+}
+
+.animate-badge-bounce {
+  animation: badgeMicroBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

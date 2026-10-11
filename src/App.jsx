@@ -26,6 +26,9 @@ import ConfirmModal from './components/ConfirmModal';
 import AdminResourcesView from './components/AdminResourcesView';
 import { getResources } from './services/resources';
 import { fetchAllEvents, approveEvent, rejectEvent, deleteEvent } from './services/events';
+import Mascot from './components/mascot/Mascot';
+import personImg from './assets/mascot.png';
+import Footer from './components/Footer';
 
 export default function App() {
   const { currentUser, isAdmin, loading: authLoading, logout } = useAuth();
@@ -329,6 +332,18 @@ export default function App() {
         )}
       </div>
 
+      {/* Editorial Campus Makerspace Footer (Rendered only on Home page) */}
+      {activeTab === 'overview' && (
+        <Footer
+          brand="MatteLab"
+          ctaText={isAdmin ? "Create Workshop" : "Propose Workshop"}
+          headline="Got an idea? Let's build it together."
+          craftingYear="2019"
+          onOpenCreateModal={() => setIsCreateModalOpen(true)}
+          onSelectTab={setActiveTab}
+        />
+      )}
+
       {/* Mobile Sticky Bottom Navigation */}
       <MobileNav
         activeTab={activeTab}
@@ -354,6 +369,14 @@ export default function App() {
         isLoading={confirmModal.isLoading}
         onConfirm={confirmModal.onConfirm}
         onCancel={() => setConfirmModal(prev => ({ ...prev, isOpen: false }))}
+      />
+
+      {/* Interactive MatteLab Mascot */}
+      <Mascot
+        db={db}
+        image={personImg}
+        onNavigate={setActiveTab}
+        onOpenCreateModal={() => setIsCreateModalOpen(true)}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import { useToast } from '../context/ToastContext';
 import { ArrowRight, Cpu, Users, Sparkles } from 'lucide-react';
 import Header from './Header';
 import GoonsHero from './GoonsHero';
+import mattelabLogo from '../assets/mattelab.png';
 
 export default function LoginView() {
   const { loginWithGoogle } = useAuth();
@@ -68,7 +69,7 @@ export default function LoginView() {
           <div className="flex justify-center mb-6">
             <div className="bg-[#fbf9f5] rounded-2xl px-5 py-3 border border-[#c26e47]/30 shadow-sm">
               <img
-                src="/logo.png"
+                src={mattelabLogo}
                 alt="MatteLab"
                 className="h-14 sm:h-16 w-auto object-contain"
               />
