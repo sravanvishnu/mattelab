@@ -24,6 +24,8 @@ import MyRegistrationsView from './components/MyRegistrationsView';
 import ProfileView from './components/ProfileView';
 import CreateEventModal from './components/CreateEventModal';
 import ConfirmModal from './components/ConfirmModal';
+import AdminResourcesView from './components/AdminResourcesView';
+import { getResources } from './services/resources';
 
 export default function App() {
   const { currentUser, loading: authLoading, logout } = useAuth();
@@ -32,7 +34,9 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [events, setEvents] = useState([]);
   const [registeredEventIds, setRegisteredEventIds] = useState(new Set());
+  const [resources, setResources] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
+  const [resourcesLoading, setResourcesLoading] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   // Confirm Modal state
@@ -45,6 +49,20 @@ export default function App() {
     isLoading: false,
     onConfirm: () => {}
   });
+
+  const loadResources = useCallback(async () => {
+    if (!currentUser) return;
+    setResourcesLoading(true);
+    try {
+      const data = await getResources();
+      setResources(data);
+    } catch (err) {
+      console.error('Failed to load resources:', err);
+      // Don't toast error if user is simply not permitted or collection empty
+    } finally {
+      setResourcesLoading(false);
+    }
+  }, [currentUser]);
 
   const loadData = useCallback(async () => {
     if (!currentUser) return;
@@ -96,11 +114,13 @@ export default function App() {
   useEffect(() => {
     if (currentUser) {
       loadData();
+      loadResources();
     } else {
       setEvents([]);
       setRegisteredEventIds(new Set());
+      setResources([]);
     }
-  }, [currentUser, loadData]);
+  }, [currentUser, loadData, loadResources]);
 
   // Register for internal event
   const handleRegister = async (eventItem) => {
@@ -223,6 +243,7 @@ export default function App() {
             <Overview
               events={events}
               myRegistrations={myRegisteredEvents}
+              resources={resources}
               setActiveTab={setActiveTab}
               onOpenCreateModal={() => setIsCreateModalOpen(true)}
             />
@@ -247,6 +268,14 @@ export default function App() {
               onRefresh={loadData}
               onCancelRegistration={promptCancelRegistration}
               onExploreEvents={() => setActiveTab('events')}
+            />
+          )}
+
+          {activeTab === 'resources' && (
+            <AdminResourcesView
+              resources={resources}
+              loading={resourcesLoading}
+              onRefresh={loadResources}
             />
           )}
 

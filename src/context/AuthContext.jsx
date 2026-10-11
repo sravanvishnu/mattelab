@@ -80,18 +80,22 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const isOrganizer = Boolean(
+  const isAdmin = Boolean(
     currentUser && (
+      userProfile?.role === 'admin' ||
       userProfile?.role === 'organizer' ||
       (currentUser.email && APPROVED_ORGANIZER_EMAILS.includes(currentUser.email.toLowerCase()))
     )
   );
+
+  const isOrganizer = isAdmin;
 
   return (
     <AuthContext.Provider
       value={{
         currentUser,
         userProfile,
+        isAdmin,
         isOrganizer,
         loading,
         loginWithGoogle,

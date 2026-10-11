@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function: Check if user is signed in
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function: Check if user is an approved admin or organizer
+    function isAdminOrOrganizer() {
+      return isAuthenticated() && (
+        (exists(/databases/{database}/documents/users/$(request.auth.uid)) &&
+         get(/databases/{database}/documents/users/$(request.auth.uid)).data.role in ['admin', 'organizer']) ||
+        request.auth.token.email.lower() in [
+          'nayankeshav29@gmail.com'
+        ]
+      );
+    }
+
+    // 1. RESOURCES COLLECTION (Machines and Spaces)
+    // Everyone signed in can view resources; only admins/organizers can create, update, or deactivate
+    match /resources/{resourceId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdminOrOrganizer();
+    }
+
+    // 2. EVENTS COLLECTION
+    // Everyone signed in can browse events; only organizers/admins can publish/edit
+    match /events/{eventId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdminOrOrganizer();
+
+      // Subcollection: Event Registrations
+      match /registrations/{userId} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated() && (request.auth.uid == userId || isAdminOrOrganizer());
+      }
+    }
+
+    // 3. USERS COLLECTION
+    // Users can read any profile; can write their own profile
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && (request.auth.uid == userId || isAdminOrOrganizer());
+      allow delete: if isAdminOrOrganizer();
+    }
+  }
+}

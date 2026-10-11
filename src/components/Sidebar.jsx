@@ -7,7 +7,8 @@ import {
   LogOut,
   PlusCircle,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  Wrench
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -18,7 +19,7 @@ export default function Sidebar({
   onPromptLogout,
   registeredCount = 0
 }) {
-  const { isOrganizer, userProfile } = useAuth();
+  const { isOrganizer, isAdmin, userProfile } = useAuth();
 
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
@@ -28,6 +29,12 @@ export default function Sidebar({
       label: 'My Registrations',
       icon: BookmarkCheck,
       badge: registeredCount > 0 ? registeredCount : null
+    },
+    {
+      id: 'resources',
+      label: isAdmin ? 'Manage Resources' : 'Lab Resources',
+      icon: Wrench,
+      highlight: isAdmin
     },
     { id: 'profile', label: 'My Profile', icon: User },
   ];

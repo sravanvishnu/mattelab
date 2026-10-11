@@ -4,7 +4,8 @@ import {
   Calendar,
   BookmarkCheck,
   User,
-  LogOut
+  LogOut,
+  Wrench
 } from 'lucide-react';
 
 export default function MobileNav({
@@ -22,6 +23,7 @@ export default function MobileNav({
       icon: BookmarkCheck,
       badge: registeredCount > 0 ? registeredCount : null
     },
+    { id: 'resources', label: 'Resources', icon: Wrench },
     { id: 'profile', label: 'Profile', icon: User },
   ];
 
