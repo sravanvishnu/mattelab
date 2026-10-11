@@ -8,16 +8,18 @@ import {
   MapPin,
   Clock,
   Compass,
-  Award
+  Award,
+  Wrench
 } from 'lucide-react';
 
 export default function Overview({
   events = [],
   myRegistrations = [],
+  resources = [],
   setActiveTab,
   onOpenCreateModal
 }) {
-  const { currentUser, userProfile, isOrganizer } = useAuth();
+  const { currentUser, userProfile, isOrganizer, isAdmin } = useAuth();
   const userName = userProfile?.name || currentUser?.displayName || 'Maker';
 
   // Find the soonest upcoming event
@@ -64,6 +66,14 @@ export default function Overview({
             >
               <span>My Registrations ({myRegistrations.length})</span>
             </button>
+            <button
+              type="button"
+              className="btn btn-secondary flex items-center gap-2"
+              onClick={() => setActiveTab('resources')}
+            >
+              <Wrench size={15} />
+              <span>{isAdmin ? 'Manage Resources' : 'Lab Machinery & Spaces'} ({resources.length})</span>
+            </button>
           </div>
         </div>
       </section>
@@ -98,13 +108,24 @@ export default function Overview({
             </div>
           </div>
 
+          <div className="stat-metric-card" onClick={() => setActiveTab('resources')}>
+            <div className="stat-card-icon-wrap primary">
+              <Wrench size={22} />
+            </div>
+            <div className="stat-card-info">
+              <span className="stat-card-label">Makerspace Resources</span>
+              <h3 className="stat-card-number">{resources.length}</h3>
+              <p className="stat-card-sub">Machines & lab stations</p>
+            </div>
+          </div>
+
           <div className="stat-metric-card" onClick={() => setActiveTab('profile')}>
             <div className="stat-card-icon-wrap warning">
               <Award size={22} />
             </div>
             <div className="stat-card-info">
               <span className="stat-card-label">Maker Role</span>
-              <h3 className="stat-card-number capitalize">{userProfile?.role || (isOrganizer ? 'Organizer' : 'Student')}</h3>
+              <h3 className="stat-card-number capitalize">{userProfile?.role || (isAdmin ? 'Admin' : 'Student')}</h3>
               <p className="stat-card-sub">College of Engineering Trikaripur</p>
             </div>
           </div>

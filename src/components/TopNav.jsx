@@ -15,6 +15,10 @@ const TAB_TITLES = {
     title: 'My Registrations',
     subtitle: 'Workshops and activities you have reserved a spot for.'
   },
+  resources: {
+    title: 'Makerspace Resources & Equipment',
+    subtitle: 'Manage machines, 3D printers, workstations, and lab spaces.'
+  },
   profile: {
     title: 'My Profile',
     subtitle: 'Manage your college maker credentials and activity.'
