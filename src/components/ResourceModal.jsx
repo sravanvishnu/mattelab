@@ -67,7 +67,7 @@ export default function ResourceModal({
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">
+            <div className="p-2.5 rounded-xl bg-[#c26e47]/15 text-[#e28743] border border-[#c26e47]/25">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -123,7 +123,7 @@ export default function ResourceModal({
                 onClick={() => setType('machine')}
                 className={`flex items-center justify-center gap-2.5 p-3 rounded-lg border text-xs font-medium transition-all ${
                   type === 'machine'
-                    ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-300 shadow-sm'
+                    ? 'bg-[#c26e47]/15 border-[#c26e47]/50 text-[#f3a86c] shadow-sm'
                     : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-800/60'
                 }`}
               >
@@ -169,7 +169,7 @@ export default function ResourceModal({
                 onClick={() => setStatus('active')}
                 className={`flex items-center justify-center gap-2 p-2.5 rounded-lg border text-xs font-medium transition-all ${
                   status === 'active'
-                    ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400'
+                    ? 'bg-[#c26e47]/15 border-[#c26e47] text-[#e28743]'
                     : 'bg-slate-900 border-slate-800 text-slate-500 hover:bg-slate-800'
                 }`}
               >
