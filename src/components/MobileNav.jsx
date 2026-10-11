@@ -38,28 +38,19 @@ export default function MobileNav({
             type="button"
             className={`mobile-nav-btn ${isActive ? 'active' : ''}`}
             onClick={() => setActiveTab(item.id)}
+            aria-current={isActive ? 'page' : undefined}
           >
             <div className="mobile-nav-icon-wrapper">
-              <Icon size={20} />
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.9} />
               {item.badge && (
                 <span className="mobile-dot-badge">{item.badge}</span>
               )}
             </div>
-            <span>{item.label}</span>
+            <span className="mobile-nav-label">{item.label}</span>
+            {isActive && <span className="mobile-active-pip" aria-hidden="true" />}
           </button>
         );
       })}
-      <button
-        type="button"
-        className="mobile-nav-btn logout-btn"
-        onClick={onPromptLogout}
-        aria-label="Sign Out"
-      >
-        <div className="mobile-nav-icon-wrapper">
-          <LogOut size={20} />
-        </div>
-        <span>Sign Out</span>
-      </button>
     </nav>
   );
 }

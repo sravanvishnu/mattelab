@@ -19,28 +19,28 @@ export default function TopNav({
   const { currentUser, userProfile, isOrganizer, isAdmin } = useAuth();
 
   const navItems = [
-    { id: 'overview', label: 'OVERVIEW' },
+    { id: 'overview', label: 'Overview' },
     {
       id: 'events',
-      label: 'EVENTS',
+      label: 'Events',
       badge: isAdmin && pendingCount > 0 ? pendingCount : null
     },
     {
       id: 'registrations',
-      label: 'REGISTRATIONS',
+      label: 'Registrations',
       badge: registeredCount > 0 ? registeredCount : null
     },
     {
       id: 'resources',
-      label: isAdmin ? 'MANAGE RESOURCES' : 'RESOURCES',
+      label: isAdmin ? 'Manage Resources' : 'Resources',
       highlight: isAdmin
     },
-    { id: 'profile', label: 'PROFILE' }
+    { id: 'profile', label: 'Profile' }
   ];
 
   return (
     <Header
-      brand="MATTELAB"
+      brand="MatteLab"
       subtitle="CET Makerspace"
       items={navItems}
       activeItem={activeTab}

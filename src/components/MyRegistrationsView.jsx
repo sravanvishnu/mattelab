@@ -84,28 +84,31 @@ export default function MyRegistrationsView({
   };
 
   return (
-    <div className="tab-pane-fade space-y-6">
+    <div className="tab-pane-fade space-y-8">
       {/* Section Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b-2 border-[#4C4541]/20">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100 font-heading">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>[ 03 / PASSES ] · RESERVATIONS</span>
+          </div>
+          <h2 className="font-condensed text-3xl sm:text-5xl font-bold tracking-tight text-[#4C4541] uppercase">
             My Campus Reservations
           </h2>
-          <p className="text-muted text-sm mt-0.5">
+          <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
             Workshops, events, and makerspace machinery you are confirmed to attend.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Sub-tabs switch */}
-          <div className="flex items-center bg-[#181a1d] p-1 rounded-xl border border-white/10">
+          {/* Sub-tabs switch with brutalist pill */}
+          <div className="flex items-center bg-white p-1 rounded-full border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541]">
             <button
               type="button"
               onClick={() => setActiveTab('events')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${
                 activeTab === 'events'
-                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
               Events ({myRegistrations.length})
@@ -113,25 +116,27 @@ export default function MyRegistrationsView({
             <button
               type="button"
               onClick={() => setActiveTab('equipment')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeTab === 'equipment'
-                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
-              <Wrench className="w-3.5 h-3.5" />
-              <span>Equipment Bookings ({myBookings.length})</span>
+              <Wrench size={13} />
+              <span>Machinery ({myBookings.length})</span>
             </button>
           </div>
 
           <button
             type="button"
-            className={`btn-icon ${loading ? 'anim-spin' : ''}`}
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
+              loading ? 'animate-spin' : ''
+            }`}
             onClick={onRefresh}
             title="Refresh registrations"
             aria-label="Refresh registrations"
           >
-            <RotateCw size={17} />
+            <RotateCw size={15} />
           </button>
         </div>
       </div>
@@ -140,69 +145,77 @@ export default function MyRegistrationsView({
       {activeTab === 'events' && (
         <>
           {myRegistrations.length === 0 ? (
-            <div className="empty-state-card mt-4">
-              <div className="empty-state-icon">
-                <BookmarkCheck size={36} />
+            <div className="rounded-[24px] border-2 border-[#4C4541] bg-white p-10 sm:p-14 text-center shadow-[4px_4px_0_#4C4541]">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FCF0DA] border-2 border-[#4C4541] flex items-center justify-center text-[#4C4541] mb-4 shadow-[2px_2px_0_#4C4541]">
+                <BookmarkCheck size={28} />
               </div>
-              <h3>No Active Event Registrations</h3>
-              <p className="text-muted text-sm max-w-md">
+              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541]">
+                No Active Event Registrations
+              </h3>
+              <p className="text-xs sm:text-sm text-[#4C4541]/80 max-w-md mx-auto mt-2 leading-relaxed font-sans">
                 You haven't signed up for any upcoming workshops yet. Explore the campus events catalog to reserve your spot!
               </p>
               <button
                 type="button"
-                className="btn btn-primary mt-4 flex items-center gap-2"
+                className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                 onClick={onExploreEvents}
               >
                 <span>Explore Events</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </button>
             </div>
           ) : (
-            <div className="events-grid-responsive mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {myRegistrations.map((evt) => (
-                <article key={evt.id} className="event-card-modern registered-card">
-                  <div className="event-card-header">
-                    <span className="badge-tag registered">
-                      <ShieldCheck size={13} />
-                      <span>Spot Confirmed</span>
-                    </span>
-                    <span className="text-muted text-xs">
-                      ID: #{evt.id.substring(0, 6)}
-                    </span>
+                <article key={evt.id} className="group relative flex flex-col justify-between rounded-[22px] border-2 border-[#4C4541] bg-white p-5 sm:p-6 shadow-[3px_3px_0_#4C4541] hover:-translate-y-1 hover:shadow-[6px_6px_0_#4C4541] transition-all duration-200">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3.5">
+                      <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#F2C46A] text-[#4C4541] border border-[#4C4541] flex items-center gap-1">
+                        <ShieldCheck size={12} />
+                        <span>Spot Confirmed</span>
+                      </span>
+                      <span className="font-mono text-xs text-[#4C4541]/60">
+                        PASS #{evt.id.substring(0, 6).toUpperCase()}
+                      </span>
+                    </div>
+
+                    <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#4C4541] mb-2 leading-none">
+                      {evt.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4C4541]/80 line-clamp-2 leading-relaxed mb-4 font-sans">
+                      {evt.description}
+                    </p>
+
+                    <div className="space-y-1.5 text-xs text-[#4C4541] font-mono">
+                      <div className="flex items-center gap-2">
+                        <MapPin size={14} className="text-[#4C4541]/70 flex-shrink-0" />
+                        <span className="truncate">{evt.venue || 'College Makerspace'}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar size={14} className="text-[#4C4541]/70 flex-shrink-0" />
+                        <span>{formatDate(evt.startAt)}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="event-card-title">{evt.title}</h3>
-                  <p className="event-card-desc">{evt.description}</p>
-
-                  <div className="event-card-details">
-                    <div className="detail-item">
-                      <MapPin size={15} className="detail-icon" />
-                      <span>{evt.venue || 'College Makerspace'}</span>
-                    </div>
-                    <div className="detail-item">
-                      <Calendar size={15} className="detail-icon" />
-                      <span>{formatDate(evt.startAt)}</span>
-                    </div>
-                  </div>
-
-                  <div className="event-card-footer">
+                  <div className="mt-5 pt-3.5 border-t-2 border-[#4C4541]/15">
                     {evt.registrationUrl ? (
                       <a
                         href={evt.registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-outline-accent w-full flex items-center justify-center gap-2"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#FCF0DA] hover:bg-[#F2C46A] text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                       >
                         <span>Open External Link</span>
-                        <ExternalLink size={15} />
+                        <ExternalLink size={14} />
                       </a>
                     ) : (
                       <button
                         type="button"
-                        className="btn btn-danger-soft w-full"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                         onClick={() => onCancelRegistration(evt)}
                       >
-                        Cancel Registration
+                        Cancel Spot
                       </button>
                     )}
                   </div>
@@ -217,90 +230,94 @@ export default function MyRegistrationsView({
       {activeTab === 'equipment' && (
         <>
           {myBookings.length === 0 ? (
-            <div className="empty-state-card mt-4">
-              <div className="empty-state-icon">
-                <Wrench size={36} />
+            <div className="rounded-[24px] border-2 border-[#4C4541] bg-white p-10 sm:p-14 text-center shadow-[4px_4px_0_#4C4541]">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FCF0DA] border-2 border-[#4C4541] flex items-center justify-center text-[#4C4541] mb-4 shadow-[2px_2px_0_#4C4541]">
+                <Wrench size={28} />
               </div>
-              <h3>No Active Equipment Reservations</h3>
-              <p className="text-muted text-sm max-w-md">
+              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541]">
+                No Active Equipment Reservations
+              </h3>
+              <p className="text-xs sm:text-sm text-[#4C4541]/80 max-w-md mx-auto mt-2 leading-relaxed font-sans">
                 You don't have any machinery or lab slots reserved. Check the equipment schedule to book a 3D printer, laser cutter, or electronics station.
               </p>
               {onExploreResources && (
                 <button
                   type="button"
-                  className="btn btn-primary mt-4 flex items-center gap-2"
+                  className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                   onClick={onExploreResources}
                 >
-                  <Wrench size={16} />
-                  <span>View Equipment & Schedule</span>
+                  <Wrench size={15} />
+                  <span>View Machinery & Schedule</span>
                 </button>
               )}
             </div>
           ) : (
-            <div className="events-grid-responsive mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {myBookings.map((b) => {
                 const res = resources.find((r) => r.id === b.resourceId);
                 const startDate = b.start instanceof Date ? b.start : new Date(b.start);
                 const endDate = b.end instanceof Date ? b.end : new Date(b.end);
-
                 const durationMins = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60));
 
                 return (
-                  <article key={b.id} className="event-card-modern registered-card border-[#c26e47]/30">
-                    <div className="event-card-header">
-                      <span className="badge-tag registered bg-[#c26e47]/15 border-[#c26e47]/40 text-[#f3a86c]">
-                        <CheckCircle2 size={13} />
-                        <span>Slot Reserved</span>
-                      </span>
-                      <span className="text-muted text-xs">
-                        ID: #{b.id.substring(0, 6)}
-                      </span>
-                    </div>
-
-                    <h3 className="event-card-title">{b.title}</h3>
-                    <p className="event-card-desc">
-                      {b.notes || (res?.description ? res.description : 'Makerspace scheduled session.')}
-                    </p>
-
-                    <div className="event-card-details">
-                      <div className="detail-item">
-                        <Wrench size={15} className="detail-icon text-[#e28743]" />
-                        <span className="font-semibold text-slate-200">
-                          {res?.name || 'Makerspace Equipment'} ({res?.location || 'Lab'})
+                  <article key={b.id} className="group relative flex flex-col justify-between rounded-[22px] border-2 border-[#4C4541] bg-white p-5 sm:p-6 shadow-[3px_3px_0_#4C4541] hover:-translate-y-1 hover:shadow-[6px_6px_0_#4C4541] transition-all duration-200">
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3.5">
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#AEAC78] text-[#4C4541] border border-[#4C4541] flex items-center gap-1">
+                          <CheckCircle2 size={12} />
+                          <span>Slot Reserved</span>
+                        </span>
+                        <span className="font-mono text-xs text-[#4C4541]/60">
+                          SLOT #{b.id.substring(0, 6).toUpperCase()}
                         </span>
                       </div>
-                      <div className="detail-item">
-                        <Calendar size={15} className="detail-icon text-[#e28743]" />
-                        <span>{startDate.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })}</span>
-                      </div>
-                      <div className="detail-item">
-                        <Clock size={15} className="detail-icon text-amber-400" />
-                        <span>
-                          {startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ({durationMins}m)
-                        </span>
+
+                      <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#4C4541] mb-2 leading-none">
+                        {b.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#4C4541]/80 line-clamp-2 leading-relaxed mb-4 font-sans">
+                        {b.notes || (res?.description ? res.description : 'Makerspace scheduled session.')}
+                      </p>
+
+                      <div className="space-y-1.5 text-xs text-[#4C4541] font-mono">
+                        <div className="flex items-center gap-2">
+                          <Wrench size={14} className="text-[#4C4541]/70 flex-shrink-0" />
+                          <span className="font-bold truncate">
+                            {res?.name || 'Makerspace Equipment'} ({res?.location || 'Lab'})
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Calendar size={14} className="text-[#4C4541]/70 flex-shrink-0" />
+                          <span>{startDate.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-[#4C4541]/70 text-[11px]">
+                          <Clock size={13} className="flex-shrink-0" />
+                          <span>
+                            {startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ({durationMins}m)
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="event-card-footer">
-                      <Button
+                    <div className="mt-5 pt-3.5 border-t-2 border-[#4C4541]/15">
+                      <button
                         type="button"
-                        variant="destructive"
-                        className="w-full text-xs bg-red-600/90 hover:bg-red-700 text-white flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                         disabled={cancellingBookingId === b.id}
                         onClick={() => handleCancelMyBooking(b.id)}
                       >
                         {cancellingBookingId === b.id ? (
                           <>
-                            <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <div className="w-3.5 h-3.5 border-2 border-rose-900 border-t-transparent rounded-full animate-spin" />
                             <span>Cancelling...</span>
                           </>
                         ) : (
                           <>
-                            <Ban size={15} />
-                            <span>Cancel My Booking</span>
+                            <Ban size={14} />
+                            <span>Cancel Reservation</span>
                           </>
                         )}
-                      </Button>
+                      </button>
                     </div>
                   </article>
                 );

@@ -121,20 +121,23 @@ export default function EventsView({
   };
 
   return (
-    <div className="tab-pane-fade space-y-6">
+    <div className="tab-pane-fade space-y-8">
       {/* Top Banner & Action Bar */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b-2 border-[#4C4541]/20">
         <div>
-          <h2 className="text-2xl font-black tracking-tight text-white flex items-center gap-2.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>[ 02 / CALENDAR ] · CAMPUS LABS</span>
+          </div>
+          <h2 className="font-condensed text-3xl sm:text-5xl font-bold tracking-tight text-[#4C4541] uppercase flex flex-wrap items-center gap-3">
             <span>Makerspace Events & Workshops</span>
             {pendingEvents.length > 0 && isAdmin && (
-              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#F2C46A] text-[#4C4541] border border-[#4C4541] flex items-center gap-1.5 shadow-[1.5px_1.5px_0_#4C4541]">
                 <AlertCircle size={12} />
                 <span>{pendingEvents.length} Pending Approval</span>
               </span>
             )}
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
             Hands-on prototyping sessions, engineering talks, and hardware hackathons at CET.
           </p>
         </div>
@@ -143,15 +146,15 @@ export default function EventsView({
           <button
             type="button"
             onClick={() => setShowGuidelinesModal(true)}
-            className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold border border-white/10 flex items-center gap-1.5 transition-colors"
+            className="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-[#FCF0DA] hover:bg-[#F2C46A]/30 text-[#4C4541] text-xs font-bold font-mono uppercase border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
           >
-            <ShieldAlert size={14} className="text-[#e08253]" />
+            <ShieldAlert size={14} className="text-[#4C4541]" />
             <span>Guidelines</span>
           </button>
 
           <button
             type="button"
-            className="btn btn-primary px-4 py-2 text-xs font-semibold flex items-center gap-1.5 bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white shadow-md shadow-[#c26e47]/25"
+            className="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all active:translate-y-0.5 active:shadow-none cursor-pointer"
             onClick={onOpenCreateModal}
           >
             <PlusCircle size={15} />
@@ -161,20 +164,21 @@ export default function EventsView({
       </div>
 
       {/* Filter / Sub-Nav Bar */}
-      <div className="events-action-bar">
-        <div className="search-box-wrap">
-          <Search size={18} className="search-icon" />
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        {/* Search input with brutalist frame */}
+        <div className="relative flex-1 max-w-md">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60 pointer-events-none" />
           <input
             type="text"
-            className="search-input"
-            placeholder="Search workshops, organizers, topics..."
+            className="w-full pl-9 pr-8 py-2.5 rounded-full bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/50 font-medium shadow-[2px_2px_0_#4C4541] focus:outline-none focus:bg-[#FCF0DA] transition-colors"
+            placeholder="Search workshops, hosts, topics..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
           {searchQuery && (
             <button
               type="button"
-              className="search-clear-btn"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-[#4C4541]/70 hover:text-[#4C4541]"
               onClick={() => setSearchQuery('')}
             >
               ×
@@ -182,18 +186,27 @@ export default function EventsView({
           )}
         </div>
 
-        <div className="filter-chip-group overflow-x-auto pb-1">
+        {/* Filter chips container with horizontal touch-scroll on mobile */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar">
           <button
             type="button"
-            className={`filter-chip ${filterMode === 'all' ? 'active' : ''}`}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
+              filterMode === 'all'
+                ? 'bg-[#4C4541] text-[#FCF0DA]'
+                : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
+            }`}
             onClick={() => setFilterMode('all')}
           >
-            All Events ({events.length})
+            All ({events.length})
           </button>
 
           <button
             type="button"
-            className={`filter-chip ${filterMode === 'open' ? 'active' : ''}`}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
+              filterMode === 'open'
+                ? 'bg-[#4C4541] text-[#FCF0DA]'
+                : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
+            }`}
             onClick={() => setFilterMode('open')}
           >
             Open for Signups
@@ -201,76 +214,82 @@ export default function EventsView({
 
           <button
             type="button"
-            className={`filter-chip ${filterMode === 'registered' ? 'active' : ''}`}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
+              filterMode === 'registered'
+                ? 'bg-[#4C4541] text-[#FCF0DA]'
+                : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
+            }`}
             onClick={() => setFilterMode('registered')}
           >
-            My Registered ({registeredEventIds.size})
+            Registered ({registeredEventIds.size})
           </button>
 
-          {/* User's own proposals tab */}
           <button
             type="button"
-            className={`filter-chip ${filterMode === 'proposals' ? 'active' : ''}`}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
+              filterMode === 'proposals'
+                ? 'bg-[#4C4541] text-[#FCF0DA]'
+                : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
+            }`}
             onClick={() => setFilterMode('proposals')}
           >
-            My Submissions ({myProposals.length})
+            Submissions ({myProposals.length})
           </button>
 
-          {/* Admin Pending Approvals tab */}
           {isAdmin && (
             <button
               type="button"
-              className={`filter-chip relative ${
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                 filterMode === 'approvals'
-                  ? 'bg-amber-500/25 text-amber-200 border-amber-500/40 active'
-                  : 'text-amber-300 hover:bg-amber-500/10'
+                  ? 'bg-[#F2C46A] text-[#4C4541]'
+                  : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
               onClick={() => setFilterMode('approvals')}
             >
-              <div className="flex items-center gap-1.5 font-bold">
-                <ShieldCheck size={14} className="text-amber-400" />
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck size={13} />
                 <span>Approvals</span>
-                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/30 text-amber-200 border border-amber-500/30">
+                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#4C4541] text-[#FCF0DA]">
                   {pendingEvents.length}
                 </span>
               </div>
             </button>
           )}
-        </div>
 
-        <div className="toolbar-right-btns">
           <button
             type="button"
-            className={`btn-icon ${loading ? 'anim-spin' : ''}`}
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
+              loading ? 'animate-spin' : ''
+            }`}
             onClick={onRefresh}
             title="Refresh events list"
             aria-label="Refresh events"
           >
-            <RotateCw size={17} />
+            <RotateCw size={15} />
           </button>
         </div>
       </div>
 
-      {/* Admin Approvals Notice banner when tab is approvals */}
+      {/* Admin Approvals Queue Info Banner */}
       {filterMode === 'approvals' && (
-        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
-          <ShieldAlert size={20} className="text-amber-400 flex-shrink-0 mt-0.5" />
-          <div className="text-xs text-amber-100">
-            <h4 className="font-bold text-amber-200 text-sm">Administrator Event Approval Queue</h4>
-            <p className="mt-0.5 text-slate-300 leading-relaxed">
+        <div className="p-5 rounded-2xl bg-[#F2C46A]/25 border-2 border-[#4C4541] shadow-[3px_3px_0_#4C4541] flex items-start gap-3">
+          <ShieldAlert size={20} className="text-[#4C4541] flex-shrink-0 mt-0.5" />
+          <div className="text-xs text-[#4C4541]">
+            <h4 className="font-bold text-sm uppercase font-mono tracking-wider">Administrator Approval Queue</h4>
+            <p className="mt-1 leading-relaxed font-sans text-[#4C4541]/85">
               Review event proposals submitted by students and makers. Verify compliance with lab safety protocols, operating hours (08:30–20:00), and workbench equipment requirements. Approving an event will immediately publish it to the campus-wide calendar.
             </p>
           </div>
         </div>
       )}
 
-      {/* My Submissions notice banner when tab is proposals */}
+      {/* My Submissions Info Banner */}
       {filterMode === 'proposals' && (
-        <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-start gap-3">
-          <Info size={20} className="text-blue-400 flex-shrink-0 mt-0.5" />
-          <div className="text-xs text-blue-100">
-            <h4 className="font-bold text-blue-200 text-sm">Your Event Proposals</h4>
-            <p className="mt-0.5 text-slate-300 leading-relaxed">
+        <div className="p-5 rounded-2xl bg-[#AEAC78]/25 border-2 border-[#4C4541] shadow-[3px_3px_0_#4C4541] flex items-start gap-3">
+          <Info size={20} className="text-[#4C4541] flex-shrink-0 mt-0.5" />
+          <div className="text-xs text-[#4C4541]">
+            <h4 className="font-bold text-sm uppercase font-mono tracking-wider">Your Event Proposals</h4>
+            <p className="mt-1 leading-relaxed font-sans text-[#4C4541]/85">
               Track the approval status of workshops you have submitted. While pending, admins review your proposal against the MatteLab Guidelines.
             </p>
           </div>
@@ -279,18 +298,18 @@ export default function EventsView({
 
       {/* Events Grid */}
       {displayedEvents.length === 0 ? (
-        <div className="empty-state-card py-12 text-center bg-[#171b1f] border border-white/5 rounded-2xl">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-white/5 flex items-center justify-center text-slate-400 mb-3">
-            <Calendar size={28} />
+        <div className="rounded-[24px] border-2 border-[#4C4541] bg-white p-12 text-center shadow-[4px_4px_0_#4C4541]">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FCF0DA] border-2 border-[#4C4541] flex items-center justify-center text-[#4C4541] mb-4 shadow-[2px_2px_0_#4C4541]">
+            <Calendar size={26} />
           </div>
-          <h3 className="text-lg font-bold text-white">
+          <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541]">
             {filterMode === 'approvals'
               ? 'No Pending Event Approvals'
               : filterMode === 'proposals'
               ? 'You have not proposed any events yet'
               : 'No events found'}
           </h3>
-          <p className="text-muted text-xs max-w-md mx-auto mt-1 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#4C4541]/80 max-w-md mx-auto mt-2 leading-relaxed font-sans">
             {filterMode === 'approvals'
               ? 'All student and organizer event proposals have been reviewed and published.'
               : filterMode === 'proposals'
@@ -300,11 +319,11 @@ export default function EventsView({
               : 'There are currently no upcoming events scheduled in this filter.'}
           </p>
 
-          <div className="mt-4 flex items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {searchQuery && (
               <button
                 type="button"
-                className="btn btn-secondary text-xs"
+                className="px-5 py-2.5 rounded-full bg-[#FCF0DA] hover:bg-[#F2C46A]/30 text-[#4C4541] border-2 border-[#4C4541] text-xs font-bold font-mono uppercase shadow-[2px_2px_0_#4C4541] cursor-pointer"
                 onClick={() => setSearchQuery('')}
               >
                 Clear Search
@@ -314,7 +333,7 @@ export default function EventsView({
             {filterMode === 'proposals' && (
               <button
                 type="button"
-                className="btn btn-primary text-xs flex items-center gap-1.5 bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] cursor-pointer"
                 onClick={onOpenCreateModal}
               >
                 <PlusCircle size={15} />
@@ -324,7 +343,7 @@ export default function EventsView({
           </div>
         </div>
       ) : (
-        <div className="events-grid-responsive grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedEvents.map(evt => {
             const isRegistered = registeredEventIds.has(evt.id);
             const isExternal = Boolean(evt.registrationUrl);
@@ -338,50 +357,50 @@ export default function EventsView({
             return (
               <article
                 key={evt.id}
-                className={`event-card-modern flex flex-col justify-between border ${
-                  isPending
-                    ? 'border-amber-500/30 bg-[#191d22]'
-                    : isRejected
-                    ? 'border-rose-500/30 bg-[#1c1819]'
-                    : 'border-white/10 bg-[#16191d]'
-                } rounded-2xl p-5 hover:border-[#c26e47]/40 transition-all`}
+                className="group relative flex flex-col justify-between rounded-[22px] border-2 border-[#4C4541] bg-white p-5 sm:p-6 shadow-[3px_3px_0_#4C4541] hover:-translate-y-1 hover:shadow-[6px_6px_0_#4C4541] transition-all duration-200"
               >
                 <div>
                   {/* Top Status & Category Tags */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center justify-between gap-2 mb-3.5">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {isPending ? (
-                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#F2C46A] text-[#4C4541] border border-[#4C4541] flex items-center gap-1">
                           <Clock size={11} />
                           <span>Pending Approval</span>
                         </span>
                       ) : isRejected ? (
-                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-rose-200 text-rose-900 border border-[#4C4541] flex items-center gap-1">
                           <X size={11} />
                           <span>Declined</span>
                         </span>
                       ) : isRegistered ? (
-                        <span className="badge-tag registered flex items-center gap-1">
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#AEAC78] text-[#4C4541] border border-[#4C4541] flex items-center gap-1">
                           <CheckCircle2 size={12} />
                           <span>Registered</span>
                         </span>
                       ) : isClosed ? (
-                        <span className="badge-tag closed">Registration Closed</span>
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 border border-[#4C4541]">
+                          Registration Closed
+                        </span>
                       ) : hasStarted ? (
-                        <span className="badge-tag closed">In Progress</span>
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-900 border border-[#4C4541]">
+                          In Progress
+                        </span>
                       ) : (
-                        <span className="badge-tag open">Open</span>
+                        <span className="text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-[#FCF0DA] text-[#4C4541] border border-[#4C4541]">
+                          Open
+                        </span>
                       )}
 
                       {evt.category && (
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/5 text-slate-300 border border-white/10">
+                        <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-slate-100 text-[#4C4541]/80 border border-[#4C4541]/30">
                           {evt.category}
                         </span>
                       )}
                     </div>
 
                     {evt.capacity && (
-                      <span className="capacity-badge flex items-center gap-1 text-[11px] text-slate-400">
+                      <span className="flex items-center gap-1 text-[11px] font-mono font-bold text-[#4C4541]/70">
                         <Users size={12} />
                         <span>Max {evt.capacity}</span>
                       </span>
@@ -389,38 +408,38 @@ export default function EventsView({
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="event-card-title text-base font-bold text-white mb-1.5 line-clamp-1">
+                  <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#4C4541] mb-2 line-clamp-1 leading-none">
                     {evt.title}
                   </h3>
-                  <p className="event-card-desc text-xs text-slate-400 line-clamp-2 leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-[#4C4541]/80 line-clamp-2 leading-relaxed mb-4 font-sans">
                     {evt.description}
                   </p>
 
-                  {/* Creator info badge for approvals / admin or creator */}
+                  {/* Host info badge for approvals / admin or creator */}
                   {(filterMode === 'approvals' || isAdmin || isCreator) && (
-                    <div className="p-2.5 rounded-lg bg-[#111417] border border-white/5 mb-3.5 text-[11px] space-y-1">
-                      <div className="flex items-center justify-between text-slate-300">
-                        <span className="flex items-center gap-1.5 text-slate-400">
-                          <User size={13} className="text-[#e08253]" />
+                    <div className="p-3 rounded-xl bg-[#FCF0DA] border border-[#4C4541]/30 mb-4 text-[11px] space-y-1 font-mono">
+                      <div className="flex items-center justify-between text-[#4C4541]">
+                        <span className="flex items-center gap-1.5 text-[#4C4541]/70">
+                          <User size={13} />
                           <span>Host:</span>
                         </span>
-                        <span className="font-semibold text-white">
+                        <span className="font-bold text-[#4C4541]">
                           {evt.creatorName || 'Student Maker'}
                         </span>
                       </div>
                       {evt.creatorEmail && (
-                        <div className="text-slate-400 text-[10px] truncate">
+                        <div className="text-[#4C4541]/60 text-[10px] truncate">
                           {evt.creatorEmail}
                         </div>
                       )}
                       {evt.equipmentNeeded && (
-                        <div className="flex items-center gap-1 text-amber-300 text-[10px] pt-1 border-t border-white/5">
+                        <div className="flex items-center gap-1 text-[#4C4541] text-[10px] pt-1 border-t border-[#4C4541]/20">
                           <Wrench size={11} />
                           <span>Machinery: {evt.equipmentNeeded}</span>
                         </div>
                       )}
                       {evt.guidelinesAccepted && (
-                        <div className="flex items-center gap-1 text-emerald-400 text-[10px]">
+                        <div className="flex items-center gap-1 text-[#AEAC78] font-bold text-[10px]">
                           <ShieldCheck size={11} />
                           <span>Agreed to MatteLab Guidelines</span>
                         </div>
@@ -430,46 +449,46 @@ export default function EventsView({
 
                   {/* Rejection Note for Declined Proposals */}
                   {isRejected && evt.rejectionReason && (
-                    <div className="p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/25 mb-3 text-[11px] text-rose-200">
-                      <p className="font-semibold text-rose-300">Feedback from Admin:</p>
-                      <p className="mt-0.5 text-slate-300">{evt.rejectionReason}</p>
+                    <div className="p-3 rounded-xl bg-rose-100 border border-rose-300 mb-4 text-[11px] text-rose-900">
+                      <p className="font-bold font-mono">Feedback from Admin:</p>
+                      <p className="mt-0.5 text-rose-800 font-sans">{evt.rejectionReason}</p>
                     </div>
                   )}
 
                   {/* Details metadata: Location, Date, Deadline */}
-                  <div className="event-card-details space-y-1.5 text-xs text-slate-300">
-                    <div className="detail-item flex items-center gap-2">
-                      <MapPin size={14} className="detail-icon text-[#e08253]" />
-                      <span>{evt.venue || 'Makerspace Lab'}</span>
+                  <div className="space-y-1.5 text-xs text-[#4C4541] font-mono">
+                    <div className="flex items-center gap-2">
+                      <MapPin size={14} className="text-[#4C4541]/70 flex-shrink-0" />
+                      <span className="truncate">{evt.venue || 'Makerspace Lab'}</span>
                     </div>
-                    <div className="detail-item flex items-center gap-2">
-                      <Calendar size={14} className="detail-icon text-[#e08253]" />
+                    <div className="flex items-center gap-2">
+                      <Calendar size={14} className="text-[#4C4541]/70 flex-shrink-0" />
                       <span>{formatDate(evt.startAt)}</span>
                     </div>
-                    <div className="detail-item deadline-item flex items-center gap-2 text-slate-400 text-[11px]">
-                      <Clock size={14} className="detail-icon" />
+                    <div className="flex items-center gap-2 text-[#4C4541]/60 text-[11px]">
+                      <Clock size={13} className="flex-shrink-0" />
                       <span>Closes: {formatDate(evt.registrationDeadline)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Footer Buttons */}
-                <div className="event-card-footer mt-4 pt-3 border-t border-white/10 space-y-2">
+                <div className="mt-5 pt-3.5 border-t-2 border-[#4C4541]/15 space-y-2">
                   {/* ADMIN APPROVAL ACTIONS FOR PENDING EVENTS */}
                   {isAdmin && isPending ? (
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         type="button"
-                        className="btn w-full py-2 px-3 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-1.5 shadow-md shadow-emerald-900/30 transition-all cursor-pointer"
+                        className="w-full py-2.5 px-3 text-xs font-bold font-mono uppercase rounded-full bg-[#AEAC78] hover:bg-[#AEAC78]/80 text-[#4C4541] border border-[#4C4541] flex items-center justify-center gap-1.5 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer"
                         onClick={() => onApproveEvent?.(evt)}
                       >
                         <Check size={14} />
-                        <span>Approve & Publish</span>
+                        <span>Approve</span>
                       </button>
 
                       <button
                         type="button"
-                        className="btn w-full py-2 px-3 text-xs font-semibold rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                        className="w-full py-2.5 px-3 text-xs font-bold font-mono uppercase rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 border border-[#4C4541] flex items-center justify-center gap-1.5 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer"
                         onClick={() => openRejectDialog(evt)}
                       >
                         <X size={14} />
@@ -478,11 +497,11 @@ export default function EventsView({
                     </div>
                   ) : isPending && isCreator ? (
                     /* STUDENT ACTION FOR THEIR OWN PENDING EVENT */
-                    <div className="flex items-center justify-between text-xs text-slate-400">
+                    <div className="flex items-center justify-between text-xs text-[#4C4541]/70 font-mono">
                       <span className="italic text-[11px]">Awaiting Admin Approval</span>
                       <button
                         type="button"
-                        className="text-rose-400 hover:text-rose-300 text-xs font-semibold underline"
+                        className="text-rose-600 hover:text-rose-800 text-xs font-bold underline cursor-pointer"
                         onClick={() => onDeleteEvent?.(evt)}
                       >
                         Withdraw
@@ -495,7 +514,7 @@ export default function EventsView({
                         href={evt.registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-outline-accent w-full flex items-center justify-center gap-2 text-xs"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#FCF0DA] hover:bg-[#F2C46A] text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                       >
                         <span>Register Externally</span>
                         <ExternalLink size={14} />
@@ -503,7 +522,7 @@ export default function EventsView({
                     ) : isRegistered ? (
                       <button
                         type="button"
-                        className="btn btn-danger-soft w-full text-xs"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
                         onClick={() => onCancelRegistration(evt)}
                       >
                         Cancel Registration
@@ -511,7 +530,7 @@ export default function EventsView({
                     ) : (
                       <button
                         type="button"
-                        className="btn btn-primary w-full text-xs font-semibold bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] disabled:opacity-50 disabled:cursor-not-allowed text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
                         disabled={isClosed || hasStarted}
                         onClick={() => onRegister(evt)}
                       >
@@ -521,7 +540,7 @@ export default function EventsView({
                   ) : isRejected && isCreator ? (
                     <button
                       type="button"
-                      className="btn btn-secondary w-full text-xs"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-slate-200 text-slate-800 text-xs font-bold uppercase border border-[#4C4541] cursor-pointer"
                       onClick={() => onDeleteEvent?.(evt)}
                     >
                       Dismiss Proposal
@@ -532,7 +551,7 @@ export default function EventsView({
                   {isAdmin && !isPending && (
                     <button
                       type="button"
-                      className="w-full text-center text-[11px] text-slate-500 hover:text-rose-400 transition-colors pt-1"
+                      className="w-full text-center text-[11px] font-mono text-[#4C4541]/60 hover:text-rose-700 transition-colors pt-1 cursor-pointer"
                       onClick={() => onDeleteEvent?.(evt)}
                     >
                       Delete Event Record
@@ -547,49 +566,49 @@ export default function EventsView({
 
       {/* REJECT PROPOSAL DIALOG */}
       {rejectDialog.isOpen && (
-        <div className="modal-backdrop" onClick={() => setRejectDialog({ isOpen: false, event: null, reason: '', submitting: false })}>
-          <div className="modal-card max-w-md" onClick={e => e.stopPropagation()}>
-            <div className="modal-header border-b border-white/10 pb-3">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setRejectDialog({ isOpen: false, event: null, reason: '', submitting: false })}>
+          <div className="max-w-md w-full rounded-[24px] border-2 border-[#4C4541] bg-[#FCF0DA] p-6 shadow-[6px_6px_0_#4C4541] text-[#4C4541]" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between pb-3 border-b-2 border-[#4C4541]/20">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-rose-200 text-rose-800 border border-[#4C4541] flex items-center justify-center">
                   <AlertTriangle size={18} />
                 </div>
                 <div>
-                  <h3 className="modal-title text-sm font-bold text-white">Decline Event Proposal</h3>
-                  <p className="modal-subtitle text-xs text-slate-400">
+                  <h3 className="font-condensed text-xl font-bold uppercase">Decline Event Proposal</h3>
+                  <p className="font-mono text-xs text-[#4C4541]/70 truncate max-w-[240px]">
                     "{rejectDialog.event?.title}"
                   </p>
                 </div>
               </div>
               <button
                 type="button"
-                className="modal-close-btn"
+                className="w-7 h-7 rounded-full border border-[#4C4541] flex items-center justify-center text-sm font-bold hover:bg-[#F2C46A]"
                 onClick={() => setRejectDialog({ isOpen: false, event: null, reason: '', submitting: false })}
               >
-                <X size={16} />
+                ×
               </button>
             </div>
 
-            <form onSubmit={handleConfirmReject} className="modal-form pt-3 space-y-4">
-              <div className="form-group">
-                <label htmlFor="reject-reason" className="text-xs font-semibold text-slate-300">
+            <form onSubmit={handleConfirmReject} className="pt-4 space-y-4">
+              <div>
+                <label htmlFor="reject-reason" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1.5">
                   Reason for Declining (Visible to Host)
                 </label>
                 <textarea
                   id="reject-reason"
                   rows={3}
-                  className="w-full rounded-xl bg-[#14171a] border border-white/10 p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500"
+                  className="w-full rounded-2xl bg-white border-2 border-[#4C4541] p-3 text-xs text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none"
                   value={rejectDialog.reason}
                   onChange={e => setRejectDialog(prev => ({ ...prev, reason: e.target.value }))}
-                  placeholder="e.g. Venue capacity conflict or requires lab safety supervisor confirmation..."
+                  placeholder="e.g. Schedule conflicts or requires lab safety supervisor confirmation..."
                   required
                 />
               </div>
 
-              <div className="modal-actions flex items-center justify-end gap-2 pt-2 border-t border-white/10">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t-2 border-[#4C4541]/20">
                 <button
                   type="button"
-                  className="btn btn-secondary text-xs"
+                  className="px-4 py-2 rounded-full border-2 border-[#4C4541] bg-white text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541]"
                   onClick={() => setRejectDialog({ isOpen: false, event: null, reason: '', submitting: false })}
                   disabled={rejectDialog.submitting}
                 >
@@ -597,7 +616,7 @@ export default function EventsView({
                 </button>
                 <button
                   type="submit"
-                  className="btn bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold px-4 py-2 rounded-xl"
+                  className="px-5 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold uppercase border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541]"
                   disabled={rejectDialog.submitting}
                 >
                   {rejectDialog.submitting ? 'Declining...' : 'Confirm Decline'}
@@ -610,65 +629,65 @@ export default function EventsView({
 
       {/* GUIDELINES INFO MODAL */}
       {showGuidelinesModal && (
-        <div className="modal-backdrop" onClick={() => setShowGuidelinesModal(false)}>
-          <div className="modal-card modal-card-lg" onClick={e => e.stopPropagation()}>
-            <div className="modal-header border-b border-white/10 pb-4">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShowGuidelinesModal(false)}>
+          <div className="max-w-2xl w-full rounded-[28px] border-2 border-[#4C4541] bg-[#FCF0DA] p-6 sm:p-8 shadow-[8px_8px_0_#4C4541] text-[#4C4541]" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between pb-4 border-b-2 border-[#4C4541]/20">
               <div className="flex items-center gap-3">
-                <div className="modal-icon-badge primary bg-[#c26e47]/20 text-[#e08253] border border-[#c26e47]/30">
+                <div className="w-10 h-10 rounded-xl bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] flex items-center justify-center shadow-[1.5px_1.5px_0_#4C4541]">
                   <ShieldAlert size={20} />
                 </div>
                 <div>
-                  <h3 className="modal-title text-base font-bold text-white">MatteLab Community Event Guidelines</h3>
-                  <p className="modal-subtitle text-xs text-slate-400">
+                  <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase leading-none">MatteLab Community Guidelines</h3>
+                  <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
                     Standards for proposing workshops, build nights, and hackathons at CET Makerspace
                   </p>
                 </div>
               </div>
               <button
                 type="button"
-                className="modal-close-btn"
+                className="w-8 h-8 rounded-full border-2 border-[#4C4541] bg-white flex items-center justify-center text-base font-bold hover:bg-[#F2C46A]"
                 onClick={() => setShowGuidelinesModal(false)}
               >
-                <X size={18} />
+                ×
               </button>
             </div>
 
-            <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
+            <div className="py-4 space-y-4 max-h-[60vh] overflow-y-auto pr-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                 {EVENT_GUIDELINES.map((rule, idx) => (
-                  <div key={rule.id} className="p-3.5 rounded-xl bg-[#14171a] border border-white/10 space-y-1.5">
-                    <div className="flex items-center gap-2 font-bold text-sm text-white">
-                      <span className="w-5 h-5 rounded-full bg-[#c26e47]/25 text-[#e08253] flex items-center justify-center text-xs">
+                  <div key={rule.id} className="p-4 rounded-2xl bg-white border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] space-y-1.5">
+                    <div className="flex items-center gap-2 font-bold font-mono text-xs uppercase text-[#4C4541]">
+                      <span className="w-5 h-5 rounded-full bg-[#F2C46A] border border-[#4C4541] text-[#4C4541] flex items-center justify-center text-[10px]">
                         {idx + 1}
                       </span>
                       <span>{rule.title}</span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed pl-7">
+                    <p className="text-xs text-[#4C4541]/80 leading-relaxed pl-7 font-sans">
                       {rule.desc}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-start gap-3 text-xs text-blue-200">
-                <Info size={18} className="text-blue-400 flex-shrink-0 mt-0.5" />
-                <p className="leading-relaxed">
+              <div className="p-4 rounded-2xl bg-[#AEAC78]/25 border-2 border-[#4C4541] flex items-start gap-3 text-xs text-[#4C4541]">
+                <Info size={18} className="text-[#4C4541] flex-shrink-0 mt-0.5" />
+                <p className="leading-relaxed font-sans">
                   Anyone in our college community is empowered to propose an event! Once submitted, lab administrators will review the proposal against safety and schedule availability before approving it for the public catalog.
                 </p>
               </div>
             </div>
 
-            <div className="modal-actions p-4 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-4 border-t-2 border-[#4C4541]/20 flex flex-wrap items-center justify-between gap-3">
               <button
                 type="button"
-                className="btn btn-secondary text-xs"
+                className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-white text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541] cursor-pointer"
                 onClick={() => setShowGuidelinesModal(false)}
               >
                 Close
               </button>
               <button
                 type="button"
-                className="btn btn-primary text-xs font-semibold bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white flex items-center gap-1.5"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] cursor-pointer"
                 onClick={() => {
                   setShowGuidelinesModal(false);
                   onOpenCreateModal();

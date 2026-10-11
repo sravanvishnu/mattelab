@@ -26,6 +26,9 @@ import ConfirmModal from './components/ConfirmModal';
 import AdminResourcesView from './components/AdminResourcesView';
 import { getResources } from './services/resources';
 import { fetchAllEvents, approveEvent, rejectEvent, deleteEvent } from './services/events';
+import Mascot from './components/mascot/Mascot';
+import personImg from './assets/mascot.png';
+import Footer from './components/Footer';
 
 export default function App() {
   const { currentUser, isAdmin, loading: authLoading, logout } = useAuth();
@@ -259,7 +262,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#121416]">
+    <div className="min-h-screen flex flex-col bg-[#FCF0DA] text-[#4C4541] overflow-x-hidden w-full max-w-full selection:bg-[#F2C46A] selection:text-[#4C4541]">
       {/* Top Header Overlay spanning full width */}
       <TopNav
         activeTab={activeTab}
@@ -270,8 +273,8 @@ export default function App() {
         pendingCount={pendingEvents.length}
       />
 
-      {/* Main Full-Width Content Viewport (No Sidebar) */}
-      <div className="w-full flex-1 pt-[88px] sm:pt-[96px]">
+      {/* Main Full-Width Content Viewport with mobile bottom navigation clearance */}
+      <div className="w-full flex-1 pt-[88px] sm:pt-[96px] pb-24 md:pb-12">
         {activeTab === 'overview' ? (
           <Overview
             events={events}
@@ -329,6 +332,18 @@ export default function App() {
         )}
       </div>
 
+      {/* Editorial Campus Makerspace Footer (Rendered only on Home page) */}
+      {activeTab === 'overview' && (
+        <Footer
+          brand="MatteLab"
+          ctaText={isAdmin ? "Create Workshop" : "Propose Workshop"}
+          headline="Got an idea? Let's build it together."
+          punchyStatement="DREAM IT · SOLDER IT · BUILD IT"
+          onOpenCreateModal={() => setIsCreateModalOpen(true)}
+          onSelectTab={setActiveTab}
+        />
+      )}
+
       {/* Mobile Sticky Bottom Navigation */}
       <MobileNav
         activeTab={activeTab}
@@ -354,6 +369,14 @@ export default function App() {
         isLoading={confirmModal.isLoading}
         onConfirm={confirmModal.onConfirm}
         onCancel={() => setConfirmModal(prev => ({ ...prev, isOpen: false }))}
+      />
+
+      {/* Interactive MatteLab Mascot */}
+      <Mascot
+        db={db}
+        image={personImg}
+        onNavigate={setActiveTab}
+        onOpenCreateModal={() => setIsCreateModalOpen(true)}
       />
     </div>
   );

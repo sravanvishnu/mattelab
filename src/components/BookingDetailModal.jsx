@@ -48,26 +48,26 @@ export default function BookingDetailModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-md bg-[#181a1d] border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-md bg-[#FCF0DA] border-2 border-[#4C4541] rounded-[28px] shadow-[8px_8px_0_#4C4541] overflow-hidden animate-in zoom-in-95 duration-200 text-[#4C4541]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-[#1e2125]/60">
+        <div className="flex items-center justify-between p-6 border-b-2 border-[#4C4541] bg-[#FCF0DA]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#c26e47]/15 border border-[#c26e47]/30 text-[#e28743] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] flex items-center justify-center shadow-[2px_2px_0_#4C4541]">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white font-heading">
+              <h3 className="font-condensed text-2xl font-bold uppercase tracking-wide text-[#4C4541]">
                 Reservation Details
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="font-editorial italic text-xs text-[#4C4541]/80">
                 {resource?.name || 'Makerspace Resource'}
               </p>
             </div>
@@ -75,31 +75,28 @@ export default function BookingDetailModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A] transition-all flex items-center justify-center shadow-[2px_2px_0_#4C4541] cursor-pointer"
             aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Content */}
         <div className="p-6 space-y-4">
           {/* Title & Status */}
-          <div className="p-4 rounded-2xl bg-[#121416]/70 border border-white/5 space-y-2">
+          <div className="p-4 rounded-2xl bg-white border-2 border-[#4C4541] shadow-[3px_3px_0_#4C4541] space-y-2">
             <div className="flex items-center justify-between gap-2">
-              <h4 className="text-base font-bold text-white tracking-tight">
+              <h4 className="text-base font-bold text-[#4C4541] tracking-tight">
                 {booking.title}
               </h4>
-              <Badge
-                variant="outline"
-                className="bg-[#c26e47]/15 border-[#c26e47]/40 text-[#f3a86c] text-[11px] font-bold"
-              >
+              <span className="px-3 py-1 rounded-full bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] text-xs font-mono font-bold shadow-[1.5px_1.5px_0_#4C4541]">
                 Confirmed
-              </Badge>
+              </span>
             </div>
 
             {isOwner && (
-              <span className="inline-block text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full">
+              <span className="inline-block text-[10px] font-mono font-bold uppercase tracking-wider text-[#4C4541] bg-[#AEAC78] border border-[#4C4541] px-2.5 py-0.5 rounded-full shadow-[1px_1px_0_#4C4541]">
                 Your Booking
               </span>
             )}
@@ -107,52 +104,52 @@ export default function BookingDetailModal({
 
           {/* Time & Duration */}
           <div className="space-y-2 text-xs">
-            <div className="flex items-center justify-between py-2 border-b border-white/5 text-slate-300">
-              <div className="flex items-center gap-2 text-slate-400">
-                <Clock className="w-4 h-4 text-[#e28743]" />
+            <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-[#4C4541]">
+              <div className="flex items-center gap-2 text-[#4C4541]/75 font-mono">
+                <Clock className="w-4 h-4 text-[#4C4541]" />
                 <span>Reserved Interval</span>
               </div>
-              <span className="font-semibold text-white">
+              <span className="font-bold text-[#4C4541]">
                 {formatDateTime(startDate)} - {endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>
             </div>
 
-            <div className="flex items-center justify-between py-2 border-b border-white/5 text-slate-300">
-              <div className="flex items-center gap-2 text-slate-400">
-                <Clock className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-[#4C4541]">
+              <div className="flex items-center gap-2 text-[#4C4541]/75 font-mono">
+                <Clock className="w-4 h-4 text-[#4C4541]" />
                 <span>Session Duration</span>
               </div>
-              <span className="font-semibold text-white">
+              <span className="font-bold text-[#4C4541]">
                 {durationMinutes} mins ({durationHours} hrs)
               </span>
             </div>
 
-            <div className="flex items-center justify-between py-2 border-b border-white/5 text-slate-300">
-              <div className="flex items-center gap-2 text-slate-400">
-                <Wrench className="w-4 h-4 text-[#e28743]" />
+            <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-[#4C4541]">
+              <div className="flex items-center gap-2 text-[#4C4541]/75 font-mono">
+                <Wrench className="w-4 h-4 text-[#4C4541]" />
                 <span>Equipment / Lab</span>
               </div>
-              <span className="font-semibold text-white">
+              <span className="font-bold text-[#4C4541]">
                 {resource?.name || 'Makerspace Equipment'} ({resource?.location || 'Lab'})
               </span>
             </div>
 
-            <div className="flex items-center justify-between py-2 border-b border-white/5 text-slate-300">
-              <div className="flex items-center gap-2 text-slate-400">
-                <User className="w-4 h-4 text-slate-400" />
+            <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-[#4C4541]">
+              <div className="flex items-center gap-2 text-[#4C4541]/75 font-mono">
+                <User className="w-4 h-4 text-[#4C4541]" />
                 <span>Reserved By</span>
               </div>
-              <span className="font-semibold text-white">
+              <span className="font-bold text-[#4C4541]">
                 {booking.userName || 'Student Maker'} {isOwner ? '(You)' : ''}
               </span>
             </div>
 
             {booking.notes && (
               <div className="pt-2">
-                <span className="text-slate-400 font-medium block mb-1 flex items-center gap-1.5">
+                <span className="text-[#4C4541] font-mono font-bold text-xs block mb-1 flex items-center gap-1.5">
                   <FileText className="w-3.5 h-3.5" /> Project Notes:
                 </span>
-                <p className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-slate-300 text-xs leading-relaxed">
+                <p className="p-3 rounded-xl bg-white border-2 border-[#4C4541] text-[#4C4541] text-xs leading-relaxed shadow-[2px_2px_0_#4C4541]">
                   {booking.notes}
                 </p>
               </div>
@@ -161,39 +158,42 @@ export default function BookingDetailModal({
 
           {/* Cancellation Notice for Owner / Admin */}
           {canCancel ? (
-            <div className="p-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-xs text-red-300 flex items-start gap-2.5">
-              <AlertTriangle className="w-4 h-4 shrink-0 text-red-400 mt-0.5" />
+            <div className="p-3 rounded-2xl bg-red-100/80 border-2 border-red-500 text-xs text-red-950 flex items-start gap-2.5 shadow-[2px_2px_0_#4C4541]">
+              <AlertTriangle className="w-4 h-4 shrink-0 text-red-700 mt-0.5" />
               <div>
-                <p className="font-semibold text-red-200">Cancel this Reservation?</p>
-                <p className="text-[11px] text-red-300/80 mt-0.5">
+                <p className="font-bold text-red-900">Cancel this Reservation?</p>
+                <p className="text-[11px] text-red-800 mt-0.5 font-medium">
                   Cancelling will immediately release this time slot on the calendar for other makers.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5 text-[11px] text-slate-400 flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" />
-              <span>This session was booked by another maker.</span>
+            <div className="p-3 rounded-2xl bg-[#AEAC78]/25 border-2 border-[#4C4541] text-xs text-[#4C4541] flex items-center gap-2 shadow-[2px_2px_0_#4C4541]">
+              <CheckCircle2 className="w-4 h-4 text-[#4C4541]" />
+              <span className="font-medium">This session was booked by another maker.</span>
             </div>
           )}
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between pt-3 border-t border-white/10">
-            <Button variant="outline" size="sm" onClick={onClose} className="text-xs">
+          <div className="flex items-center justify-between pt-3 border-t-2 border-[#4C4541]/15">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/20 font-mono text-xs font-bold uppercase shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
+            >
               Close
-            </Button>
+            </button>
 
             {canCancel && (
-              <Button
-                variant="destructive"
-                size="sm"
+              <button
+                type="button"
                 onClick={() => onCancelBooking(booking.id)}
                 disabled={isCancelling}
-                className="text-xs bg-red-600 hover:bg-red-700 text-white flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold uppercase shadow-[3px_3px_0_#4C4541] transition-all active:translate-y-0.5 active:shadow-none cursor-pointer flex items-center gap-1.5"
               >
                 {isCancelling ? (
                   <>
-                    <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     <span>Cancelling...</span>
                   </>
                 ) : (
@@ -202,7 +202,7 @@ export default function BookingDetailModal({
                     <span>Cancel My Booking</span>
                   </>
                 )}
-              </Button>
+              </button>
             )}
           </div>
         </div>

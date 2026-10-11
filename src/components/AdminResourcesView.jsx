@@ -166,33 +166,31 @@ export default function AdminResourcesView({
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="tab-pane-fade space-y-8">
       {/* Top Banner / Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b-2 border-[#4C4541]/20">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Badge variant="outline" className="border-[#c26e47]/40 text-[#e28743] bg-[#c26e47]/10">
-              Admin & Organizer Suite
-            </Badge>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>[ 04 / HARDWARE ] · MAKERSPACE FACILITIES</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100 font-heading">
+          <h2 className="font-condensed text-3xl sm:text-5xl font-bold tracking-tight text-[#4C4541] uppercase">
             Makerspace Resources & Equipment
           </h2>
-          <p className="text-sm text-slate-400">
-            Register hardware machinery, 3D printers, workstations, and collaborative spaces.
+          <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
+            Hardware machinery, 3D printers, electronics workbenches, and project incubation spaces at CET.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Mode Switcher */}
-          <div className="flex items-center bg-[#181a1d] p-1 rounded-xl border border-white/10">
+          <div className="flex items-center bg-white p-1 rounded-full border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541]">
             <button
               type="button"
               onClick={() => setViewMode('inventory')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${
                 viewMode === 'inventory'
-                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
               Equipment List
@@ -203,104 +201,110 @@ export default function AdminResourcesView({
                 setCalendarTargetResourceId(resources[0]?.id || null);
                 setViewMode('calendar');
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === 'calendar'
-                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
-              <Calendar className="w-3.5 h-3.5" />
+              <Calendar size={13} />
               <span>Week Calendar</span>
             </button>
           </div>
 
-          <Button
-            variant="outline"
-            size="icon"
+          <button
+            type="button"
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
+              loading ? 'animate-spin' : ''
+            }`}
             onClick={onRefresh}
             title="Refresh resource list"
-            className={loading ? 'animate-spin' : ''}
+            aria-label="Refresh resource list"
           >
-            <RotateCw className="w-4 h-4" />
-          </Button>
+            <RotateCw size={15} />
+          </button>
 
           {isAdmin && (
-            <Button
-              variant="accent"
+            <button
+              type="button"
               onClick={handleOpenCreate}
-              className="flex items-center gap-2"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all active:translate-y-0.5 active:shadow-none cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
+              <Plus size={15} />
               <span>Add Resource</span>
-            </Button>
+            </button>
           )}
         </div>
       </div>
 
       {/* KPI Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-slate-800/80 bg-slate-900/60">
-          <CardContent className="p-4 flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-slate-800 text-slate-300">
-              <Layers className="w-5 h-5" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="rounded-2xl border-2 border-[#4C4541] bg-white p-4 sm:p-5 shadow-[3px_3px_0_#4C4541]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4C4541]/70">TOTAL</span>
+            <div className="w-8 h-8 rounded-lg bg-[#FCF0DA] text-[#4C4541] border border-[#4C4541] flex items-center justify-center">
+              <Layers size={16} />
             </div>
-            <div>
-              <p className="text-xs text-slate-400 font-medium">Total Resources</p>
-              <h4 className="text-2xl font-bold text-slate-100">{stats.total}</h4>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+            {stats.total}
+          </div>
+          <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Lab inventory</p>
+        </div>
 
-        <Card className="border-slate-800/80 bg-slate-900/60">
-          <CardContent className="p-4 flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-[#c26e47]/15 text-[#e28743]">
-              <Cpu className="w-5 h-5" />
+        <div className="rounded-2xl border-2 border-[#4C4541] bg-white p-4 sm:p-5 shadow-[3px_3px_0_#4C4541]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4C4541]/70">MACHINES</span>
+            <div className="w-8 h-8 rounded-lg bg-[#AEAC78] text-[#4C4541] border border-[#4C4541] flex items-center justify-center">
+              <Cpu size={16} />
             </div>
-            <div>
-              <p className="text-xs text-slate-400 font-medium">Active Machines</p>
-              <h4 className="text-2xl font-bold text-slate-100">{stats.activeMachines}</h4>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+            {stats.activeMachines}
+          </div>
+          <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Ready for booking</p>
+        </div>
 
-        <Card className="border-slate-800/80 bg-slate-900/60">
-          <CardContent className="p-4 flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-blue-500/15 text-blue-400">
-              <Building2 className="w-5 h-5" />
+        <div className="rounded-2xl border-2 border-[#4C4541] bg-white p-4 sm:p-5 shadow-[3px_3px_0_#4C4541]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4C4541]/70">SPACES</span>
+            <div className="w-8 h-8 rounded-lg bg-[#F2C46A] text-[#4C4541] border border-[#4C4541] flex items-center justify-center">
+              <Building2 size={16} />
             </div>
-            <div>
-              <p className="text-xs text-slate-400 font-medium">Active Spaces</p>
-              <h4 className="text-2xl font-bold text-slate-100">{stats.activeSpaces}</h4>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+            {stats.activeSpaces}
+          </div>
+          <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Available stations</p>
+        </div>
 
-        <Card className="border-slate-800/80 bg-slate-900/60">
-          <CardContent className="p-4 flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-amber-500/15 text-amber-400">
-              <AlertCircle className="w-5 h-5" />
+        <div className="rounded-2xl border-2 border-[#4C4541] bg-white p-4 sm:p-5 shadow-[3px_3px_0_#4C4541]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4C4541]/70">OFFLINE</span>
+            <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-900 border border-[#4C4541] flex items-center justify-center">
+              <AlertCircle size={16} />
             </div>
-            <div>
-              <p className="text-xs text-slate-400 font-medium">Maintenance / Inactive</p>
-              <h4 className="text-2xl font-bold text-slate-100">{stats.inactive}</h4>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+            {stats.inactive}
+          </div>
+          <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">In maintenance</p>
+        </div>
       </div>
 
       {/* Toolbar: Search & Filter Tabs */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <Input
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60 pointer-events-none" />
+          <input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search machines, spaces, rooms..."
-            className="pl-9 bg-slate-900/80 border-slate-800"
+            className="w-full pl-9 pr-4 py-2.5 rounded-full bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/50 font-medium shadow-[2px_2px_0_#4C4541] focus:outline-none focus:bg-[#FCF0DA] transition-colors"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
           {[
             { id: 'all', label: `All (${resources.length})` },
             { id: 'machine', label: 'Machines' },
@@ -312,10 +316,10 @@ export default function AdminResourcesView({
               key={tab.id}
               type="button"
               onClick={() => setFilterType(tab.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                 filterType === tab.id
-                  ? 'bg-[#c26e47]/15 text-[#f3a86c] border border-[#c26e47]/40'
-                  : 'bg-slate-900/60 text-slate-400 border border-slate-800/80 hover:bg-slate-800/60 hover:text-slate-200'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
               {tab.label}
@@ -326,173 +330,149 @@ export default function AdminResourcesView({
 
       {/* Resources Table */}
       {filteredResources.length === 0 ? (
-        <Card className="border-dashed border-slate-800 bg-slate-900/40 py-12 text-center">
-          <CardContent className="flex flex-col items-center">
-            <div className="p-4 rounded-full bg-slate-800/60 text-slate-500 mb-3">
-              <Wrench className="w-8 h-8" />
-            </div>
-            <h4 className="text-base font-semibold text-slate-200">No resources found</h4>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm">
-              {searchQuery
-                ? `No matching items for "${searchQuery}". Try clearing search keywords.`
-                : 'No machines or makerspace stations have been added in this category yet.'}
-            </p>
-            {isAdmin && !searchQuery && (
-              <Button
-                variant="accent"
-                size="sm"
-                className="mt-4"
-                onClick={handleOpenCreate}
-              >
-                <Plus className="w-4 h-4 mr-1.5" />
-                Add First Resource
-              </Button>
-            )}
-          </CardContent>
-        </Card>
+        <div className="rounded-[24px] border-2 border-[#4C4541] bg-white p-12 text-center shadow-[4px_4px_0_#4C4541]">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FCF0DA] border-2 border-[#4C4541] flex items-center justify-center text-[#4C4541] mb-4 shadow-[2px_2px_0_#4C4541]">
+            <Wrench size={28} />
+          </div>
+          <h4 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541]">No resources found</h4>
+          <p className="text-xs sm:text-sm text-[#4C4541]/80 mt-2 max-w-sm mx-auto font-sans leading-relaxed">
+            {searchQuery
+              ? `No matching items for "${searchQuery}". Try clearing search keywords.`
+              : 'No machines or makerspace stations have been added in this category yet.'}
+          </p>
+          {isAdmin && !searchQuery && (
+            <button
+              type="button"
+              className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] cursor-pointer"
+              onClick={handleOpenCreate}
+            >
+              <Plus size={15} />
+              <span>Add First Resource</span>
+            </button>
+          )}
+        </div>
       ) : (
-        <Card className="border-slate-800 bg-slate-900/60 overflow-hidden shadow-xl">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-slate-800 hover:bg-transparent">
-                <TableHead className="w-[30%]">Resource & Specs</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+        <div className="rounded-[24px] border-2 border-[#4C4541] bg-white overflow-x-auto shadow-[4px_4px_0_#4C4541]">
+          <table className="w-full text-left border-collapse min-w-[640px]">
+            <thead>
+              <tr className="bg-[#FCF0DA] border-b-2 border-[#4C4541] font-mono text-xs font-bold uppercase text-[#4C4541]">
+                <th className="py-3.5 px-5">Resource & Specs</th>
+                <th className="py-3.5 px-4">Type</th>
+                <th className="py-3.5 px-4">Location</th>
+                <th className="py-3.5 px-4">Status</th>
+                <th className="py-3.5 px-5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
               {filteredResources.map((res) => {
                 const isActive = res.status === 'active';
                 const isMachine = res.type === 'machine';
 
                 return (
-                  <TableRow key={res.id} className="border-slate-800/80 hover:bg-slate-800/40">
-                    <TableCell>
+                  <tr key={res.id} className="border-b border-[#4C4541]/15 hover:bg-[#FCF0DA]/25 transition-colors">
+                    <td className="py-4 px-5">
                       <div className="flex flex-col">
-                        <span className="font-semibold text-slate-100 flex items-center gap-1.5">
+                        <span className="font-bold text-[#4C4541] text-sm">
                           {res.name}
                         </span>
                         {res.description && (
-                          <span className="text-xs text-slate-400 mt-0.5 line-clamp-1">
+                          <span className="text-xs text-[#4C4541]/70 mt-0.5 line-clamp-1 font-sans">
                             {res.description}
                           </span>
                         )}
                       </div>
-                    </TableCell>
+                    </td>
 
-                    <TableCell>
-                      <Badge
-                        variant="secondary"
-                        className={
-                          isMachine
-                            ? 'bg-[#c26e47]/10 text-[#e28743] border-[#c26e47]/20'
-                            : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                        }
-                      >
-                        {isMachine ? (
-                          <span className="flex items-center gap-1">
-                            <Wrench className="w-3 h-3" /> Machine
-                          </span>
-                        ) : (
-                          <span className="flex items-center gap-1">
-                            <Building2 className="w-3 h-3" /> Space
-                          </span>
-                        )}
-                      </Badge>
-                    </TableCell>
-
-                    <TableCell>
-                      <span className="text-xs text-slate-300 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                        {res.location || 'Makerspace Lab'}
+                    <td className="py-4 px-4">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase border border-[#4C4541] bg-[#FCF0DA] text-[#4C4541]">
+                        {isMachine ? <Wrench size={11} /> : <Building2 size={11} />}
+                        <span>{isMachine ? 'Machine' : 'Space'}</span>
                       </span>
-                    </TableCell>
+                    </td>
 
-                    <TableCell>
+                    <td className="py-4 px-4">
+                      <span className="text-xs font-mono text-[#4C4541] flex items-center gap-1.5">
+                        <MapPin size={13} className="text-[#4C4541]/60" />
+                        <span>{res.location || 'Makerspace Lab'}</span>
+                      </span>
+                    </td>
+
+                    <td className="py-4 px-4">
                       <button
                         type="button"
                         onClick={() => isAdmin && handleToggleStatus(res)}
                         disabled={!isAdmin}
                         title={isAdmin ? 'Click to toggle status' : undefined}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] transition-all ${
                           isActive
-                            ? 'bg-[#c26e47]/15 border-[#c26e47]/30 text-[#e28743] hover:bg-[#c26e47]/25'
-                            : 'bg-amber-500/15 border-amber-500/30 text-amber-400 hover:bg-amber-500/25'
-                        } ${!isAdmin ? 'cursor-default' : 'cursor-pointer'}`}
+                            ? 'bg-[#AEAC78] text-[#4C4541]'
+                            : 'bg-[#F2C46A] text-[#4C4541]'
+                        } ${!isAdmin ? 'cursor-default' : 'cursor-pointer hover:opacity-85'}`}
                       >
                         <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            isActive ? 'bg-[#c26e47] animate-pulse' : 'bg-amber-400'
+                          className={`w-2 h-2 rounded-full ${
+                            isActive ? 'bg-[#4C4541]' : 'bg-[#4C4541]'
                           }`}
                         />
-                        <span>{isActive ? 'Active' : 'Inactive'}</span>
+                        <span>{isActive ? 'Active' : 'Maintenance'}</span>
                       </button>
-                    </TableCell>
+                    </td>
 
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        {/* Book / View Schedule on FullCalendar */}
-                        <Button
-                          variant="outline"
-                          size="sm"
+                    <td className="py-4 px-5 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        {/* Book / View Schedule */}
+                        <button
+                          type="button"
                           onClick={() => {
                             setCalendarTargetResourceId(res.id);
                             setViewMode('calendar');
                           }}
-                          className="h-8 text-xs flex items-center gap-1.5 border-[#c26e47]/40 text-[#f3a86c] hover:bg-[#c26e47]/15 cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] border border-[#4C4541] text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer"
                           title="View live schedule & book time slot"
                         >
-                          <Calendar className="w-3.5 h-3.5" />
+                          <Calendar size={13} />
                           <span>Schedule</span>
-                        </Button>
+                        </button>
 
                         {isAdmin && (
                           <>
-                            {/* Toggle Active/Inactive */}
-                            <Button
-                              variant="ghost"
-                              size="icon"
+                            <button
+                              type="button"
                               onClick={() => handleToggleStatus(res)}
                               title={isActive ? 'Deactivate resource' : 'Activate resource'}
-                              className="h-8 w-8 text-slate-400 hover:text-amber-400"
+                              className="w-7 h-7 rounded-full border border-[#4C4541] bg-white flex items-center justify-center text-[#4C4541] hover:bg-[#F2C46A] transition-all cursor-pointer"
                             >
-                              <Power className="w-4 h-4" />
-                            </Button>
+                              <Power size={13} />
+                            </button>
 
-                            {/* Edit */}
-                            <Button
-                              variant="ghost"
-                              size="icon"
+                            <button
+                              type="button"
                               onClick={() => handleOpenEdit(res)}
                               title="Edit resource"
-                              className="h-8 w-8 text-slate-400 hover:text-[#e28743]"
+                              className="w-7 h-7 rounded-full border border-[#4C4541] bg-white flex items-center justify-center text-[#4C4541] hover:bg-[#F2C46A] transition-all cursor-pointer"
                             >
-                              <Pencil className="w-4 h-4" />
-                            </Button>
+                              <Pencil size={13} />
+                            </button>
 
-                            {/* Delete */}
-                            <Button
-                              variant="ghost"
-                              size="icon"
+                            <button
+                              type="button"
                               onClick={() => handleDelete(res)}
                               disabled={deletingId === res.id}
                               title="Delete resource"
-                              className="h-8 w-8 text-slate-400 hover:text-red-400"
+                              className="w-7 h-7 rounded-full border border-[#4C4541] bg-white flex items-center justify-center text-rose-700 hover:bg-rose-100 transition-all cursor-pointer"
                             >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
+                              <Trash2 size={13} />
+                            </button>
                           </>
                         )}
                       </div>
-                    </TableCell>
-                  </TableRow>
+                    </td>
+                  </tr>
                 );
               })}
-            </TableBody>
-          </Table>
-        </Card>
+            </tbody>
+          </table>
+        </div>
       )}
 
       {/* Modal Dialog for Add / Edit */}

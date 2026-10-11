@@ -180,9 +180,9 @@ export default function ResourceCalendarView({
       title: isMine ? `★ ${b.title} (You)` : `${b.title} (${b.userName || 'Booked'})`,
       start: b.start,
       end: b.end,
-      backgroundColor: isMine ? '#c26e47' : '#2a2f35',
-      borderColor: isMine ? '#e28743' : '#3f4650',
-      textColor: isMine ? '#ffffff' : '#e2e8f0',
+      backgroundColor: isMine ? '#F2C46A' : '#AEAC78',
+      borderColor: '#4C4541',
+      textColor: '#4C4541',
       extendedProps: {
         userId: b.userId,
         isMine,
@@ -192,65 +192,59 @@ export default function ResourceCalendarView({
   });
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-6 tab-pane-fade">
       {/* Top Controls Bar */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-3xl bg-[#181a1d] border border-white/10 shadow-lg">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-[24px] bg-white border-2 border-[#4C4541] shadow-[4px_4px_0_#4C4541]">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#c26e47] animate-pulse" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#e28743]">
-              LIVE SCHEDULE & EQUIPMENT BOOKINGS
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F2C46A] border border-[#4C4541] animate-pulse" />
+            <span className="text-[11px] font-bold font-mono uppercase tracking-wider text-[#4C4541]">
+              [ LIVE SCHEDULE ] · EQUIPMENT & BENCH BOOKINGS
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-white font-heading tracking-tight flex items-center gap-2.5">
+          <h2 className="font-condensed text-3xl sm:text-4xl font-bold uppercase tracking-tight text-[#4C4541] flex flex-wrap items-center gap-2.5">
             <span>Equipment Calendar</span>
             {currentResource && (
-              <Badge
-                variant="outline"
-                className="bg-[#c26e47]/15 border-[#c26e47]/40 text-[#f3a86c] text-xs font-semibold"
-              >
+              <span className="px-3 py-0.5 rounded-full bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] text-xs font-mono font-bold shadow-[1.5px_1.5px_0_#4C4541]">
                 {currentResource.name}
-              </Badge>
+              </span>
             )}
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Real-time week view. Click or drag across empty slots to reserve, or click existing bookings to view details.
+          <p className="font-editorial italic text-xs sm:text-sm text-[#4C4541]/80 mt-1">
+            Real-time week view. Click or drag across empty slots to reserve, or tap existing bookings to view details.
           </p>
         </div>
 
         {/* Action Controls */}
         <div className="flex flex-wrap items-center gap-2.5">
           {onBackToResources && (
-            <Button
+            <button
               type="button"
-              variant="outline"
-              size="sm"
               onClick={onBackToResources}
-              className="text-xs"
+              className="px-4 py-2 rounded-full border-2 border-[#4C4541] bg-white hover:bg-[#F2C46A]/20 text-[#4C4541] text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer"
             >
               List View
-            </Button>
+            </button>
           )}
 
-          <Button
+          <button
             type="button"
-            size="sm"
             onClick={() => {
               setSelectedSlot(null);
               setIsFormModalOpen(true);
             }}
-            className="bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white text-xs font-bold shadow-md shadow-[#c26e47]/25 flex items-center gap-1.5"
+            className="px-5 py-2 rounded-full border-2 border-[#4C4541] bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold font-mono uppercase shadow-[2px_2px_0_#4C4541] transition-all active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Book This Machine</span>
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Equipment Selector Ribbon */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1 shrink-0 mr-1">
-          <Filter className="w-3.5 h-3.5 text-[#e28743]" /> Select:
+        <span className="text-xs font-bold font-mono text-[#4C4541] uppercase tracking-wider flex items-center gap-1 shrink-0 mr-1">
+          <Filter className="w-3.5 h-3.5 text-[#4C4541]" /> Select:
         </span>
         {resources.map((res) => {
           const isSelected = res.id === selectedResourceId;
@@ -261,16 +255,16 @@ export default function ResourceCalendarView({
               key={res.id}
               type="button"
               onClick={() => setSelectedResourceId(res.id)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shrink-0 cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all shrink-0 cursor-pointer border-2 border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${
                 isSelected
-                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-md shadow-[#c26e47]/25 border border-transparent'
-                  : 'bg-[#181a1d] text-slate-400 hover:text-white border border-white/5 hover:border-white/10'
+                  ? 'bg-[#4C4541] text-[#FCF0DA]'
+                  : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
               }`}
             >
               {isMachine ? <Wrench className="w-3.5 h-3.5" /> : <Building2 className="w-3.5 h-3.5" />}
               <span>{res.name}</span>
               {res.status === 'inactive' && (
-                <span className="px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-300 text-[10px]">
+                <span className="px-1.5 py-0.2 rounded-full bg-red-100 text-red-800 border border-red-300 text-[10px]">
                   Maintenance
                 </span>
               )}
@@ -280,33 +274,33 @@ export default function ResourceCalendarView({
       </div>
 
       {/* Calendar Card Container */}
-      <div className="p-4 sm:p-6 rounded-3xl bg-[#181a1d] border border-white/10 shadow-xl overflow-hidden relative">
+      <div className="p-4 sm:p-6 rounded-[28px] bg-white border-2 border-[#4C4541] shadow-[5px_5px_0_#4C4541] overflow-hidden relative">
         {/* Loading overlay indicator */}
         {loadingBookings && (
-          <div className="absolute top-4 right-6 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs text-[#e28743]">
+          <div className="absolute top-4 right-6 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FCF0DA] border-2 border-[#4C4541] text-xs font-mono font-bold text-[#4C4541] shadow-[2px_2px_0_#4C4541]">
             <RefreshCw className="w-3.5 h-3.5 animate-spin" />
             <span>Syncing Firestore...</span>
           </div>
         )}
 
         {/* Legend */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-3 border-b border-white/10 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-3 border-b-2 border-[#4C4541]/15 text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-md bg-[#c26e47] border border-[#e28743]" />
-              <span className="text-white font-medium">Your Bookings (Cancelable)</span>
+              <span className="w-3.5 h-3.5 rounded bg-[#F2C46A] border-2 border-[#4C4541] shadow-[1px_1px_0_#4C4541]" />
+              <span className="text-[#4C4541] font-bold">Your Bookings (Cancelable)</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-md bg-[#2a2f35] border border-[#3f4650]" />
-              <span className="text-slate-400">Other Makers</span>
+              <span className="w-3.5 h-3.5 rounded bg-[#AEAC78] border-2 border-[#4C4541] shadow-[1px_1px_0_#4C4541]" />
+              <span className="text-[#4C4541] font-semibold">Other Makers</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-md bg-transparent border border-dashed border-white/20" />
-              <span className="text-slate-400">Available Slot</span>
+              <span className="w-3.5 h-3.5 rounded bg-[#FCF0DA] border-2 border-dashed border-[#4C4541]" />
+              <span className="text-[#4C4541]/80">Available Slot</span>
             </div>
           </div>
 
-          <div className="text-[11px] text-slate-400 hidden sm:block">
+          <div className="text-[11px] font-editorial italic text-[#4C4541]/80 hidden sm:block">
             Showing week view for <strong>{currentResource?.name || 'Selected Resource'}</strong>
           </div>
         </div>
