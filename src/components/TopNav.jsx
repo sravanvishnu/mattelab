@@ -41,7 +41,7 @@ export default function TopNav({
   return (
     <Header
       brand="MatteLab"
-      subtitle="CET Makerspace"
+      subtitle="College of Engineering Trikaripur"
       items={navItems}
       activeItem={activeTab}
       onSelect={onSelectTab}

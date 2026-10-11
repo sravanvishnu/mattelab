@@ -12,6 +12,7 @@ import {
   Compass
 } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
+import { useTheme } from '../context/ThemeContext';
 
 /**
  * Brutalist-Editorial Hero Landing Page
@@ -47,12 +48,13 @@ export default function MatteLabHero({
   ctaText = "Propose Project"
 }) {
   const { showToast } = useToast ? useToast() : { showToast: () => {} };
+  const { isDark, toggleTheme } = useTheme();
+  const isDarkDisplay = isDark;
 
   // Stepped curtain entrance animation state
   const [curtainRevealed, setCurtainRevealed] = useState(false);
   const [activeColumn, setActiveColumn] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkDisplay, setIsDarkDisplay] = useState(false);
 
   // Lockup Typography Preset Switcher
   const [presetIndex, setPresetIndex] = useState(0);
@@ -67,7 +69,7 @@ export default function MatteLabHero({
       sansTop: 'MATTELAB',
       serifMid: 'innovation',
       sansBottom: 'ENGINEERING',
-      label: 'CET Innovation'
+      label: 'CETKR Innovation'
     },
     {
       sansTop: 'TINKER',
@@ -149,10 +151,10 @@ export default function MatteLabHero({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={`relative w-full h-[90vh] min-h-[640px] max-h-[1050px] overflow-hidden select-none transition-colors duration-500 ${
-        isDarkDisplay ? 'bg-[#3b3632] text-[#FCF0DA]' : 'bg-[#FCF0DA] text-[#4C4541]'
+        isDarkDisplay ? 'bg-[#1C1917] text-[#FCF0DA]' : 'bg-[#FCF0DA] text-[#4C4541]'
       }`}
       style={{
-        backgroundColor: isDarkDisplay ? '#3c3633' : '#FCF0DA',
+        backgroundColor: isDarkDisplay ? '#1C1917' : '#FCF0DA',
         color: isDarkDisplay ? '#FCF0DA' : '#4C4541'
       }}
     >
@@ -222,7 +224,7 @@ export default function MatteLabHero({
         <span>CREATIVE TECH</span>
         <span className="text-[#AEAC78]">MATTELAB / 2026</span>
         <span className="text-[9px] font-normal tracking-wider opacity-60 mt-1">
-          CET MAKERSPACE HUB
+          COLLEGE OF ENGINEERING TRIKARIPUR · CETKR
         </span>
       </div>
 
@@ -271,10 +273,10 @@ export default function MatteLabHero({
       <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 z-30 inline-flex items-center gap-2 p-1.5 rounded-full bg-[#4C4541]/8 hover:bg-[#4C4541]/14 backdrop-blur-md border border-[#4C4541]/20 transition-all shadow-sm">
         <button
           type="button"
-          onClick={() => setIsDarkDisplay((prev) => !prev)}
-          className="w-7 h-7 rounded-full flex items-center justify-center text-[#4C4541] hover:bg-white transition-colors cursor-pointer"
+          onClick={toggleTheme}
+          className="w-7 h-7 rounded-full flex items-center justify-center text-[#4C4541] hover:bg-white/20 transition-colors cursor-pointer"
           title={isDarkDisplay ? "Switch to Canvas Cream" : "Switch to Espresso Charcoal"}
-          style={{ color: isDarkDisplay ? '#FCF0DA' : '#4C4541' }}
+          style={{ color: isDarkDisplay ? '#F2C46A' : '#4C4541' }}
         >
           {isDarkDisplay ? <Sun size={13} /> : <Moon size={13} />}
         </button>

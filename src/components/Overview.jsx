@@ -66,7 +66,7 @@ export default function Overview({
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4 sm:mb-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/40 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase">
                 <Sparkles size={13} className="text-[#4C4541]" />
-                <span>CET MAKERSPACE · TINKERHUB &amp; IEDC</span>
+                <span>CETKR MAKERSPACE · TINKERHUB &amp; IEDC</span>
               </div>
               <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#4C4541]/70">
                 <span className="w-2 h-2 rounded-full bg-[#AEAC78] animate-pulse" />

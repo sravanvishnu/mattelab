@@ -15,7 +15,7 @@ import {
  * - Top-right tab: "Back to top ↑"
  * - Section 1: "Got an idea? Let's build it together." + sculpted CTA button + Alan Kay makerspace quote
  * - Section 2: "Explore Lab" navigation column (FabLab, 3D printers, IoT workbenches)
- * - Section 3: "Initiatives" navigation column (Workshops, Hackathons, IEDC Grants, TinkerHub CET)
+ * - Section 3: "Initiatives" navigation column (Workshops, Hackathons, IEDC Grants, TinkerHub CETKR)
  * - Section 4: Lab Coordinates & Contact (College of Engineering Trikaripur, Cheemeni, Kasaragod)
  * - Monumental typographic statement: "DREAM IT · SOLDER IT · BUILD IT"
  * - Sub-footer: MatteLab brand wordmark, college affiliation, IEDC support, and lab safety guidelines
@@ -89,7 +89,7 @@ export default function Footer({
         </div>
 
         {/* Outer Card Container */}
-        <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#4C4541] border border-white/10 p-6 sm:p-10 lg:p-14 shadow-2xl overflow-hidden text-[#FCF0DA]">
+        <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#4C4541] dark:bg-[#151312] border border-white/10 p-6 sm:p-10 lg:p-14 shadow-2xl overflow-hidden text-[#FCF0DA]">
           {/* Main Content Layout with Left Social Bar + Multi-column Grid */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
             {/* Left Vertical Social Dock (Acid-Lime circular buttons) */}
@@ -145,7 +145,7 @@ export default function Footer({
                         OPEN HARDWARE COMMUNITY
                       </span>
                       <span className="text-[11px] text-neutral-400 font-medium mt-0.5">
-                        TinkerHub &amp; IEDC · CET Trikaripur
+                        TinkerHub &amp; IEDC · College of Engineering Trikaripur (CETKR)
                       </span>
                     </div>
                   </div>
@@ -255,7 +255,7 @@ export default function Footer({
                   </li>
                   <li>
                     <span className="hover:text-white transition-colors cursor-pointer">
-                      TinkerHub CET Hub
+                      TinkerHub CETKR Hub
                     </span>
                   </li>
                   <li>

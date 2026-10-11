@@ -28,11 +28,11 @@ export default function LoginView() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCF0DA] text-[#4C4541]">
+    <div className="min-h-screen flex flex-col bg-[#FCF0DA] dark:bg-[#1C1917] text-[#4C4541] dark:text-[#FCF0DA] transition-colors duration-300">
       {/* Modern Floating Island Header with MatteLab Logo */}
       <Header
         brand="MATTELAB"
-        subtitle="CET Makerspace"
+        subtitle="College of Engineering Trikaripur"
         items={[
           { id: 'about', label: 'ABOUT' },
           { id: 'workshops', label: 'WORKSHOPS' },
@@ -77,7 +77,7 @@ export default function LoginView() {
           </div>
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
-            <span>[ AUTHENTICATION ] · CET MAKERSPACE</span>
+            <span>[ AUTHENTICATION ] · CETKR MAKERSPACE</span>
           </div>
 
           <h3 className="font-condensed text-3xl sm:text-4xl font-bold uppercase tracking-wide text-[#4C4541]">
@@ -115,8 +115,8 @@ export default function LoginView() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full py-8 px-6 bg-[#4C4541] border-t-2 border-[#4C4541] text-center text-xs font-mono text-[#FCF0DA]/80">
-        <p>© {new Date().getFullYear()} MatteLab · Innovation & Prototyping Laboratory · CET</p>
+      <footer className="w-full py-8 px-6 bg-[#4C4541] dark:bg-[#151312] border-t-2 border-[#4C4541] dark:border-white/10 text-center text-xs font-mono text-[#FCF0DA]/80">
+        <p>© {new Date().getFullYear()} MatteLab · Innovation & Prototyping Laboratory · College of Engineering Trikaripur (CETKR)</p>
       </footer>
     </div>
   );

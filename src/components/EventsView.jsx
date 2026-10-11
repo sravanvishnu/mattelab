@@ -138,7 +138,7 @@ export default function EventsView({
             )}
           </h2>
           <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
-            Hands-on prototyping sessions, engineering talks, and hardware hackathons at CET.
+            Hands-on prototyping sessions, engineering talks, and hardware hackathons at College of Engineering Trikaripur (CETKR).
           </p>
         </div>
 
@@ -639,7 +639,7 @@ export default function EventsView({
                 <div>
                   <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase leading-none">MatteLab Community Guidelines</h3>
                   <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
-                    Standards for proposing workshops, build nights, and hackathons at CET Makerspace
+                    Standards for proposing workshops, build nights, and hackathons at College of Engineering Trikaripur (CETKR) Makerspace
                   </p>
                 </div>
               </div>

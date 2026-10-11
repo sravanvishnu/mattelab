@@ -66,6 +66,225 @@
   --shadow-glow: 0 0 28px -4px rgba(194, 110, 71, 0.4);
 }
 
+/* Core Dark Palette - Luxury Brutalist Espresso Canvas */
+html.dark,
+.dark {
+  --bg-primary: #1C1917;
+  --bg-secondary: #171412;
+  --bg-tertiary: #24201E;
+  --surface-card: #282421;
+  --surface-card-hover: #332E2A;
+  --surface-glass: rgba(28, 25, 23, 0.95);
+
+  --border-subtle: rgba(242, 196, 106, 0.18);
+  --border-hover: rgba(242, 196, 106, 0.45);
+  --border-active: #F2C46A;
+
+  --text-primary: #FCF0DA;
+  --text-secondary: #D4CBC4;
+  --text-muted: #A39B94;
+
+  /* Accents in Dark Mode */
+  --accent-terracotta: #F2C46A;
+  --accent-clay: #AEAC78;
+  --accent-amber: #F2C46A;
+  --accent-emerald: #AEAC78;
+  --accent-lime: #AEAC78;
+  --accent-gradient: linear-gradient(135deg, #F2C46A 0%, #D4A346 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #FFE08F 0%, #F2C46A 100%);
+  --accent-glow: rgba(242, 196, 106, 0.4);
+
+  /* Status Colors */
+  --status-open-bg: rgba(174, 172, 120, 0.25);
+  --status-open-text: #FCF0DA;
+  --status-closed-bg: rgba(239, 68, 68, 0.2);
+  --status-closed-text: #FCA5A5;
+  --status-registered-bg: rgba(242, 196, 106, 0.25);
+  --status-registered-text: #F2C46A;
+
+  --editorial-cream: #1C1917;
+  --editorial-sage: #AEAC78;
+  --editorial-gold: #F2C46A;
+  --editorial-espresso: #FCF0DA;
+
+  /* Shadows in Dark Mode */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.9);
+}
+
+/* ========================================================
+   MATTELAB EDITORIAL BRUTALIST DARK THEME ENGINE
+   ======================================================== */
+html.dark {
+  background-color: #1C1917;
+  color: #FCF0DA;
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #1C1917;
+  color: #FCF0DA;
+}
+
+/* Background surfaces */
+html.dark .bg-\[\#FCF0DA\] {
+  background-color: #1C1917 !important;
+}
+
+html.dark .bg-white {
+  background-color: #282421 !important;
+  color: #FCF0DA !important;
+}
+
+html.dark .bg-white\/90,
+html.dark .bg-white\/95,
+html.dark .bg-white\/80 {
+  background-color: rgba(40, 36, 33, 0.95) !important;
+}
+
+/* Text adaptations */
+html.dark .text-\[\#4C4541\] {
+  color: #FCF0DA !important;
+}
+
+html.dark .text-\[\#4C4541\]\/90,
+html.dark .text-\[\#4C4541\]\/85,
+html.dark .text-\[\#4C4541\]\/80 {
+  color: rgba(252, 240, 218, 0.85) !important;
+}
+
+html.dark .text-\[\#4C4541\]\/75,
+html.dark .text-\[\#4C4541\]\/70,
+html.dark .text-\[\#4C4541\]\/60 {
+  color: rgba(252, 240, 218, 0.70) !important;
+}
+
+html.dark .text-slate-950,
+html.dark .text-stone-900,
+html.dark .text-stone-800,
+html.dark .text-neutral-900 {
+  color: #FCF0DA !important;
+}
+
+html.dark .text-stone-700,
+html.dark .text-stone-600 {
+  color: #D4CBC4 !important;
+}
+
+html.dark .text-stone-500 {
+  color: #A39B94 !important;
+}
+
+/* Borders & Dividers */
+html.dark .border-\[\#4C4541\] {
+  border-color: rgba(242, 196, 106, 0.35) !important;
+}
+
+html.dark .border-\[\#4C4541\]\/15,
+html.dark .border-\[\#4C4541\]\/20,
+html.dark .border-\[\#4C4541\]\/30,
+html.dark .border-\[\#4C4541\]\/40 {
+  border-color: rgba(242, 196, 106, 0.20) !important;
+}
+
+html.dark .border-stone-200,
+html.dark .border-stone-300 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Tactile Brutalist Shadows in Dark Mode */
+html.dark .shadow-\[2px_2px_0_\#4C4541\],
+html.dark .shadow-\[3px_3px_0_\#4C4541\],
+html.dark .shadow-\[4px_4px_0_\#4C4541\],
+html.dark .shadow-\[5px_5px_0_\#4C4541\],
+html.dark .shadow-\[6px_6px_0_\#4C4541\] {
+  box-shadow: 3px 3px 0 rgba(242, 196, 106, 0.40) !important;
+}
+
+/* Buttons in Dark Mode */
+html.dark .bg-\[\#4C4541\]:not(header):not(footer) {
+  background-color: #2D2825 !important;
+  color: #FCF0DA !important;
+  border-color: rgba(242, 196, 106, 0.4) !important;
+}
+
+html.dark .hover\:bg-\[\#4C4541\]:hover {
+  background-color: #38322E !important;
+}
+
+/* Inputs, Textareas, Selects */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #231F1D !important;
+  color: #FCF0DA !important;
+  border-color: rgba(242, 196, 106, 0.3) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8C847E !important;
+}
+
+/* Modal windows & dialog cards */
+html.dark .modal-content,
+html.dark [role="dialog"] > div {
+  background-color: #24201E !important;
+  color: #FCF0DA !important;
+  border-color: rgba(242, 196, 106, 0.35) !important;
+  box-shadow: 6px 6px 0 rgba(242, 196, 106, 0.40) !important;
+}
+
+html.dark [role="dialog"] div[class*="border-b"] {
+  background-color: #24201E !important;
+  border-color: rgba(242, 196, 106, 0.20) !important;
+}
+
+/* Overview hero welcome box in Dark Mode */
+html.dark .overview-inner-body section:first-of-type {
+  background-color: #24201E !important;
+  border-color: rgba(242, 196, 106, 0.35) !important;
+}
+
+/* Mobile bottom bar in Dark Mode */
+html.dark .mobile-bottom-bar {
+  background: #141211 !important;
+  border-top: 1.5px solid rgba(242, 196, 106, 0.2) !important;
+}
+
+/* FullCalendar in Dark Mode */
+html.dark .fc {
+  --fc-border-color: rgba(242, 196, 106, 0.18);
+  --fc-page-bg-color: #282421;
+  --fc-neutral-bg-color: #231F1D;
+  --fc-list-event-hover-bg-color: rgba(242, 196, 106, 0.15);
+  color: #FCF0DA;
+}
+
+html.dark .fc .fc-col-header-cell-cushion,
+html.dark .fc .fc-daygrid-day-number,
+html.dark .fc .fc-toolbar-title {
+  color: #FCF0DA !important;
+}
+
+html.dark .fc .fc-button-primary {
+  background-color: #2D2825 !important;
+  border-color: rgba(242, 196, 106, 0.35) !important;
+  color: #FCF0DA !important;
+}
+
+html.dark .fc .fc-button-primary:hover {
+  background-color: #F2C46A !important;
+  color: #1C1917 !important;
+}
+
+/* Footer card in Dark Mode */
+html.dark footer .bg-\[\#4C4541\] {
+  background-color: #141211 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 /* Base Reset */
 *,
 *::before,
