@@ -42,8 +42,8 @@ export default function Sidebar({
   return (
     <aside className="app-sidebar">
       <div className="sidebar-brand">
-        <div className="brand-logo-icon">
-          <span>M</span>
+        <div className="bg-[#fbf9f5] rounded-xl px-2.5 py-1 border border-[#c26e47]/30 shadow-xs flex items-center justify-center">
+          <img src="/logo.png" alt="MatteLab" className="h-7 w-auto object-contain" />
         </div>
         <div className="brand-text">
           <h2>MatteLab</h2>

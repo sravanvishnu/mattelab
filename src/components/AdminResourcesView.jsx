@@ -155,7 +155,7 @@ export default function AdminResourcesView({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Badge variant="outline" className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10">
+            <Badge variant="outline" className="border-[#c26e47]/40 text-[#e28743] bg-[#c26e47]/10">
               Admin & Organizer Suite
             </Badge>
           </div>
@@ -207,7 +207,7 @@ export default function AdminResourcesView({
 
         <Card className="border-slate-800/80 bg-slate-900/60">
           <CardContent className="p-4 flex items-center gap-3.5">
-            <div className="p-3 rounded-xl bg-emerald-500/15 text-emerald-400">
+            <div className="p-3 rounded-xl bg-[#c26e47]/15 text-[#e28743]">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
@@ -268,7 +268,7 @@ export default function AdminResourcesView({
               onClick={() => setFilterType(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                 filterType === tab.id
-                  ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/40'
+                  ? 'bg-[#c26e47]/15 text-[#f3a86c] border border-[#c26e47]/40'
                   : 'bg-slate-900/60 text-slate-400 border border-slate-800/80 hover:bg-slate-800/60 hover:text-slate-200'
               }`}
             >
@@ -341,7 +341,7 @@ export default function AdminResourcesView({
                         variant="secondary"
                         className={
                           isMachine
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                            ? 'bg-[#c26e47]/10 text-[#e28743] border-[#c26e47]/20'
                             : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                         }
                       >
@@ -372,13 +372,13 @@ export default function AdminResourcesView({
                         title={isAdmin ? 'Click to toggle status' : undefined}
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
                           isActive
-                            ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25'
+                            ? 'bg-[#c26e47]/15 border-[#c26e47]/30 text-[#e28743] hover:bg-[#c26e47]/25'
                             : 'bg-amber-500/15 border-amber-500/30 text-amber-400 hover:bg-amber-500/25'
                         } ${!isAdmin ? 'cursor-default' : 'cursor-pointer'}`}
                       >
                         <span
                           className={`w-1.5 h-1.5 rounded-full ${
-                            isActive ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'
+                            isActive ? 'bg-[#c26e47] animate-pulse' : 'bg-amber-400'
                           }`}
                         />
                         <span>{isActive ? 'Active' : 'Inactive'}</span>
@@ -405,7 +405,7 @@ export default function AdminResourcesView({
                             size="icon"
                             onClick={() => handleOpenEdit(res)}
                             title="Edit resource"
-                            className="h-8 w-8 text-slate-400 hover:text-emerald-400"
+                            className="h-8 w-8 text-slate-400 hover:text-[#e28743]"
                           >
                             <Pencil className="w-4 h-4" />
                           </Button>

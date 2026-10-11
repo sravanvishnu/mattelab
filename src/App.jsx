@@ -15,7 +15,6 @@ import {
 import { db } from './firebase';
 
 import LoginView from './components/LoginView';
-import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import MobileNav from './components/MobileNav';
 import Overview from './components/Overview';
@@ -47,7 +46,7 @@ export default function App() {
     confirmText: 'Confirm',
     isDanger: false,
     isLoading: false,
-    onConfirm: () => {}
+    onConfirm: () => { }
   });
 
   const loadResources = useCallback(async () => {
@@ -208,8 +207,16 @@ export default function App() {
     return (
       <div className="app-loading-screen">
         <div className="brand-loader">
-          <div className="loader-logo">M</div>
-          <p className="loader-text">Loading MatteLab Workspace...</p>
+          <div className="loader-logo-wrap">
+            <img src="/logo.png" alt="MatteLab" className="loader-logo-img" />
+          </div>
+          <div className="text-center">
+            <p className="loader-text">Loading MatteLab Workspace...</p>
+            <p className="loader-subtext mt-1">College of Engineering Trikaripur · Makerspace</p>
+          </div>
+          <div className="loader-bar-track">
+            <div className="loader-bar-fill"></div>
+          </div>
         </div>
       </div>
     );
@@ -221,71 +228,66 @@ export default function App() {
   }
 
   return (
-    <div className="app-layout">
-      {/* Desktop Sidebar */}
-      <Sidebar
+    <div className="min-h-screen flex flex-col bg-[#121416]">
+      {/* Top Header Overlay spanning full width */}
+      <TopNav
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
         onOpenCreateModal={() => setIsCreateModalOpen(true)}
+        onSelectTab={setActiveTab}
         onPromptLogout={promptLogout}
         registeredCount={registeredEventIds.size}
       />
 
-      {/* Main Content Area */}
-      <div className="app-main-viewport">
-        <TopNav
-          activeTab={activeTab}
-          onOpenCreateModal={() => setIsCreateModalOpen(true)}
-        />
+      {/* Main Full-Width Content Viewport (No Sidebar) */}
+      <div className="w-full flex-1 pt-[88px] sm:pt-[96px]">
+        {activeTab === 'overview' ? (
+          <Overview
+            events={events}
+            myRegistrations={myRegisteredEvents}
+            resources={resources}
+            setActiveTab={setActiveTab}
+            onOpenCreateModal={() => setIsCreateModalOpen(true)}
+          />
+        ) : (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+            {activeTab === 'events' && (
+              <EventsView
+                events={events}
+                registeredEventIds={registeredEventIds}
+                loading={dataLoading}
+                onRefresh={loadData}
+                onRegister={handleRegister}
+                onCancelRegistration={promptCancelRegistration}
+                onOpenCreateModal={() => setIsCreateModalOpen(true)}
+              />
+            )}
 
-        <main className="app-content-body">
-          {activeTab === 'overview' && (
-            <Overview
-              events={events}
-              myRegistrations={myRegisteredEvents}
-              resources={resources}
-              setActiveTab={setActiveTab}
-              onOpenCreateModal={() => setIsCreateModalOpen(true)}
-            />
-          )}
+            {activeTab === 'registrations' && (
+              <MyRegistrationsView
+                myRegistrations={myRegisteredEvents}
+                loading={dataLoading}
+                onRefresh={loadData}
+                onCancelRegistration={promptCancelRegistration}
+                onExploreEvents={() => setActiveTab('events')}
+              />
+            )}
 
-          {activeTab === 'events' && (
-            <EventsView
-              events={events}
-              registeredEventIds={registeredEventIds}
-              loading={dataLoading}
-              onRefresh={loadData}
-              onRegister={handleRegister}
-              onCancelRegistration={promptCancelRegistration}
-              onOpenCreateModal={() => setIsCreateModalOpen(true)}
-            />
-          )}
+            {activeTab === 'resources' && (
+              <AdminResourcesView
+                resources={resources}
+                loading={resourcesLoading}
+                onRefresh={loadResources}
+              />
+            )}
 
-          {activeTab === 'registrations' && (
-            <MyRegistrationsView
-              myRegistrations={myRegisteredEvents}
-              loading={dataLoading}
-              onRefresh={loadData}
-              onCancelRegistration={promptCancelRegistration}
-              onExploreEvents={() => setActiveTab('events')}
-            />
-          )}
-
-          {activeTab === 'resources' && (
-            <AdminResourcesView
-              resources={resources}
-              loading={resourcesLoading}
-              onRefresh={loadResources}
-            />
-          )}
-
-          {activeTab === 'profile' && (
-            <ProfileView
-              myRegistrationsCount={registeredEventIds.size}
-              onPromptLogout={promptLogout}
-            />
-          )}
-        </main>
+            {activeTab === 'profile' && (
+              <ProfileView
+                myRegistrationsCount={registeredEventIds.size}
+                onPromptLogout={promptLogout}
+              />
+            )}
+          </div>
+        )}
       </div>
 
       {/* Mobile Sticky Bottom Navigation */}

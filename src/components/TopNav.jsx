@@ -1,79 +1,51 @@
 import React from 'react';
+import Header from './Header';
 import { useAuth } from '../context/AuthContext';
-import { PlusCircle, ShieldCheck } from 'lucide-react';
 
-const TAB_TITLES = {
-  overview: {
-    title: 'Workspace Overview',
-    subtitle: 'Your space to learn, build, innovate and create.'
-  },
-  events: {
-    title: 'Upcoming Events & Workshops',
-    subtitle: 'Explore hands-on makerspace sessions, bootcamps and talks.'
-  },
-  registrations: {
-    title: 'My Registrations',
-    subtitle: 'Workshops and activities you have reserved a spot for.'
-  },
-  resources: {
-    title: 'Makerspace Resources & Equipment',
-    subtitle: 'Manage machines, 3D printers, workstations, and lab spaces.'
-  },
-  profile: {
-    title: 'My Profile',
-    subtitle: 'Manage your college maker credentials and activity.'
-  }
-};
+/**
+ * TopNav delegates to the master Header component with all the rich sidebar contents:
+ * - Brand: MATTELAB (with horizontal center cut)
+ * - Navigation pill: OVERVIEW, EVENTS, REGISTRATIONS (with counter badge), RESOURCES (with Admin highlight), PROFILE
+ * - Right: Organizer status badge, User profile avatar, Blue pill CTA (Create Event for organizer, Sign Out for members)
+ */
+export default function TopNav({
+  activeTab,
+  onOpenCreateModal,
+  onSelectTab,
+  onPromptLogout,
+  registeredCount = 0
+}) {
+  const { currentUser, userProfile, isOrganizer, isAdmin } = useAuth();
 
-export default function TopNav({ activeTab, onOpenCreateModal }) {
-  const { currentUser, userProfile, isOrganizer } = useAuth();
-  const currentTabInfo = TAB_TITLES[activeTab] || TAB_TITLES.overview;
-
-  const displayName = userProfile?.name || currentUser?.displayName || 'Student Maker';
-  const initial = displayName.charAt(0).toUpperCase();
+  const navItems = [
+    { id: 'overview', label: 'OVERVIEW' },
+    { id: 'events', label: 'EVENTS' },
+    {
+      id: 'registrations',
+      label: 'REGISTRATIONS',
+      badge: registeredCount > 0 ? registeredCount : null
+    },
+    {
+      id: 'resources',
+      label: isAdmin ? 'MANAGE RESOURCES' : 'RESOURCES',
+      highlight: isAdmin
+    },
+    { id: 'profile', label: 'PROFILE' }
+  ];
 
   return (
-    <header className="app-topbar">
-      <div className="topbar-content">
-        <div className="topbar-headings">
-          <h1 className="topbar-title">{currentTabInfo.title}</h1>
-          <p className="topbar-subtitle">{currentTabInfo.subtitle}</p>
-        </div>
-
-        <div className="topbar-actions">
-          {isOrganizer && (
-            <button
-              type="button"
-              className="btn btn-primary topbar-create-btn"
-              onClick={onOpenCreateModal}
-            >
-              <PlusCircle size={16} />
-              <span>Create Event</span>
-            </button>
-          )}
-
-          <div className="topbar-user-badge">
-            <div className="user-avatar" title={displayName}>
-              {currentUser?.photoURL ? (
-                <img
-                  src={currentUser.photoURL}
-                  alt={displayName}
-                  className="user-avatar-img"
-                  referrerPolicy="no-referrer"
-                />
-              ) : (
-                <span>{initial}</span>
-              )}
-            </div>
-            <div className="user-meta-text">
-              <span className="user-name-snippet">{displayName}</span>
-              <span className="user-role-snippet">
-                {isOrganizer ? 'Organizer' : 'Student'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <Header
+      brand="MATTELAB"
+      subtitle="CET Makerspace"
+      items={navItems}
+      activeItem={activeTab}
+      onSelect={onSelectTab}
+      user={currentUser ? { ...currentUser, ...userProfile } : null}
+      isOrganizer={isOrganizer}
+      isAdmin={isAdmin}
+      ctaText={isOrganizer ? "Create Event" : "Sign Out"}
+      onCtaClick={isOrganizer ? onOpenCreateModal : onPromptLogout}
+      isOverlay={true}
+    />
   );
 }

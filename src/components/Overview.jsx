@@ -12,6 +12,9 @@ import {
   Wrench
 } from 'lucide-react';
 
+import HeroSection from './HeroSection';
+import GoonsHero from './GoonsHero';
+
 export default function Overview({
   events = [],
   myRegistrations = [],
@@ -39,14 +42,22 @@ export default function Overview({
 
   return (
     <div className="tab-pane-fade">
-      {/* Hero Welcome Banner */}
-      <section className="welcome-banner">
-        <div className="welcome-content">
-          <div className="eyebrow-chip">
-            <Sparkles size={13} className="text-accent" />
-            <span>COLLEGE MAKERSPACE & INNOVATION</span>
-          </div>
-          <h2 className="welcome-title">Welcome back, {userName}.</h2>
+      {/* Recovered Goons 3D Geometric Hero matching the user reference screenshot */}
+      <GoonsHero
+        ctaText={isOrganizer ? "Create Workshop Event" : "Reserve Lab Equipment"}
+        onCtaClick={() => (isOrganizer ? onOpenCreateModal?.() : setActiveTab('resources'))}
+        onExploreEvents={() => setActiveTab('events')}
+        onExploreResources={() => setActiveTab('resources')}
+      />
+
+      <div className="overview-inner-body max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20">
+        <section className="welcome-banner">
+          <div className="welcome-content">
+            <div className="eyebrow-chip">
+              <Sparkles size={13} className="text-accent" />
+              <span>COLLEGE MAKERSPACE & INNOVATION</span>
+            </div>
+            <h2 className="welcome-title">Welcome back, {userName}.</h2>
           <p className="welcome-desc">
             MatteLab is where ideas transform into hardware and software reality. Explore upcoming workshops, register for hackathons, and collaborate with peer innovators.
           </p>
@@ -184,5 +195,6 @@ export default function Overview({
         </div>
       </section>
     </div>
+  </div>
   );
 }
