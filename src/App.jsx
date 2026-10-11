@@ -262,7 +262,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCF0DA] text-[#4C4541] overflow-x-hidden w-full max-w-full selection:bg-[#F2C46A] selection:text-[#4C4541]">
+    <div className="min-h-screen flex flex-col bg-[#FCF0DA] dark:bg-[#1C1917] text-[#4C4541] dark:text-[#FCF0DA] overflow-x-hidden w-full max-w-full selection:bg-[#F2C46A] selection:text-[#4C4541] transition-colors duration-300">
       {/* Top Header Overlay spanning full width */}
       <TopNav
         activeTab={activeTab}

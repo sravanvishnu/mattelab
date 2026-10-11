@@ -30,7 +30,7 @@ export const EVENT_GUIDELINES = [
   {
     id: 'timing',
     title: 'Lab Operating Hours & Lead Time',
-    desc: 'Events must be held between 08:30 AM and 08:00 PM on CET campus. Proposals must be submitted at least 48 hours in advance for admin review.'
+    desc: 'Events must be held between 08:30 AM and 08:00 PM on College of Engineering Trikaripur (CETKR) campus. Proposals must be submitted at least 48 hours in advance for admin review.'
   },
   {
     id: 'capacity',

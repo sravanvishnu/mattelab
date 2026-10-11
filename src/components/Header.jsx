@@ -8,6 +8,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import mattelabLogo from '../assets/mattelab.png';
+import { useTheme } from '../context/ThemeContext';
 
 /**
  * Editorial Studio Header with Morphing Motion:
@@ -36,7 +37,7 @@ export default function Header({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { isDark, toggleTheme } = useTheme();
 
   // Scroll listener for the transition from edge-to-edge sides to centered floating dock
   useEffect(() => {
@@ -52,17 +53,6 @@ export default function Header({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Theme switch utility
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => {
-      const next = !prev;
-      if (typeof document !== 'undefined') {
-        document.documentElement.classList.toggle('light-theme', !next);
-      }
-      return next;
-    });
-  };
-
   const displayName = user?.displayName || user?.name || "Student Maker";
   const userInitial = displayName.charAt(0).toUpperCase();
 
@@ -75,8 +65,12 @@ export default function Header({
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
           isScrolled
-            ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
-            : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
+            ? isDark
+              ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#1A1816]/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.85),0_0_0_1px_rgba(242,196,106,0.15)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
+              : 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
+            : isDark
+              ? 'top-0 w-full max-w-full rounded-none bg-[#1C1917]/95 backdrop-blur-md border-b border-white/12 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
+              : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
         } ${className}`}
       >
         {/* ========================================================
@@ -128,7 +122,9 @@ export default function Header({
           </a>
 
           {!isScrolled && subtitle && (
-            <span className="hidden xl:inline-block text-[11px] font-medium text-stone-500 tracking-wider border-l border-stone-300 pl-2.5 ml-1 transition-opacity duration-300">
+            <span className={`hidden xl:inline-block text-[11px] font-medium tracking-wider border-l pl-2.5 ml-1 transition-opacity duration-300 ${
+              isDark ? 'text-stone-400 border-white/20' : 'text-stone-500 border-stone-300'
+            }`}>
               {subtitle}
             </span>
           )}
@@ -153,8 +149,8 @@ export default function Header({
                       onClick={() => onSelect?.(item.id)}
                       className={`group relative py-1 text-[13px] sm:text-sm font-medium tracking-normal transition-colors duration-200 cursor-pointer flex items-center ${
                         isActive
-                          ? (isScrolled ? 'text-white' : 'text-slate-950 font-semibold')
-                          : (isScrolled ? 'text-[#9ca3af] hover:text-white' : 'text-stone-600 hover:text-slate-950')
+                          ? (isDark ? 'text-[#F2C46A] font-semibold' : (isScrolled ? 'text-white' : 'text-slate-950 font-semibold'))
+                          : (isDark ? 'text-stone-300 hover:text-white' : (isScrolled ? 'text-[#9ca3af] hover:text-white' : 'text-stone-600 hover:text-slate-950'))
                       }`}
                     >
                       <span>{item.label}</span>
@@ -180,7 +176,7 @@ export default function Header({
                       {isActive && (
                         <span
                           className={`absolute -bottom-1 left-0 right-0 h-[2px] rounded-full transition-all duration-300 ${
-                            isScrolled ? 'bg-white' : 'bg-slate-950'
+                            isDark ? 'bg-[#F2C46A]' : (isScrolled ? 'bg-white' : 'bg-slate-950')
                           }`}
                         />
                       )}
@@ -211,22 +207,20 @@ export default function Header({
           <button
             type="button"
             onClick={toggleTheme}
-            className="group p-1.5 text-neutral-400 hover:text-neutral-900 transition-colors duration-200 cursor-pointer flex items-center justify-center focus:outline-none"
-            title={isDarkMode ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            className="group p-1.5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 cursor-pointer flex items-center justify-center focus:outline-none"
+            title={isDark ? "Switch to Canvas Cream Light Mode" : "Switch to Espresso Charcoal Dark Mode"}
             aria-label="Toggle Theme Mode"
           >
-            {isDarkMode ? (
+            {isDark ? (
               <Sun
                 size={18}
-                className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-active:rotate-90 stroke-[1.8] ${
-                  isScrolled ? 'text-white' : 'text-stone-800'
-                }`}
+                className="transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-active:rotate-90 stroke-[1.8] text-[#F2C46A]"
               />
             ) : (
               <Moon
                 size={18}
                 className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-active:rotate-90 stroke-[1.8] ${
-                  isScrolled ? 'text-neutral-200' : 'text-stone-700'
+                  isScrolled ? 'text-neutral-200' : 'text-[#4C4541]'
                 }`}
               />
             )}
@@ -291,7 +285,9 @@ export default function Header({
       {/* Mobile Dropdown Drawer when open */}
       {mobileMenuOpen && (
         <div
-          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl bg-[#4C4541]/96 backdrop-blur-2xl border border-white/12 p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${
+          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl ${
+            isDark ? 'bg-[#1C1917]/96 border-white/20' : 'bg-[#4C4541]/96 border-white/12'
+          } backdrop-blur-2xl border p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${
             isScrolled ? 'top-20' : 'top-[76px]'
           }`}
         >

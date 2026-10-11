@@ -9,7 +9,7 @@ import { ArrowUpRight, Sparkles, Cpu, Layers, Wrench, Compass, BookOpen, Users }
  *   1. Top-Left: "MatteLab: Rapid Prototyping & Form" (3D printed mechanical book)
  *   2. Top-Center: Open technical catalog laying flat ("Miniaturized Systems & Precision Engineering")
  *   3. Right: Standing sage green book ("The Art of Hardware")
- *   4. Bottom-Left: CET Makerspace gallery exhibition photo (collaborative engineering lab)
+ *   4. Bottom-Left: CETKR Makerspace gallery exhibition photo (collaborative engineering lab)
  *   5. Bottom-Center: Vibrant yellow "Matte Zine: Field Manual for Makers"
  *   6. Bottom-Right: Hands holding open an electronic breadboard prototyping manual
  */
@@ -56,7 +56,7 @@ export default function HeroSection({
     },
     {
       id: 'makerspace-collab',
-      title: 'CET Innovation Hub',
+      title: 'CETKR Innovation Hub',
       tag: 'COLLABORATIVE WORKSPACE',
       src: '/hero/lab-collab.jpg',
       alt: 'University Engineering Students in Makerspace',

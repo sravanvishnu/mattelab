@@ -11,6 +11,14 @@
   --paper-border: #4C4541;
 }
 
+html.dark .mascot,
+html.dark .mascot-show {
+  --ink: #F2C46A;
+  --paper: #282421;
+  --paper-text: #FCF0DA;
+  --paper-border: rgba(242, 196, 106, 0.45);
+}
+
 @media (min-width: 768px) {
   .mascot,
   .mascot-show {

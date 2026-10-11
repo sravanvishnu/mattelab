@@ -177,7 +177,7 @@ export default function AdminResourcesView({
             Makerspace Resources & Equipment
           </h2>
           <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
-            Hardware machinery, 3D printers, electronics workbenches, and project incubation spaces at CET.
+            Hardware machinery, 3D printers, electronics workbenches, and project incubation spaces at College of Engineering Trikaripur (CETKR).
           </p>
         </div>
 
