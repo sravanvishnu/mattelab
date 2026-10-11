@@ -51,18 +51,16 @@ export default function Sidebar({
         </div>
       </div>
 
-      {isOrganizer && (
-        <div className="sidebar-action-box">
-          <button
-            type="button"
-            className="btn btn-create-event"
-            onClick={onOpenCreateModal}
-          >
-            <PlusCircle size={17} />
-            <span>Create Event</span>
-          </button>
-        </div>
-      )}
+      <div className="sidebar-action-box">
+        <button
+          type="button"
+          className="btn btn-create-event"
+          onClick={onOpenCreateModal}
+        >
+          <PlusCircle size={17} />
+          <span>{isOrganizer ? "Create Event" : "Propose Event"}</span>
+        </button>
+      </div>
 
       <div className="nav-group">
         <p className="nav-group-title">WORKSPACE</p>

@@ -205,7 +205,7 @@ export default function Header({
             onClick={onCtaClick}
             className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white text-xs sm:text-sm font-semibold tracking-tight shadow-md shadow-[#c26e47]/25 hover:shadow-lg hover:shadow-[#c26e47]/35 transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
           >
-            {isOrganizer ? <PlusCircle size={15} /> : <LogOut size={14} className="rotate-180" />}
+            {isOrganizer || ctaText?.includes('Event') ? <PlusCircle size={15} /> : <LogOut size={14} className="rotate-180" />}
             <span>{ctaText}</span>
           </button>
 
@@ -268,7 +268,7 @@ export default function Header({
               }}
               className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white text-xs font-bold text-center shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
-              {isOrganizer ? <PlusCircle size={16} /> : <LogOut size={15} className="rotate-180" />}
+              {isOrganizer || ctaText?.includes('Event') ? <PlusCircle size={16} /> : <LogOut size={15} className="rotate-180" />}
               <span>{ctaText}</span>
             </button>
           </div>

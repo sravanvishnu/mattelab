@@ -25,13 +25,16 @@ import CreateEventModal from './components/CreateEventModal';
 import ConfirmModal from './components/ConfirmModal';
 import AdminResourcesView from './components/AdminResourcesView';
 import { getResources } from './services/resources';
+import { fetchAllEvents, approveEvent, rejectEvent, deleteEvent } from './services/events';
 
 export default function App() {
-  const { currentUser, loading: authLoading, logout } = useAuth();
+  const { currentUser, isAdmin, loading: authLoading, logout } = useAuth();
   const { showToast } = useToast();
 
   const [activeTab, setActiveTab] = useState('overview');
   const [events, setEvents] = useState([]);
+  const [pendingEvents, setPendingEvents] = useState([]);
+  const [myProposals, setMyProposals] = useState([]);
   const [registeredEventIds, setRegisteredEventIds] = useState(new Set());
   const [resources, setResources] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
@@ -57,7 +60,6 @@ export default function App() {
       setResources(data);
     } catch (err) {
       console.error('Failed to load resources:', err);
-      // Don't toast error if user is simply not permitted or collection empty
     } finally {
       setResourcesLoading(false);
     }
@@ -68,47 +70,18 @@ export default function App() {
     setDataLoading(true);
 
     try {
-      const eventsQuery = query(
-        collection(db, 'events'),
-        orderBy('startAt', 'asc')
-      );
-      const snapshot = await getDocs(eventsQuery);
-      const now = Date.now();
-
-      const upcoming = [];
-      const userRegistered = new Set();
-
-      // Check registration for each event
-      for (const eventDoc of snapshot.docs) {
-        const data = eventDoc.data();
-        const eventId = eventDoc.id;
-
-        // Only include published future events
-        if (data.status === 'published' && data.startAt && data.startAt.toMillis() >= now) {
-          upcoming.push({ id: eventId, ...data });
-        }
-
-        // Check if current user is registered
-        try {
-          const regRef = doc(db, 'events', eventId, 'registrations', currentUser.uid);
-          const regSnap = await getDoc(regRef);
-          if (regSnap.exists()) {
-            userRegistered.add(eventId);
-          }
-        } catch (regErr) {
-          console.warn('Could not check registration for', eventId, regErr);
-        }
-      }
-
-      setEvents(upcoming);
-      setRegisteredEventIds(userRegistered);
+      const data = await fetchAllEvents(currentUser, isAdmin);
+      setEvents(data.published);
+      setPendingEvents(data.pending);
+      setMyProposals(data.myProposals);
+      setRegisteredEventIds(data.registeredEventIds);
     } catch (err) {
       console.error('Failed to load events:', err);
       showToast('Could not load events from database.', 'error');
     } finally {
       setDataLoading(false);
     }
-  }, [currentUser, showToast]);
+  }, [currentUser, isAdmin, showToast]);
 
   useEffect(() => {
     if (currentUser) {
@@ -116,6 +89,8 @@ export default function App() {
       loadResources();
     } else {
       setEvents([]);
+      setPendingEvents([]);
+      setMyProposals([]);
       setRegisteredEventIds(new Set());
       setResources([]);
     }
@@ -171,6 +146,62 @@ export default function App() {
         } catch (err) {
           console.error('Cancel failed:', err);
           showToast('Failed to cancel registration.', 'error');
+          setConfirmModal(prev => ({ ...prev, isOpen: false }));
+        }
+      }
+    });
+  };
+
+  // Admin Approve Event
+  const handleApproveEvent = async (eventItem) => {
+    if (!isAdmin) {
+      showToast('Admin privileges required to approve events.', 'error');
+      return;
+    }
+    try {
+      await approveEvent(eventItem.id, currentUser);
+      showToast(`Event "${eventItem.title}" approved and published!`, 'success');
+      loadData();
+    } catch (err) {
+      console.error('Failed to approve event:', err);
+      showToast('Failed to approve event. Check Firestore permissions.', 'error');
+    }
+  };
+
+  // Admin Reject Event
+  const handleRejectEvent = async (eventItem, reason) => {
+    if (!isAdmin) {
+      showToast('Admin privileges required to decline events.', 'error');
+      return;
+    }
+    try {
+      await rejectEvent(eventItem.id, currentUser, reason);
+      showToast(`Event proposal "${eventItem.title}" declined.`, 'info');
+      loadData();
+    } catch (err) {
+      console.error('Failed to decline event:', err);
+      showToast('Failed to decline event.', 'error');
+    }
+  };
+
+  // Delete/Withdraw Event
+  const promptDeleteEvent = (eventItem) => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Delete Event Proposal?',
+      message: `Are you sure you want to remove "${eventItem.title}"? This cannot be undone.`,
+      confirmText: 'Delete Event',
+      isDanger: true,
+      isLoading: false,
+      onConfirm: async () => {
+        try {
+          await deleteEvent(eventItem.id);
+          showToast(`Event "${eventItem.title}" removed.`, 'info');
+          loadData();
+        } catch (err) {
+          console.error('Failed to delete event:', err);
+          showToast('Failed to delete event.', 'error');
+        } finally {
           setConfirmModal(prev => ({ ...prev, isOpen: false }));
         }
       }
@@ -236,6 +267,7 @@ export default function App() {
         onSelectTab={setActiveTab}
         onPromptLogout={promptLogout}
         registeredCount={registeredEventIds.size}
+        pendingCount={pendingEvents.length}
       />
 
       {/* Main Full-Width Content Viewport (No Sidebar) */}
@@ -253,22 +285,29 @@ export default function App() {
             {activeTab === 'events' && (
               <EventsView
                 events={events}
+                pendingEvents={pendingEvents}
+                myProposals={myProposals}
                 registeredEventIds={registeredEventIds}
                 loading={dataLoading}
                 onRefresh={loadData}
                 onRegister={handleRegister}
                 onCancelRegistration={promptCancelRegistration}
                 onOpenCreateModal={() => setIsCreateModalOpen(true)}
+                onApproveEvent={handleApproveEvent}
+                onRejectEvent={handleRejectEvent}
+                onDeleteEvent={promptDeleteEvent}
               />
             )}
 
             {activeTab === 'registrations' && (
               <MyRegistrationsView
                 myRegistrations={myRegisteredEvents}
+                resources={resources}
                 loading={dataLoading}
                 onRefresh={loadData}
                 onCancelRegistration={promptCancelRegistration}
                 onExploreEvents={() => setActiveTab('events')}
+                onExploreResources={() => setActiveTab('resources')}
               />
             )}
 
