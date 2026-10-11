@@ -21,16 +21,83 @@ service cloud.firestore {
 
     // 1. RESOURCES COLLECTION (Machines and Spaces)
     // Everyone signed in can view resources; only admins/organizers can create, update, or deactivate
+    // Authenticated users can update lastBookingAt during transactional booking concurrency check
     match /resources/{resourceId} {
       allow read: if isAuthenticated();
-      allow write: if isAdminOrOrganizer();
+      allow update: if isAdminOrOrganizer() || (
+        isAuthenticated() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastBookingAt', 'lastBookingCheck'])
+      );
+      allow create, delete: if isAdminOrOrganizer();
     }
 
-    // 2. EVENTS COLLECTION
-    // Everyone signed in can browse events; only organizers/admins can publish/edit
+    // 2. BOOKINGS COLLECTION (Equipment and Lab Space Reservations)
+    // Rules: Users can create and cancel only their own bookings; admins/organizers can manage all
+    match /bookings/{bookingId} {
+      // Anyone signed in can read active bookings to see calendar schedule availability
+      allow read: if isAuthenticated();
+
+      // Users can create bookings only for themselves
+      allow create: if isAuthenticated() && (
+        isAdminOrOrganizer() || (
+          request.resource.data.userId == request.auth.uid &&
+          request.resource.data.status == 'confirmed' &&
+          request.resource.data.start < request.resource.data.end &&
+          request.resource.data.resourceId is string
+        )
+      );
+
+      // Owner can cancel only their own booking (cannot modify time interval or transfer ownership)
+      // Admins/organizers can update any booking
+      allow update: if isAuthenticated() && (
+        isAdminOrOrganizer() || (
+          request.auth.uid == resource.data.userId &&
+          request.resource.data.userId == resource.data.userId &&
+          request.resource.data.resourceId == resource.data.resourceId &&
+          request.resource.data.status == 'cancelled'
+        )
+      );
+
+      // Admins/organizers can delete bookings
+      allow delete: if isAdminOrOrganizer();
+    }
+
+    // 3. EVENTS COLLECTION (Workshops, Talks, Hackathons)
+    // - Authenticated users can browse all events
+    // - Any authenticated user can submit an event proposal with status == 'pending' and guidelinesAccepted == true
+    // - Admins/organizers can approve (set status == 'published'), reject, edit, or delete any event
+    // - Creators can update/delete their proposal while it is still 'pending'
     match /events/{eventId} {
       allow read: if isAuthenticated();
-      allow create, update, delete: if isAdminOrOrganizer();
+
+      // Admins can create with any status; Regular users can create only with status == 'pending'
+      allow create: if isAuthenticated() && (
+        isAdminOrOrganizer() || (
+          request.resource.data.createdBy == request.auth.uid &&
+          request.resource.data.status == 'pending' &&
+          request.resource.data.guidelinesAccepted == true &&
+          request.resource.data.title is string &&
+          request.resource.data.startAt is timestamp
+        )
+      );
+
+      // Admins can update any event; Creators can edit their own proposal only while still pending
+      allow update: if isAuthenticated() && (
+        isAdminOrOrganizer() || (
+          resource.data.createdBy == request.auth.uid &&
+          resource.data.status == 'pending' &&
+          request.resource.data.createdBy == request.auth.uid &&
+          request.resource.data.status == 'pending'
+        )
+      );
+
+      // Admins can delete any event; Creators can withdraw their own proposal while still pending
+      allow delete: if isAuthenticated() && (
+        isAdminOrOrganizer() || (
+          resource.data.createdBy == request.auth.uid &&
+          resource.data.status == 'pending'
+        )
+      );
 
       // Subcollection: Event Registrations
       match /registrations/{userId} {

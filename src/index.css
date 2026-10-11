@@ -1821,3 +1821,119 @@ select {
     color: #f87171;
   }
 }
+
+/* FullCalendar Custom Theme Styles */
+.fullcalendar-dark-theme .fc {
+  --fc-border-color: rgba(255, 255, 255, 0.08);
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: rgba(255, 255, 255, 0.03);
+  --fc-neutral-text-color: #94a3b8;
+  --fc-today-bg-color: rgba(194, 110, 71, 0.07);
+  --fc-now-indicator-color: #e28743;
+  font-family: var(--font-body);
+}
+
+.fullcalendar-dark-theme .fc-header-toolbar {
+  margin-bottom: 1.25rem !important;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fullcalendar-dark-theme .fc-toolbar-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem !important;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+}
+
+.fullcalendar-dark-theme .fc-button {
+  background-color: #202428 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+  border-radius: 0.65rem !important;
+  padding: 0.4rem 0.85rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  text-transform: capitalize;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.15s ease !important;
+}
+
+.fullcalendar-dark-theme .fc-button:hover {
+  background-color: #2b3036 !important;
+  color: #ffffff !important;
+  border-color: rgba(194, 110, 71, 0.4) !important;
+}
+
+.fullcalendar-dark-theme .fc-button-active {
+  background: linear-gradient(135deg, #c26e47 0%, #d97736 100%) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(194, 110, 71, 0.35) !important;
+}
+
+.fullcalendar-dark-theme .fc-col-header-cell {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.65rem 0 !important;
+}
+
+.fullcalendar-dark-theme .fc-col-header-cell-cushion {
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-slot-label-cushion {
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-slot {
+  height: 2.2rem !important;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-event {
+  border-radius: 0.5rem !important;
+  padding: 0.2rem 0.4rem !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-event:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4) !important;
+  z-index: 10 !important;
+}
+
+.fullcalendar-dark-theme .fc-event-title {
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  line-height: 1.25 !important;
+}
+
+.fullcalendar-dark-theme .fc-event-time {
+  font-size: 0.68rem !important;
+  opacity: 0.85;
+}
+
+.fullcalendar-dark-theme .fc-highlight {
+  background: rgba(194, 110, 71, 0.22) !important;
+  border: 1px dashed #e28743 !important;
+  border-radius: 0.4rem;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-now-indicator-line {
+  border-color: #e28743 !important;
+  border-width: 2px !important;
+}
+
+.fullcalendar-dark-theme .fc-timegrid-now-indicator-arrow {
+  border-color: #e28743 !important;
+}

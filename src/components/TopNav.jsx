@@ -13,13 +13,18 @@ export default function TopNav({
   onOpenCreateModal,
   onSelectTab,
   onPromptLogout,
-  registeredCount = 0
+  registeredCount = 0,
+  pendingCount = 0
 }) {
   const { currentUser, userProfile, isOrganizer, isAdmin } = useAuth();
 
   const navItems = [
     { id: 'overview', label: 'OVERVIEW' },
-    { id: 'events', label: 'EVENTS' },
+    {
+      id: 'events',
+      label: 'EVENTS',
+      badge: isAdmin && pendingCount > 0 ? pendingCount : null
+    },
     {
       id: 'registrations',
       label: 'REGISTRATIONS',
@@ -43,8 +48,8 @@ export default function TopNav({
       user={currentUser ? { ...currentUser, ...userProfile } : null}
       isOrganizer={isOrganizer}
       isAdmin={isAdmin}
-      ctaText={isOrganizer ? "Create Event" : "Sign Out"}
-      onCtaClick={isOrganizer ? onOpenCreateModal : onPromptLogout}
+      ctaText={isAdmin ? "Create Event" : "Propose Event"}
+      onCtaClick={onOpenCreateModal}
       isOverlay={true}
     />
   );

@@ -13,8 +13,10 @@ import {
   MapPin,
   Cpu,
   Layers,
-  Sparkles
+  Sparkles,
+  Calendar
 } from 'lucide-react';
+import ResourceCalendarView from './ResourceCalendarView';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -51,6 +53,10 @@ export default function AdminResourcesView({
   const [editingResource, setEditingResource] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
+
+  // View Mode: 'inventory' | 'calendar'
+  const [viewMode, setViewMode] = useState('inventory');
+  const [calendarTargetResourceId, setCalendarTargetResourceId] = useState(null);
 
   // Compute live statistics
   const stats = useMemo(() => {
@@ -149,6 +155,16 @@ export default function AdminResourcesView({
     }
   };
 
+  if (viewMode === 'calendar') {
+    return (
+      <ResourceCalendarView
+        resources={resources}
+        initialResourceId={calendarTargetResourceId}
+        onBackToResources={() => setViewMode('inventory')}
+      />
+    );
+  }
+
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Banner / Actions */}
@@ -168,6 +184,36 @@ export default function AdminResourcesView({
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Mode Switcher */}
+          <div className="flex items-center bg-[#181a1d] p-1 rounded-xl border border-white/10">
+            <button
+              type="button"
+              onClick={() => setViewMode('inventory')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                viewMode === 'inventory'
+                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Equipment List
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setCalendarTargetResourceId(resources[0]?.id || null);
+                setViewMode('calendar');
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                viewMode === 'calendar'
+                  ? 'bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white shadow-xs'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Week Calendar</span>
+            </button>
+          </div>
+
           <Button
             variant="outline"
             size="icon"
@@ -386,45 +432,60 @@ export default function AdminResourcesView({
                     </TableCell>
 
                     <TableCell className="text-right">
-                      {isAdmin ? (
-                        <div className="flex items-center justify-end gap-1.5">
-                          {/* Toggle Active/Inactive */}
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleToggleStatus(res)}
-                            title={isActive ? 'Deactivate resource' : 'Activate resource'}
-                            className="h-8 w-8 text-slate-400 hover:text-amber-400"
-                          >
-                            <Power className="w-4 h-4" />
-                          </Button>
+                      <div className="flex items-center justify-end gap-1.5">
+                        {/* Book / View Schedule on FullCalendar */}
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setCalendarTargetResourceId(res.id);
+                            setViewMode('calendar');
+                          }}
+                          className="h-8 text-xs flex items-center gap-1.5 border-[#c26e47]/40 text-[#f3a86c] hover:bg-[#c26e47]/15 cursor-pointer"
+                          title="View live schedule & book time slot"
+                        >
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>Schedule</span>
+                        </Button>
 
-                          {/* Edit */}
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleOpenEdit(res)}
-                            title="Edit resource"
-                            className="h-8 w-8 text-slate-400 hover:text-[#e28743]"
-                          >
-                            <Pencil className="w-4 h-4" />
-                          </Button>
+                        {isAdmin && (
+                          <>
+                            {/* Toggle Active/Inactive */}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleToggleStatus(res)}
+                              title={isActive ? 'Deactivate resource' : 'Activate resource'}
+                              className="h-8 w-8 text-slate-400 hover:text-amber-400"
+                            >
+                              <Power className="w-4 h-4" />
+                            </Button>
 
-                          {/* Delete */}
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDelete(res)}
-                            disabled={deletingId === res.id}
-                            title="Delete resource"
-                            className="h-8 w-8 text-slate-400 hover:text-red-400"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      ) : (
-                        <span className="text-xs text-slate-500">—</span>
-                      )}
+                            {/* Edit */}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleOpenEdit(res)}
+                              title="Edit resource"
+                              className="h-8 w-8 text-slate-400 hover:text-[#e28743]"
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+
+                            {/* Delete */}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleDelete(res)}
+                              disabled={deletingId === res.id}
+                              title="Delete resource"
+                              className="h-8 w-8 text-slate-400 hover:text-red-400"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

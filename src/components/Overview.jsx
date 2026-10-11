@@ -44,8 +44,8 @@ export default function Overview({
     <div className="tab-pane-fade">
       {/* Recovered Goons 3D Geometric Hero matching the user reference screenshot */}
       <GoonsHero
-        ctaText={isOrganizer ? "Create Workshop Event" : "Reserve Lab Equipment"}
-        onCtaClick={() => (isOrganizer ? onOpenCreateModal?.() : setActiveTab('resources'))}
+        ctaText={isOrganizer ? "Create Workshop Event" : "Propose Workshop / Event"}
+        onCtaClick={onOpenCreateModal}
         onExploreEvents={() => setActiveTab('events')}
         onExploreResources={() => setActiveTab('resources')}
       />
