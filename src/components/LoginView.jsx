@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { ArrowRight, Cpu, Users, Sparkles } from 'lucide-react';
 import Header from './Header';
-import GoonsHero from './GoonsHero';
+import MatteLabHero from './MatteLabHero';
 import mattelabLogo from '../assets/mattelab.png';
 
 export default function LoginView() {
@@ -28,7 +28,7 @@ export default function LoginView() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f4ee] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#FCF0DA] text-[#4C4541]">
       {/* Modern Floating Island Header with MatteLab Logo */}
       <Header
         brand="MATTELAB"
@@ -48,9 +48,9 @@ export default function LoginView() {
         isOverlay={false}
       />
 
-      {/* Hero with Terracotta 3D Geometric Sculpture */}
-      <GoonsHero
-        ctaText={loading ? "Authenticating..." : "Enter Workspace"}
+      {/* Redesigned Architectural Hero Section */}
+      <MatteLabHero
+        ctaText={loading ? "Authenticating..." : "Sign In to Propose"}
         onCtaClick={handleLogin}
         onExploreEvents={() => {
           const el = document.getElementById('login-action-section');
@@ -63,11 +63,11 @@ export default function LoginView() {
       />
 
       {/* College Sign-In Callout */}
-      <section id="login-action-section" className="w-full py-16 px-6 bg-[#ebe6db] border-t border-slate-300/80 flex justify-center">
-        <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200/90 text-center">
+      <section id="login-action-section" className="w-full py-16 px-6 bg-[#FCF0DA] border-t-2 border-[#4C4541]/15 flex justify-center">
+        <div className="max-w-md w-full bg-white rounded-[32px] p-8 sm:p-10 shadow-[6px_6px_0_#4C4541] border-2 border-[#4C4541] text-center text-[#4C4541]">
           {/* Official MatteLab Brand Logo */}
           <div className="flex justify-center mb-6">
-            <div className="bg-[#fbf9f5] rounded-2xl px-5 py-3 border border-[#c26e47]/30 shadow-sm">
+            <div className="bg-[#FCF0DA] rounded-2xl px-5 py-3 border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541]">
               <img
                 src={mattelabLogo}
                 alt="MatteLab"
@@ -76,15 +76,21 @@ export default function LoginView() {
             </div>
           </div>
 
-          <h3 className="text-2xl font-bold text-slate-950 tracking-tight">Access MatteLab</h3>
-          <p className="text-xs sm:text-sm text-slate-600 mt-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
+            <span>[ AUTHENTICATION ] · CET MAKERSPACE</span>
+          </div>
+
+          <h3 className="font-condensed text-3xl sm:text-4xl font-bold uppercase tracking-wide text-[#4C4541]">
+            Access MatteLab
+          </h3>
+          <p className="font-editorial italic text-xs sm:text-sm text-[#4C4541]/80 mt-2">
             Sign in with your College of Engineering Trikaripur Google account to reserve 3D printers and register for workshops.
           </p>
 
           <button
             type="button"
             id="googleLoginBtn"
-            className="mt-6 w-full py-3.5 px-5 rounded-full bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white font-semibold text-sm shadow-md hover:shadow-lg shadow-[#c26e47]/30 transition-all active:scale-95 flex items-center justify-center gap-3 cursor-pointer"
+            className="mt-6 w-full py-4 px-5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] hover:text-[#4C4541] text-[#FCF0DA] border-2 border-[#4C4541] font-mono text-xs font-bold uppercase tracking-wider shadow-[3px_3px_0_#4C4541] hover:shadow-[4px_4px_0_#4C4541] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center justify-center gap-3 cursor-pointer"
             onClick={handleLogin}
             disabled={loading}
           >
@@ -98,18 +104,18 @@ export default function LoginView() {
                 <path fill="#ffffff" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
             )}
-            <span>{loading ? 'Authenticating...' : 'Continue with College Google Account'}</span>
+            <span>{loading ? 'Authenticating...' : 'Continue with College Account'}</span>
             {!loading && <ArrowRight size={16} />}
           </button>
 
-          <p className="mt-5 text-[11px] text-slate-500">
+          <p className="mt-5 text-[11px] font-mono text-[#4C4541]/70">
             Powered by TinkerHub & IEDC · College of Engineering Trikaripur
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="w-full py-8 px-6 bg-[#ebe6db] border-t border-slate-300 text-center text-xs text-slate-600">
+      <footer className="w-full py-8 px-6 bg-[#4C4541] border-t-2 border-[#4C4541] text-center text-xs font-mono text-[#FCF0DA]/80">
         <p>© {new Date().getFullYear()} MatteLab · Innovation & Prototyping Laboratory · CET</p>
       </footer>
     </div>

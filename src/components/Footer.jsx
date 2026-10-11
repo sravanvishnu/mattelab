@@ -4,28 +4,27 @@ import {
   Phone,
   Mail,
   MapPin,
-  Star,
   Github,
   Instagram,
   ArrowUp
 } from 'lucide-react';
 
 /**
- * Editorial Studio Footer inspired by Shape design:
- * - Left vertical social dock (circular acid-lime buttons: LinkedIn, X, GitHub, Instagram, Behance)
- * - Top-right playful tab: "Sh*t I've gone too far, send me back up 👆"
- * - Section 1: "Do you like what you see?" + sculpted lime CTA button + 5.0 Google rating
- * - Section 2: "Learn" navigation column
- * - Section 3: "Explore" navigation column with lime "NEW" badge
- * - Section 4: "Get in touch" with phone, email, address, and what3words tag
- * - Huge typographic statement: "Crafting since 2019"
- * - Sub-footer: Brand wordmark, copyright, rights reserved, and humorous privacy policy
+ * Editorial Studio Footer for MatteLab Makerspace:
+ * - Left vertical social dock (circular honey-gold buttons: LinkedIn, X, GitHub, Instagram, Discord)
+ * - Top-right tab: "Back to top ↑"
+ * - Section 1: "Got an idea? Let's build it together." + sculpted CTA button + Alan Kay makerspace quote
+ * - Section 2: "Explore Lab" navigation column (FabLab, 3D printers, IoT workbenches)
+ * - Section 3: "Initiatives" navigation column (Workshops, Hackathons, IEDC Grants, TinkerHub CET)
+ * - Section 4: Lab Coordinates & Contact (College of Engineering Trikaripur, Cheemeni, Kasaragod)
+ * - Monumental typographic statement: "DREAM IT · SOLDER IT · BUILD IT"
+ * - Sub-footer: MatteLab brand wordmark, college affiliation, IEDC support, and lab safety guidelines
  */
 export default function Footer({
   brand = "MatteLab",
   ctaText = "Propose a Project",
   headline = "Got an idea? Let's build it together.",
-  craftingYear = "2019",
+  punchyStatement = "DREAM IT · SOLDER IT · BUILD IT",
   onOpenCreateModal,
   onSelectTab
 }) {
@@ -74,23 +73,23 @@ export default function Footer({
   return (
     <footer className="w-full px-3 sm:px-6 lg:px-8 pb-8 pt-10 select-none">
       <div className="relative mx-auto max-w-[1400px]">
-        {/* Top-Right Tab: "Sh*t I've gone too far, send me back up 👆" */}
+        {/* Top-Right Tab: Back to Top */}
         <div className="flex justify-end pr-4 sm:pr-8">
           <button
             type="button"
             onClick={scrollToTop}
-            className="group relative inline-flex items-center gap-1.5 px-4 py-2 rounded-t-2xl bg-[#16181b] hover:bg-[#1c1f24] text-neutral-300 hover:text-white text-xs font-semibold tracking-wide border-t border-x border-white/10 transition-all duration-200 cursor-pointer shadow-lg -mb-[1px] z-10"
+            className="group relative inline-flex items-center gap-1.5 px-4 py-2 rounded-t-2xl bg-[#4C4541] hover:bg-[#3d3734] text-[#FCF0DA] text-xs font-semibold tracking-wide border-t border-x border-white/10 transition-all duration-200 cursor-pointer shadow-lg -mb-[1px] z-10"
             title="Scroll back to top"
           >
-            <span>Sh*t I've gone too far, send me back up</span>
+            <span>Back to top</span>
             <span className="inline-block transition-transform duration-200 group-hover:-translate-y-1">
-              👆
+              ↑
             </span>
           </button>
         </div>
 
         {/* Outer Card Container */}
-        <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#16181b] border border-white/10 p-6 sm:p-10 lg:p-14 shadow-2xl overflow-hidden">
+        <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#4C4541] border border-white/10 p-6 sm:p-10 lg:p-14 shadow-2xl overflow-hidden text-[#FCF0DA]">
           {/* Main Content Layout with Left Social Bar + Multi-column Grid */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
             {/* Left Vertical Social Dock (Acid-Lime circular buttons) */}
@@ -102,7 +101,7 @@ export default function Footer({
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.label}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#c8ea4a] hover:bg-[#bde03a] text-slate-950 flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-[0_0_12px_rgba(200,234,74,0.4)] cursor-pointer"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] font-bold flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-[0_0_14px_rgba(242,196,106,0.4)] cursor-pointer"
                 >
                   {social.icon}
                 </a>
@@ -114,12 +113,12 @@ export default function Footer({
               {/* Column 1: Headline, Inspiring Quote & Sculpted CTA (Span 5 on XL) */}
               <div className="xl:col-span-5 flex flex-col justify-between">
                 <div>
-                  <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-white leading-[1.14]">
+                  <h2 className="font-condensed text-3xl sm:text-4xl lg:text-[44px] font-bold uppercase tracking-tight text-white leading-[1.05]">
                     {headline}
                   </h2>
 
                   {/* Campus Makerspace Ethos Quote */}
-                  <blockquote className="mt-3 text-xs sm:text-sm text-stone-400 italic border-l-2 border-[#c8ea4a]/60 pl-3 leading-relaxed">
+                  <blockquote className="mt-3 text-xs sm:text-sm text-[#FCF0DA]/80 font-editorial italic border-l-2 border-[#F2C46A] pl-3 leading-relaxed">
                     "The best way to predict the future is to invent it. Dream it, solder it, code it."
                     <span className="block not-italic text-[11px] text-stone-500 mt-1 font-semibold">
                       — Alan Kay · MatteLab Ethos
@@ -131,7 +130,7 @@ export default function Footer({
                     <button
                       type="button"
                       onClick={onOpenCreateModal}
-                      className="group px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#c8ea4a] hover:bg-[#bde03a] text-slate-950 font-semibold text-xs sm:text-sm tracking-tight transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-md hover:shadow-lg hover:shadow-[#c8ea4a]/25"
+                      className="group px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-md hover:shadow-lg hover:shadow-[#F2C46A]/30"
                     >
                       <span>{ctaText}</span>
                       <ArrowUpRight
@@ -140,23 +139,14 @@ export default function Footer({
                       />
                     </button>
 
-                    {/* Community Rating & Social Proof */}
+                    {/* Makerspace Community Badge */}
                     <div className="flex flex-col">
-                      <span className="text-[11px] font-medium text-neutral-400">
-                        4.9 ★ from 250+ student makers
+                      <span className="font-mono font-bold text-[11px] text-[#F2C46A] tracking-wider uppercase">
+                        OPEN HARDWARE COMMUNITY
                       </span>
-                      <div className="flex items-center gap-1 mt-0.5">
-                        <span className="font-extrabold text-[11px] text-amber-300 tracking-wider mr-1">
-                          CET INNOVATION
-                        </span>
-                        <div className="flex items-center text-amber-400">
-                          <Star size={11} fill="currentColor" />
-                          <Star size={11} fill="currentColor" />
-                          <Star size={11} fill="currentColor" />
-                          <Star size={11} fill="currentColor" />
-                          <Star size={11} fill="currentColor" />
-                        </div>
-                      </div>
+                      <span className="text-[11px] text-neutral-400 font-medium mt-0.5">
+                        TinkerHub &amp; IEDC · CET Trikaripur
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -236,7 +226,7 @@ export default function Footer({
                     >
                       Workshops
                     </button>
-                    <span className="px-1.5 py-0.2 rounded-full bg-[#c8ea4a] text-slate-950 text-[9px] font-black leading-tight">
+                    <span className="px-1.5 py-0.2 rounded-full bg-[#AEAC78] text-[#4C4541] text-[9px] font-black leading-tight">
                       NEW
                     </span>
                   </li>
@@ -316,7 +306,7 @@ export default function Footer({
 
                 {/* What3Words / Maker Coordinates */}
                 <div className="pt-1 text-[11px] font-mono text-neutral-500 flex items-center gap-1.5">
-                  <span className="font-bold text-[#c8ea4a]">///</span>
+                  <span className="font-bold text-[#F2C46A]">///</span>
                   <span className="text-stone-300">dream.solder.create</span>
                 </div>
               </div>
@@ -325,11 +315,11 @@ export default function Footer({
 
           {/* ========================================================
               THE MONUMENTAL TYPOGRAPHIC STATEMENT
-              "Innovating since 2019"
+              "DREAM IT · SOLDER IT · BUILD IT"
              ======================================================== */}
           <div className="my-10 sm:my-14 lg:my-16 select-none overflow-hidden">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[145px] font-black tracking-tighter text-white leading-none whitespace-nowrap">
-              Innovating since {craftingYear}
+            <h1 className="font-condensed text-3xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[124px] font-black uppercase tracking-tight text-white leading-none whitespace-nowrap">
+              {punchyStatement}
             </h1>
           </div>
 
@@ -340,7 +330,7 @@ export default function Footer({
             {/* Left: Brand + College + IEDC Support */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="font-bold text-white tracking-tight flex items-center">
-                {brand}<span className="text-[#c8ea4a]">.</span>
+                {brand}<span className="text-[#F2C46A]">.</span>
               </span>
               <span>© MatteLab Makerspace 2026</span>
               <span className="text-neutral-600">|</span>
@@ -349,14 +339,14 @@ export default function Footer({
               <span className="text-stone-400">Supported by IEDC & Kerala Startup Mission</span>
             </div>
 
-            {/* Right: Studio info & Humor */}
+            {/* Right: Lab Standards & Open Source */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-center md:text-right">
               <span>Open to All Innovators</span>
               <span className="text-neutral-600">|</span>
-              <span>Open Source Lab</span>
+              <span>Open Source Hardware</span>
               <span className="text-neutral-600">|</span>
               <span className="hover:text-neutral-200 cursor-pointer">
-                Privacy Policy (you really care?)
+                Lab Safety & Equipment Guidelines
               </span>
             </div>
           </div>

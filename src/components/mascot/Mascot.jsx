@@ -28,8 +28,10 @@ const prefersReducedMotion = () =>
 const getDockPos = () => {
   if (typeof window === "undefined") return { x: 100, y: 24 };
   const isMobile = window.innerWidth < 768;
-  const bottomMargin = isMobile ? 80 : 24;
-  const rightMargin = isMobile ? 14 : 24;
+  // Android / mobile bottom navigation height is ~64px + safe area
+  const bottomMargin = isMobile ? 86 : 32;
+  // Move resting space comfortably away from the right screen boundary
+  const rightMargin = isMobile ? 54 : 148;
   return {
     x: Math.max(MARGIN, window.innerWidth - SIZE - rightMargin),
     y: bottomMargin,
@@ -204,15 +206,40 @@ export default function Mascot({
     }, 550);
 
     const isMobile = window.innerWidth < 768;
-    const minY = isMobile ? 80 : 24;
-    const maxY = Math.min(260, window.innerHeight * 0.4);
-    const hops = prefersReducedMotion() ? 0 : Math.round(rand(2, 4));
+    const minY = isMobile ? 86 : 32;
+    // Widen vertical wandering bounds across the canvas
+    const maxY = isMobile
+      ? Math.min(window.innerHeight * 0.65, window.innerHeight - 150)
+      : Math.min(window.innerHeight * 0.78, window.innerHeight - 110);
+    const hops = prefersReducedMotion() ? 0 : Math.round(rand(4, 7));
 
     let t = 800;
     let prevX = pos.x;
 
+    const minX = isMobile ? 14 : 32;
+    const maxX = Math.max(minX + 60, window.innerWidth - SIZE - (isMobile ? 24 : 48));
+
+    // Diverse screen sectors for wide exploration
+    const sectors = [
+      [minX, Math.max(minX + 30, window.innerWidth * 0.28)],
+      [window.innerWidth * 0.26, window.innerWidth * 0.50],
+      [window.innerWidth * 0.48, window.innerWidth * 0.72],
+      [Math.max(minX + 50, window.innerWidth * 0.70), maxX],
+    ];
+
+    let lastSectorIdx = prevX > window.innerWidth / 2 ? 3 : 0;
+
+    // Distribute hops widely across opposite sectors of the screen
     for (let i = 0; i < hops; i++) {
-      const nextX = rand(MARGIN, window.innerWidth - SIZE - MARGIN);
+      // Pick a non-adjacent sector to force expansive leaps
+      let nextSectorIdx;
+      do {
+        nextSectorIdx = Math.floor(Math.random() * sectors.length);
+      } while (nextSectorIdx === lastSectorIdx && sectors.length > 1);
+
+      lastSectorIdx = nextSectorIdx;
+      const [secMin, secMax] = sectors[nextSectorIdx];
+      const nextX = Math.min(maxX, Math.max(minX, rand(secMin, Math.max(secMin + 20, secMax))));
       const nextY = rand(minY, maxY);
       const fromX = prevX;
 
@@ -301,8 +328,18 @@ export default function Mascot({
     if (mode === "docked") {
       later(activate, 280);
     } else {
-      // If already active, advance to next thought
+      // If already active, advance to next thought and take a lively jump
       showQuestion();
+      const isMobile = window.innerWidth < 768;
+      const minX = isMobile ? 14 : 32;
+      const maxX = Math.max(minX + 60, window.innerWidth - SIZE - (isMobile ? 24 : 48));
+      const minY = isMobile ? 86 : 32;
+      const maxY = isMobile ? window.innerHeight * 0.58 : window.innerHeight * 0.72;
+      const nextX = rand(minX, maxX);
+      const nextY = rand(minY, maxY);
+      setHopDirection(nextX > pos.x ? "right" : "left");
+      setPos({ x: nextX, y: nextY });
+      hop(nextX, pos.x);
     }
   };
 
@@ -314,10 +351,11 @@ export default function Mascot({
 
   if (muted) {
     const dock = getDockPos();
+    const rightMargin = typeof window !== "undefined" && window.innerWidth < 768 ? 54 : 148;
     return (
       <button
         className="mascot-show"
-        style={{ right: 18, bottom: dock.y }}
+        style={{ right: rightMargin, bottom: dock.y }}
         aria-label="Wake up MatteLab Mascot"
         title="Summon MatteLab Maker Mascot"
         onClick={() => {

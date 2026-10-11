@@ -57,24 +57,24 @@ export default function ResourceModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900/95 p-6 shadow-2xl backdrop-blur-xl animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg rounded-[28px] border-2 border-[#4C4541] bg-[#FCF0DA] p-6 sm:p-8 shadow-[8px_8px_0_#4C4541] text-[#4C4541] animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div className="flex items-center justify-between pb-4 border-b-2 border-[#4C4541]/20">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#c26e47]/15 text-[#e28743] border border-[#c26e47]/25">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] flex items-center justify-center shadow-[1.5px_1.5px_0_#4C4541]">
+              <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-100">
+              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541] leading-none">
                 {isEditing ? 'Edit Resource' : 'Add New Resource'}
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
                 {isEditing
                   ? 'Update resource specifications and operational status'
                   : 'Register a machine, equipment, or space for the makerspace'}
@@ -84,15 +84,15 @@ export default function ResourceModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors"
+            className="w-8 h-8 rounded-full border border-[#4C4541] bg-white flex items-center justify-center text-sm font-bold hover:bg-[#F2C46A] transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X size={16} />
           </button>
         </div>
 
         {error && (
-          <div className="mt-4 p-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <div className="mt-4 p-3 rounded-2xl bg-rose-100 border border-rose-300 text-rose-900 text-xs font-mono flex items-center gap-2">
+            <AlertCircle size={16} className="flex-shrink-0" />
             <span>{error}</span>
           </div>
         )}
@@ -100,124 +100,127 @@ export default function ResourceModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
               Resource Name *
             </label>
-            <Input
+            <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Bambu Lab X1-Carbon 3D Printer"
               maxLength={100}
+              className="w-full rounded-2xl bg-white border-2 border-[#4C4541] px-3.5 py-2.5 text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA]"
               required
             />
           </div>
 
           {/* Type Selector (Machine vs Space) */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
               Resource Category *
             </label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setType('machine')}
-                className={`flex items-center justify-center gap-2.5 p-3 rounded-lg border text-xs font-medium transition-all ${
+                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                   type === 'machine'
-                    ? 'bg-[#c26e47]/15 border-[#c26e47]/50 text-[#f3a86c] shadow-sm'
-                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-800/60'
+                    ? 'bg-[#4C4541] text-[#FCF0DA]'
+                    : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
               >
-                <Wrench className="w-4 h-4" />
-                <span>Machine / Hardware</span>
+                <Wrench size={15} />
+                <span>Machine</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setType('space')}
-                className={`flex items-center justify-center gap-2.5 p-3 rounded-lg border text-xs font-medium transition-all ${
+                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                   type === 'space'
-                    ? 'bg-blue-500/15 border-blue-500/50 text-blue-300 shadow-sm'
-                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-800/60'
+                    ? 'bg-[#4C4541] text-[#FCF0DA]'
+                    : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
               >
-                <Building2 className="w-4 h-4" />
-                <span>Lab Space / Station</span>
+                <Building2 size={15} />
+                <span>Lab Space</span>
               </button>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
               Location / Room
             </label>
-            <Input
+            <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="e.g. Makerspace Bay 2 / Electronics Lab"
               maxLength={120}
+              className="w-full rounded-2xl bg-white border-2 border-[#4C4541] px-3.5 py-2.5 text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA]"
             />
           </div>
 
           {/* Status Toggle */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
               Operational Status *
             </label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setStatus('active')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-lg border text-xs font-medium transition-all ${
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                   status === 'active'
-                    ? 'bg-[#c26e47]/15 border-[#c26e47] text-[#e28743]'
-                    : 'bg-slate-900 border-slate-800 text-slate-500 hover:bg-slate-800'
+                    ? 'bg-[#AEAC78] text-[#4C4541]'
+                    : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
               >
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 size={15} />
                 <span>Active (Available)</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setStatus('inactive')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-lg border text-xs font-medium transition-all ${
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
                   status === 'inactive'
-                    ? 'bg-amber-500/15 border-amber-500 text-amber-400'
-                    : 'bg-slate-900 border-slate-800 text-slate-500 hover:bg-slate-800'
+                    ? 'bg-[#F2C46A] text-[#4C4541]'
+                    : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
               >
-                <AlertCircle className="w-4 h-4" />
-                <span>Inactive (Maintenance)</span>
+                <AlertCircle size={15} />
+                <span>Maintenance</span>
               </button>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
               Description & Specifications
             </label>
-            <Textarea
+            <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide technical specs, materials supported, usage prerequisites..."
               rows={3}
               maxLength={1000}
+              className="w-full rounded-2xl bg-white border-2 border-[#4C4541] p-3 text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA]"
             />
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
-            <Button
+          <div className="flex items-center justify-end gap-3 pt-4 border-t-2 border-[#4C4541]/20">
+            <button
               type="button"
-              variant="outline"
+              className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-white text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541] cursor-pointer"
               onClick={onClose}
               disabled={isSubmitting}
             >
               Cancel
-            </Button>
-            <Button
+            </button>
+            <button
               type="submit"
-              variant="accent"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
               disabled={isSubmitting}
             >
               {isSubmitting
@@ -225,7 +228,7 @@ export default function ResourceModal({
                 : isEditing
                 ? 'Save Changes'
                 : 'Create Resource'}
-            </Button>
+            </button>
           </div>
         </form>
       </div>

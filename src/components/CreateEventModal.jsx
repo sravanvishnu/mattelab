@@ -116,19 +116,19 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-card modal-card-lg max-h-[92vh] flex flex-col" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="max-w-2xl w-full max-h-[92vh] flex flex-col rounded-[28px] border-2 border-[#4C4541] bg-[#FCF0DA] p-5 sm:p-8 shadow-[8px_8px_0_#4C4541] text-[#4C4541]" onClick={e => e.stopPropagation()}>
         {/* Header */}
-        <div className="modal-header border-b border-white/10 pb-4">
+        <div className="flex items-center justify-between pb-4 border-b-2 border-[#4C4541]/20">
           <div className="flex items-center gap-3">
-            <div className="modal-icon-badge primary bg-[#c26e47]/20 text-[#e08253] border border-[#c26e47]/30">
+            <div className="w-10 h-10 rounded-xl bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] flex items-center justify-center shadow-[1.5px_1.5px_0_#4C4541]">
               <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="modal-title text-lg font-bold text-white">
+              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase leading-none text-[#4C4541]">
                 {isAdmin ? 'Create or Schedule Event' : 'Propose Community Event'}
               </h3>
-              <p className="modal-subtitle text-xs text-slate-400">
+              <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
                 {isAdmin
                   ? 'Publish an official workshop or schedule a lab event directly.'
                   : 'Submit a workshop or hack session proposal for admin review.'}
@@ -137,104 +137,102 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
           </div>
           <button
             type="button"
-            className="modal-close-btn text-slate-400 hover:text-white"
+            className="w-8 h-8 rounded-full border border-[#4C4541] bg-white flex items-center justify-center text-sm font-bold hover:bg-[#F2C46A] transition-colors cursor-pointer"
             onClick={onClose}
             aria-label="Close dialog"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
 
         {/* Scrollable Form Body */}
-        <form onSubmit={handleSubmit(onSubmit)} className="modal-form flex-1 overflow-y-auto space-y-5 py-4 px-1 pr-2">
-          
+        <form onSubmit={handleSubmit(onSubmit)} className="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
           {/* Status Note Banner */}
           {!isAdmin ? (
-            <div className="rounded-xl p-3.5 bg-blue-500/10 border border-blue-500/25 flex items-start gap-3 text-xs text-blue-200">
-              <Info size={18} className="text-blue-400 flex-shrink-0 mt-0.5" />
+            <div className="rounded-2xl p-4 bg-[#AEAC78]/25 border-2 border-[#4C4541] flex items-start gap-3 text-xs text-[#4C4541]">
+              <Info size={18} className="text-[#4C4541] flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-blue-100">Student & Member Proposal Workflow</p>
-                <p className="text-slate-300 mt-0.5 leading-relaxed">
-                  Anyone can propose events! Your proposal will be submitted with status <span className="font-semibold text-amber-300">Pending Review</span>. Once a MatteLab administrator reviews it against the lab safety guidelines, it will be published to the public campus schedule.
+                <p className="font-bold font-mono uppercase text-xs">Student & Member Proposal Workflow</p>
+                <p className="text-[#4C4541]/85 mt-0.5 leading-relaxed font-sans">
+                  Anyone can propose events! Your proposal will be submitted with status <span className="font-bold">Pending Review</span>. Once a MatteLab administrator reviews it against the lab safety guidelines, it will be published to the public campus schedule.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="rounded-xl p-3 bg-amber-500/10 border border-amber-500/25 flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2 text-amber-200 font-medium">
-                <ShieldCheck size={16} className="text-amber-400" />
-                <span>Admin Privileges Active: You can publish directly or save for queue</span>
+            <div className="rounded-2xl p-3.5 bg-[#F2C46A]/30 border-2 border-[#4C4541] flex flex-wrap items-center justify-between gap-2 text-xs text-[#4C4541]">
+              <div className="flex items-center gap-2 font-mono font-bold">
+                <ShieldCheck size={16} />
+                <span>Admin Privileges Active: You can publish directly or queue for review</span>
               </div>
-              <label className="flex items-center gap-2 cursor-pointer text-slate-300 select-none">
+              <label className="flex items-center gap-2 cursor-pointer font-mono font-bold select-none">
                 <input
                   type="checkbox"
                   {...register('publishImmediately')}
-                  className="rounded border-slate-700 text-[#c26e47] focus:ring-[#c26e47]"
+                  className="rounded border-[#4C4541] text-[#4C4541] focus:ring-[#4C4541]"
                 />
-                <span className="font-medium text-xs">Publish Immediately</span>
+                <span>Publish Immediately</span>
               </label>
             </div>
           )}
 
           {/* GUIDELINES ACCORDION / HIGHLIGHT CARD */}
-          <div className="rounded-xl border border-[#c26e47]/30 bg-[#1a1e23] overflow-hidden">
+          <div className="rounded-2xl border-2 border-[#4C4541] bg-white overflow-hidden shadow-[2px_2px_0_#4C4541]">
             <button
               type="button"
               onClick={() => setShowGuidelinesDetails(!showGuidelinesDetails)}
-              className="w-full px-4 py-3 bg-[#20252b] hover:bg-[#252b33] flex items-center justify-between transition-colors text-left"
+              className="w-full px-4 py-3 bg-[#FCF0DA] hover:bg-[#F2C46A]/25 flex items-center justify-between transition-colors text-left border-b border-[#4C4541]/20 cursor-pointer"
             >
-              <div className="flex items-center gap-2.5">
-                <ShieldAlert size={16} className="text-[#e08253]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
-                  MatteLab Event Host Guidelines & Code
+              <div className="flex items-center gap-2">
+                <ShieldAlert size={15} className="text-[#4C4541]" />
+                <span className="text-xs font-bold font-mono uppercase tracking-wider text-[#4C4541]">
+                  MatteLab Event Guidelines
                 </span>
-                <span className="text-[10px] font-semibold bg-[#c26e47]/20 text-[#e08253] px-2 py-0.5 rounded-full border border-[#c26e47]/30">
+                <span className="text-[10px] font-bold font-mono bg-[#F2C46A] text-[#4C4541] px-2 py-0.5 rounded-full border border-[#4C4541]">
                   5 Core Rules
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-slate-400">
+              <div className="flex items-center gap-1.5 text-xs font-mono text-[#4C4541]/70">
                 <span>{showGuidelinesDetails ? 'Collapse' : 'View Guidelines'}</span>
-                {showGuidelinesDetails ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                {showGuidelinesDetails ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
               </div>
             </button>
 
-            {/* Quick summary or expanded details */}
-            <div className="p-4 space-y-3 text-xs">
+            <div className="p-4 space-y-3 text-xs text-[#4C4541]">
               {showGuidelinesDetails ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   {EVENT_GUIDELINES.map((rule, idx) => (
                     <div
                       key={rule.id}
-                      className="p-3 rounded-lg bg-[#14171a] border border-white/5 space-y-1 hover:border-[#c26e47]/30 transition-colors"
+                      className="p-3 rounded-xl bg-[#FCF0DA] border border-[#4C4541]/20 space-y-1"
                     >
-                      <div className="flex items-center gap-2 font-bold text-slate-200 text-xs">
-                        <span className="w-4 h-4 rounded-full bg-[#c26e47]/30 text-[#e08253] flex items-center justify-center text-[10px]">
+                      <div className="flex items-center gap-2 font-bold font-mono text-xs uppercase text-[#4C4541]">
+                        <span className="w-4 h-4 rounded-full bg-[#F2C46A] border border-[#4C4541] text-[#4C4541] flex items-center justify-center text-[10px]">
                           {idx + 1}
                         </span>
                         <span>{rule.title}</span>
                       </div>
-                      <p className="text-slate-400 text-[11px] leading-relaxed pl-6">
+                      <p className="text-[#4C4541]/80 text-[11px] leading-relaxed pl-6 font-sans">
                         {rule.desc}
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="flex flex-wrap items-center gap-2 text-slate-400 text-[11px]">
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <Check size={13} className="text-emerald-400" /> Lab Safety & Equipment
+                <div className="flex flex-wrap items-center gap-2 text-[#4C4541]/80 text-[11px] font-mono">
+                  <span className="flex items-center gap-1">
+                    <Check size={13} className="text-[#AEAC78]" /> Lab Safety
                   </span>
-                  <span className="text-slate-600">•</span>
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <Check size={13} className="text-emerald-400" /> CET Campus Hours
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Check size={13} className="text-[#AEAC78]" /> Campus Hours (08:30-20:00)
                   </span>
-                  <span className="text-slate-600">•</span>
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <Check size={13} className="text-emerald-400" /> Clean Workbench Policy
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Check size={13} className="text-[#AEAC78]" /> Clean Bench Policy
                   </span>
-                  <span className="text-slate-600">•</span>
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <Check size={13} className="text-emerald-400" /> 48h Advance Notice
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Check size={13} className="text-[#AEAC78]" /> 48h Advance Notice
                   </span>
                 </div>
               )}
@@ -242,22 +240,26 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
           </div>
 
           {/* Form Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2 form-group">
-              <label htmlFor="evt-title">Event Title *</label>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <div className="md:col-span-2">
+              <label htmlFor="evt-title" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Event Title *</label>
               <input
                 id="evt-title"
                 type="text"
                 placeholder="e.g. Autonomous Robotics & ROS Workshop"
                 {...register('title')}
-                className={errors.title ? 'border-rose-500' : ''}
+                className={`w-full rounded-2xl bg-white border-2 border-[#4C4541] px-3.5 py-2.5 text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA] ${errors.title ? 'border-rose-500' : ''}`}
               />
-              {errors.title && <p className="text-rose-400 text-xs mt-1">{errors.title.message}</p>}
+              {errors.title && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.title.message}</p>}
             </div>
 
-            <div className="form-group">
-              <label htmlFor="evt-category">Category *</label>
-              <select id="evt-category" {...register('category')}>
+            <div>
+              <label htmlFor="evt-category" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Category *</label>
+              <select
+                id="evt-category"
+                {...register('category')}
+                className="w-full rounded-2xl bg-white border-2 border-[#4C4541] px-3.5 py-2.5 text-xs sm:text-sm text-[#4C4541] focus:outline-none focus:bg-[#FCF0DA]"
+              >
                 <option value="Workshop">Workshop</option>
                 <option value="Hackathon">Hackathon</option>
                 <option value="Hardware Lab">Hardware Lab</option>
@@ -265,42 +267,42 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
                 <option value="Maker Meetup">Maker Meetup</option>
                 <option value="Demo Day">Project Demo Day</option>
               </select>
-              {errors.category && <p className="text-rose-400 text-xs mt-1">{errors.category.message}</p>}
+              {errors.category && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.category.message}</p>}
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="evt-desc">Event Description & Prerequisites *</label>
+          <div>
+            <label htmlFor="evt-desc" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Description & Prerequisites *</label>
             <textarea
               id="evt-desc"
               rows={3}
-              placeholder="Outline what makers will build, prerequisites, required kits or laptops, and target outcomes..."
+              placeholder="Outline what makers will build, prerequisites, required kits or laptops..."
               {...register('description')}
-              className={errors.description ? 'border-rose-500' : ''}
+              className={`w-full rounded-2xl bg-white border-2 border-[#4C4541] p-3 text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA] ${errors.description ? 'border-rose-500' : ''}`}
             />
-            {errors.description && <p className="text-rose-400 text-xs mt-1">{errors.description.message}</p>}
+            {errors.description && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.description.message}</p>}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-group">
-              <label htmlFor="evt-venue">Venue / Campus Location *</label>
-              <div className="input-with-icon">
-                <MapPin size={16} className="input-icon text-slate-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div>
+              <label htmlFor="evt-venue" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Venue / Lab *</label>
+              <div className="relative">
+                <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-venue"
                   type="text"
                   placeholder="e.g. Makerspace Hardware Lab / Main Seminar Hall"
                   {...register('venue')}
-                  className={errors.venue ? 'border-rose-500' : ''}
+                  className={`w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA] ${errors.venue ? 'border-rose-500' : ''}`}
                 />
               </div>
-              {errors.venue && <p className="text-rose-400 text-xs mt-1">{errors.venue.message}</p>}
+              {errors.venue && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.venue.message}</p>}
             </div>
 
-            <div className="form-group">
-              <label htmlFor="evt-cap">Participant Capacity *</label>
-              <div className="input-with-icon">
-                <Users size={16} className="input-icon text-slate-400" />
+            <div>
+              <label htmlFor="evt-cap" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Capacity *</label>
+              <div className="relative">
+                <Users size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-cap"
                   type="number"
@@ -308,97 +310,98 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
                   max="500"
                   placeholder="30"
                   {...register('capacity')}
-                  className={errors.capacity ? 'border-rose-500' : ''}
+                  className={`w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA] ${errors.capacity ? 'border-rose-500' : ''}`}
                 />
               </div>
-              {errors.capacity && <p className="text-rose-400 text-xs mt-1">{errors.capacity.message}</p>}
+              {errors.capacity && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.capacity.message}</p>}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-group">
-              <label htmlFor="evt-start">Event Date & Start Time *</label>
-              <div className="input-with-icon">
-                <Calendar size={16} className="input-icon text-slate-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div>
+              <label htmlFor="evt-start" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Start Date & Time *</label>
+              <div className="relative">
+                <Calendar size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-start"
                   type="datetime-local"
                   {...register('startAt')}
-                  className={errors.startAt ? 'border-rose-500' : ''}
+                  className={`w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs text-[#4C4541] focus:outline-none focus:bg-[#FCF0DA] ${errors.startAt ? 'border-rose-500' : ''}`}
                 />
               </div>
-              {errors.startAt && <p className="text-rose-400 text-xs mt-1">{errors.startAt.message}</p>}
+              {errors.startAt && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.startAt.message}</p>}
             </div>
 
-            <div className="form-group">
-              <label htmlFor="evt-deadline">Registration Deadline *</label>
-              <div className="input-with-icon">
-                <Clock size={16} className="input-icon text-slate-400" />
+            <div>
+              <label htmlFor="evt-deadline" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">Registration Deadline *</label>
+              <div className="relative">
+                <Clock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-deadline"
                   type="datetime-local"
                   {...register('deadline')}
-                  className={errors.deadline ? 'border-rose-500' : ''}
+                  className={`w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs text-[#4C4541] focus:outline-none focus:bg-[#FCF0DA] ${errors.deadline ? 'border-rose-500' : ''}`}
                 />
               </div>
-              {errors.deadline && <p className="text-rose-400 text-xs mt-1">{errors.deadline.message}</p>}
+              {errors.deadline && <p className="text-rose-600 text-xs mt-1 font-mono">{errors.deadline.message}</p>}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-group">
-              <label htmlFor="evt-equipment">
-                Machinery / Equipment Needed <span className="text-muted text-xs">(Optional)</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div>
+              <label htmlFor="evt-equipment" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
+                Equipment Needed <span className="text-[#4C4541]/60">(Optional)</span>
               </label>
-              <div className="input-with-icon">
-                <Wrench size={16} className="input-icon text-slate-400" />
+              <div className="relative">
+                <Wrench size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-equipment"
                   type="text"
-                  placeholder="e.g. 3D Printers, Soldering Irons, Oscilloscopes"
+                  placeholder="e.g. 3D Printers, Soldering Stations"
                   {...register('equipmentNeeded')}
+                  className="w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA]"
                 />
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="evt-url">
-                External Link / Ticket URL <span className="text-muted text-xs">(Optional)</span>
+            <div>
+              <label htmlFor="evt-url" className="block text-xs font-mono font-bold uppercase text-[#4C4541] mb-1">
+                External Registration URL <span className="text-[#4C4541]/60">(Optional)</span>
               </label>
-              <div className="input-with-icon">
-                <LinkIcon size={16} className="input-icon text-slate-400" />
+              <div className="relative">
+                <LinkIcon size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#4C4541]/60" />
                 <input
                   id="evt-url"
                   type="url"
                   placeholder="https://tinkerhub.org/... (leave blank for in-app)"
                   {...register('registrationUrl')}
-                  className={errors.registrationUrl ? 'border-rose-500' : ''}
+                  className={`w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-white border-2 border-[#4C4541] text-xs sm:text-sm text-[#4C4541] placeholder-[#4C4541]/40 focus:outline-none focus:bg-[#FCF0DA] ${errors.registrationUrl ? 'border-rose-500' : ''}`}
                 />
               </div>
               {errors.registrationUrl && (
-                <p className="text-rose-400 text-xs mt-1">{errors.registrationUrl.message}</p>
+                <p className="text-rose-600 text-xs mt-1 font-mono">{errors.registrationUrl.message}</p>
               )}
             </div>
           </div>
 
           {/* GUIDELINES ACKNOWLEDGMENT CHECKBOX */}
           <div className="pt-2">
-            <label className="flex items-start gap-3 p-3.5 rounded-xl bg-[#171b1f] border border-white/10 hover:border-[#c26e47]/40 cursor-pointer select-none transition-colors">
+            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] cursor-pointer select-none">
               <input
                 type="checkbox"
                 id="guidelines-agree"
                 {...register('guidelinesAccepted')}
-                className="mt-1 rounded border-slate-700 text-[#c26e47] focus:ring-[#c26e47] w-4 h-4 cursor-pointer"
+                className="mt-1 rounded border-[#4C4541] text-[#4C4541] focus:ring-[#4C4541] w-4 h-4 cursor-pointer"
               />
-              <div className="text-xs">
-                <span className="font-semibold text-white">
+              <div className="text-xs text-[#4C4541]">
+                <span className="font-bold font-mono uppercase">
                   I agree to adhere to the MatteLab Community Event Guidelines *
                 </span>
-                <p className="text-slate-400 mt-0.5 leading-relaxed">
-                  I confirm this event complies with lab equipment safety rules, operating hours, and clean bench policies. I understand that proposals must be approved by an administrator before appearing on the public calendar.
+                <p className="text-[#4C4541]/80 mt-0.5 leading-relaxed font-sans">
+                  I confirm this event complies with lab equipment safety rules, operating hours, and clean bench policies.
                 </p>
                 {errors.guidelinesAccepted && (
-                  <p className="text-rose-400 font-semibold mt-1.5 flex items-center gap-1">
+                  <p className="text-rose-600 font-bold font-mono mt-1 flex items-center gap-1">
                     <ShieldAlert size={14} />
                     {errors.guidelinesAccepted.message}
                   </p>
@@ -408,10 +411,10 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
           </div>
 
           {/* Modal Actions */}
-          <div className="modal-actions pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+          <div className="pt-4 border-t-2 border-[#4C4541]/20 flex items-center justify-end gap-3">
             <button
               type="button"
-              className="btn btn-secondary px-5 py-2.5 text-xs font-semibold"
+              className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-white text-xs font-bold font-mono uppercase shadow-[1.5px_1.5px_0_#4C4541] cursor-pointer"
               onClick={onClose}
               disabled={isSubmitting}
             >
@@ -419,16 +422,16 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
             </button>
             <button
               type="submit"
-              className="btn btn-primary px-6 py-2.5 text-xs font-semibold flex items-center gap-2 bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white shadow-md shadow-[#c26e47]/25"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
               disabled={isSubmitting}
             >
-              <PlusCircle size={16} />
+              <PlusCircle size={15} />
               <span>
                 {isSubmitting
                   ? 'Submitting...'
                   : isAdmin && watch('publishImmediately')
                   ? 'Publish Event'
-                  : 'Submit Proposal for Approval'}
+                  : 'Submit Proposal'}
               </span>
             </button>
           </div>

@@ -1,14 +1,14 @@
 /* MatteLab Animated Person Mascot */
 .mascot,
 .mascot-show {
-  --mascot-size: 88px;
-  --ink: #14171a;
-  --clay: #c26e47;
-  --clay-hover: #b05f3b;
-  --amber: #d97736;
-  --paper: #fcfaf6;
-  --paper-text: #16191d;
-  --paper-border: #202428;
+  --mascot-size: 74px; /* Scaled down slightly for mobile and Android viewports */
+  --ink: #4C4541;
+  --clay: #F2C46A;
+  --clay-hover: #e0b054;
+  --amber: #AEAC78;
+  --paper: #FCF0DA;
+  --paper-text: #4C4541;
+  --paper-border: #4C4541;
 }
 
 @media (min-width: 768px) {
@@ -193,13 +193,13 @@
   position: absolute;
   bottom: calc(100% + 14px);
   width: max-content;
-  max-width: min(290px, 82vw);
+  max-width: min(290px, calc(100vw - 32px));
   padding: 12px 14px;
   background: var(--paper);
   color: var(--paper-text);
   border: 2px solid var(--paper-border);
   border-radius: 16px;
-  box-shadow: 3px 3px 0 var(--clay), 0 14px 32px rgba(0, 0, 0, 0.45);
+  box-shadow: 3px 3px 0 var(--ink), 0 14px 28px rgba(76, 69, 65, 0.22);
   font-family: inherit;
   z-index: 60;
   animation: mascot-bubble-pop 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -231,7 +231,7 @@
   justify-content: space-between;
   margin-bottom: 5px;
   padding-bottom: 3px;
-  border-bottom: 1px dashed rgba(32, 36, 40, 0.12);
+  border-bottom: 1px dashed rgba(76, 69, 65, 0.2);
 }
 
 .mascot-bubble-tag {
@@ -239,7 +239,10 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--clay);
+  color: #4C4541;
+  background: var(--clay);
+  padding: 2px 6px;
+  border-radius: 4px;
   line-height: 1;
 }
 
@@ -317,8 +320,8 @@
 
 .mascot-btn:hover {
   background: var(--clay);
-  border-color: var(--clay);
-  color: #ffffff;
+  border-color: var(--ink);
+  color: var(--ink);
   transform: translateY(-1px);
   box-shadow: 2px 3px 0 var(--ink);
 }
@@ -335,18 +338,18 @@
   width: 44px;
   height: 44px;
   padding: 4px;
-  border: 2px solid rgba(194, 110, 71, 0.5);
+  border: 2px solid var(--ink);
   border-radius: 50%;
-  background: rgba(24, 27, 31, 0.9);
+  background: var(--paper);
   backdrop-filter: blur(8px);
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  box-shadow: 2px 2px 0 var(--ink), 0 8px 18px rgba(76, 69, 65, 0.25);
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .mascot-show:hover {
   transform: scale(1.1);
-  border-color: var(--clay);
+  background: var(--clay);
 }
 
 .mascot-show img {

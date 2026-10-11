@@ -262,7 +262,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#121416]">
+    <div className="min-h-screen flex flex-col bg-[#FCF0DA] text-[#4C4541] overflow-x-hidden w-full max-w-full selection:bg-[#F2C46A] selection:text-[#4C4541]">
       {/* Top Header Overlay spanning full width */}
       <TopNav
         activeTab={activeTab}
@@ -273,8 +273,8 @@ export default function App() {
         pendingCount={pendingEvents.length}
       />
 
-      {/* Main Full-Width Content Viewport (No Sidebar) */}
-      <div className="w-full flex-1 pt-[88px] sm:pt-[96px]">
+      {/* Main Full-Width Content Viewport with mobile bottom navigation clearance */}
+      <div className="w-full flex-1 pt-[88px] sm:pt-[96px] pb-24 md:pb-12">
         {activeTab === 'overview' ? (
           <Overview
             events={events}
@@ -338,7 +338,7 @@ export default function App() {
           brand="MatteLab"
           ctaText={isAdmin ? "Create Workshop" : "Propose Workshop"}
           headline="Got an idea? Let's build it together."
-          craftingYear="2019"
+          punchyStatement="DREAM IT · SOLDER IT · BUILD IT"
           onOpenCreateModal={() => setIsCreateModalOpen(true)}
           onSelectTab={setActiveTab}
         />

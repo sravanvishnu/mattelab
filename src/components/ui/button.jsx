@@ -8,13 +8,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[#c26e47] text-white hover:bg-[#b05f3b] shadow-sm",
-        destructive: "bg-red-600 text-white hover:bg-red-700 shadow-sm",
-        outline: "border border-slate-700 bg-transparent hover:bg-slate-800 text-slate-200",
-        secondary: "bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700/60",
-        ghost: "hover:bg-slate-800/80 hover:text-slate-100 text-slate-300",
-        link: "text-[#e28743] underline-offset-4 hover:underline",
-        accent: "bg-gradient-to-r from-[#c26e47] to-[#d97736] text-white font-semibold hover:opacity-95 shadow-md",
+        default: "bg-[#4C4541] text-[#FCF0DA] hover:bg-[#F2C46A] hover:text-[#4C4541] border-2 border-[#4C4541] font-mono uppercase font-bold text-xs shadow-[2px_2px_0_#4C4541] active:translate-y-0.5 active:shadow-none",
+        destructive: "bg-red-600 text-white hover:bg-red-700 border-2 border-[#4C4541] font-mono uppercase font-bold text-xs shadow-[2px_2px_0_#4C4541]",
+        outline: "border-2 border-[#4C4541] bg-white hover:bg-[#F2C46A]/20 text-[#4C4541] font-mono uppercase font-bold text-xs shadow-[2px_2px_0_#4C4541]",
+        secondary: "bg-[#AEAC78] text-[#4C4541] hover:bg-[#AEAC78]/80 border-2 border-[#4C4541] font-mono uppercase font-bold text-xs shadow-[2px_2px_0_#4C4541]",
+        ghost: "hover:bg-[#4C4541]/10 text-[#4C4541]",
+        link: "text-[#4C4541] font-bold underline-offset-4 hover:underline",
+        accent: "bg-[#F2C46A] text-[#4C4541] hover:bg-[#e0b054] border-2 border-[#4C4541] font-mono uppercase font-bold text-xs shadow-[2px_2px_0_#4C4541]",
       },
       size: {
         default: "h-10 px-4 py-2",

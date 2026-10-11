@@ -75,8 +75,8 @@ export default function Header({
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
           isScrolled
-            ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#121417]/92 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
-            : 'top-0 w-full max-w-full rounded-none bg-[#f7f4ee]/95 backdrop-blur-md border-b border-stone-200/90 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
+            ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
+            : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
         } ${className}`}
       >
         {/* ========================================================
@@ -121,7 +121,7 @@ export default function Header({
               >
                 <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center">
                   {brandName}
-                  <span className="text-white group-hover:text-[#c8ea4a] transition-colors">.</span>
+                  <span className="text-white group-hover:text-[#F2C46A] transition-colors">.</span>
                 </span>
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function Header({
                       {/* Anchored Circular Counter / Badge */}
                       {item.badge !== undefined && item.badge !== null && item.badge > 0 && (
                         <span
-                          className="ml-1.5 px-1.5 py-0.5 rounded-full bg-[#c8ea4a] text-slate-950 text-[10px] font-black leading-none inline-flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                          className="ml-1.5 px-1.5 py-0.5 rounded-full bg-[#F2C46A] text-[#4C4541] text-[10px] font-black leading-none inline-flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
                           title={`${item.badge} notifications`}
                         >
                           {item.badge}
@@ -171,7 +171,7 @@ export default function Header({
 
                       {/* Admin Highlight Indicator */}
                       {item.highlight && (
-                        <span className="ml-1.5 text-[9px] font-bold uppercase text-[#c8ea4a] bg-[#c8ea4a]/15 px-1.5 py-0.5 rounded-full border border-[#c8ea4a]/30">
+                        <span className="ml-1.5 text-[9px] font-bold uppercase text-[#4C4541] bg-[#AEAC78]/30 px-1.5 py-0.5 rounded-full border border-[#AEAC78]/50">
                           Admin
                         </span>
                       )}
@@ -261,7 +261,7 @@ export default function Header({
           <button
             type="button"
             onClick={onCtaClick}
-            className="group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#c8ea4a] hover:bg-[#bde03a] text-slate-950 text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer flex items-center gap-1.5 shadow-sm hover:shadow-md hover:shadow-[#c8ea4a]/25 whitespace-nowrap"
+            className="group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] text-xs sm:text-sm font-bold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer flex items-center gap-1.5 shadow-sm hover:shadow-md hover:shadow-[#F2C46A]/30 whitespace-nowrap"
           >
             <span>{ctaText}</span>
             <ArrowUpRight
@@ -291,7 +291,7 @@ export default function Header({
       {/* Mobile Dropdown Drawer when open */}
       {mobileMenuOpen && (
         <div
-          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl bg-[#141619]/96 backdrop-blur-2xl border border-white/12 p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${
+          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl bg-[#4C4541]/96 backdrop-blur-2xl border border-white/12 p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${
             isScrolled ? 'top-20' : 'top-[76px]'
           }`}
         >
@@ -315,7 +315,7 @@ export default function Header({
                 >
                   <span>{item.label}</span>
                   {item.badge && item.badge > 0 && (
-                    <span className="px-1.5 py-0.5 rounded-full bg-[#c8ea4a] text-slate-950 text-[10px] font-black">
+                    <span className="px-1.5 py-0.5 rounded-full bg-[#F2C46A] text-[#4C4541] text-[10px] font-black">
                       {item.badge}
                     </span>
                   )}
@@ -331,7 +331,7 @@ export default function Header({
                 onCtaClick?.();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-2.5 rounded-full bg-[#c8ea4a] hover:bg-[#bde03a] text-slate-950 text-xs font-bold text-center shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-2.5 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] text-xs font-bold text-center shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <span>{ctaText}</span>
               <ArrowUpRight size={14} className="stroke-[2.2]" />

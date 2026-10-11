@@ -7,13 +7,13 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-transparent bg-[#c26e47] text-white shadow hover:bg-[#b05f3b]",
-        secondary: "border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700",
-        destructive: "border-transparent bg-red-600 text-white shadow hover:bg-red-700",
-        outline: "text-slate-300 border-slate-700",
-        success: "border-[#c26e47]/30 bg-[#c26e47]/15 text-[#e28743]",
-        warning: "border-amber-500/30 bg-amber-500/15 text-amber-400",
-        muted: "border-slate-800 bg-slate-800/60 text-slate-400",
+        default: "border-2 border-[#4C4541] bg-[#4C4541] text-[#FCF0DA] font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        secondary: "border-2 border-[#4C4541] bg-[#AEAC78] text-[#4C4541] font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        destructive: "border-2 border-[#4C4541] bg-red-600 text-white font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        outline: "border-2 border-[#4C4541] bg-white text-[#4C4541] font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        success: "border-2 border-[#4C4541] bg-[#F2C46A] text-[#4C4541] font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        warning: "border-2 border-[#4C4541] bg-amber-400 text-[#4C4541] font-mono uppercase text-[10px] font-bold shadow-[1px_1px_0_#4C4541]",
+        muted: "border-2 border-[#4C4541]/40 bg-white/60 text-[#4C4541]/80 font-mono uppercase text-[10px] font-semibold",
       },
     },
     defaultVariants: {

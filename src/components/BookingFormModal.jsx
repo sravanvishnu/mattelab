@@ -196,26 +196,26 @@ export default function BookingFormModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-lg bg-[#181a1d] border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg bg-[#FCF0DA] border-2 border-[#4C4541] rounded-[28px] shadow-[8px_8px_0_#4C4541] overflow-hidden animate-in zoom-in-95 duration-200 text-[#4C4541]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-[#1e2125]/60">
+        <div className="flex items-center justify-between p-6 border-b-2 border-[#4C4541] bg-[#FCF0DA]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#c26e47]/15 border border-[#c26e47]/30 text-[#e28743] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] flex items-center justify-center shadow-[2px_2px_0_#4C4541]">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white font-heading">
+              <h3 className="font-condensed text-2xl font-bold uppercase tracking-wide text-[#4C4541]">
                 Reserve Equipment / Space
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="font-editorial italic text-xs text-[#4C4541]/80">
                 {selectedResource ? `${selectedResource.name} · ${selectedResource.location || 'Makerspace'}` : 'Select equipment and verify availability'}
               </p>
             </div>
@@ -223,24 +223,24 @@ export default function BookingFormModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A] transition-all flex items-center justify-center shadow-[2px_2px_0_#4C4541] cursor-pointer"
             aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-4 max-h-[82vh] overflow-y-auto">
           {/* Equipment Selector */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-              <Wrench className="w-3.5 h-3.5 text-[#e28743]" />
+            <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#4C4541] mb-1.5 flex items-center gap-1.5">
+              <Wrench className="w-3.5 h-3.5 text-[#4C4541]" />
               <span>Target Equipment / Lab Space *</span>
             </label>
             <select
               {...register('resourceId')}
-              className="w-full h-10 px-3 rounded-xl bg-[#121416] border border-white/10 text-slate-100 text-sm focus:border-[#c26e47] focus:ring-1 focus:ring-[#c26e47] outline-none transition-colors"
+              className="w-full h-11 px-3.5 rounded-xl bg-white border-2 border-[#4C4541] text-[#4C4541] text-sm font-medium shadow-[2px_2px_0_#4C4541] focus:ring-2 focus:ring-[#F2C46A] outline-none transition-colors"
             >
               {resources.map((res) => (
                 <option key={res.id} value={res.id}>
@@ -249,7 +249,7 @@ export default function BookingFormModal({
               ))}
             </select>
             {errors.resourceId && (
-              <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+              <p className="text-xs font-mono text-red-600 mt-1 flex items-center gap-1 font-bold">
                 <AlertCircle className="w-3 h-3 shrink-0" />
                 <span>{errors.resourceId.message}</span>
               </p>
@@ -258,18 +258,18 @@ export default function BookingFormModal({
 
           {/* Booking Title / Project Purpose */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#e28743]" />
+            <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#4C4541] mb-1.5 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#4C4541]" />
               <span>Project / Booking Purpose *</span>
             </label>
             <Input
               {...register('title')}
               placeholder="e.g. 3D Print Quadcopter Frame / PCB Soldering"
               maxLength={100}
-              className="bg-[#121416] border-white/10 text-sm"
+              className="bg-white border-2 border-[#4C4541] rounded-xl text-sm text-[#4C4541] shadow-[2px_2px_0_#4C4541]"
             />
             {errors.title && (
-              <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+              <p className="text-xs font-mono text-red-600 mt-1 flex items-center gap-1 font-bold">
                 <AlertCircle className="w-3 h-3 shrink-0" />
                 <span>{errors.title.message}</span>
               </p>
@@ -277,20 +277,20 @@ export default function BookingFormModal({
           </div>
 
           {/* Time & Date Range Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 p-3.5 rounded-2xl bg-[#121416]/60 border border-white/5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 p-4 rounded-2xl bg-white border-2 border-[#4C4541] shadow-[3px_3px_0_#4C4541]">
             {/* Start Date & Time */}
             <div className="space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Clock className="w-3 h-3 text-[#e28743]" /> Start Time
+              <span className="text-[11px] font-bold font-mono uppercase tracking-wider text-[#4C4541] flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#4C4541]" /> Start Time
               </span>
               <div>
                 <input
                   type="date"
                   {...register('startDate')}
-                  className="w-full h-9 px-2.5 rounded-lg bg-[#181a1d] border border-white/10 text-xs text-slate-200 outline-none focus:border-[#c26e47]"
+                  className="w-full h-9 px-2.5 rounded-lg bg-[#FCF0DA]/50 border-2 border-[#4C4541] text-xs font-mono font-bold text-[#4C4541] outline-none"
                 />
                 {errors.startDate && (
-                  <p className="text-[11px] text-red-400 mt-0.5">{errors.startDate.message}</p>
+                  <p className="text-[11px] font-mono text-red-600 mt-0.5">{errors.startDate.message}</p>
                 )}
               </div>
               <div>
@@ -298,27 +298,27 @@ export default function BookingFormModal({
                   type="time"
                   step="900"
                   {...register('startTime')}
-                  className="w-full h-9 px-2.5 rounded-lg bg-[#181a1d] border border-white/10 text-xs text-slate-200 outline-none focus:border-[#c26e47]"
+                  className="w-full h-9 px-2.5 rounded-lg bg-[#FCF0DA]/50 border-2 border-[#4C4541] text-xs font-mono font-bold text-[#4C4541] outline-none"
                 />
                 {errors.startTime && (
-                  <p className="text-[11px] text-red-400 mt-0.5">{errors.startTime.message}</p>
+                  <p className="text-[11px] font-mono text-red-600 mt-0.5">{errors.startTime.message}</p>
                 )}
               </div>
             </div>
 
             {/* End Date & Time */}
             <div className="space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Clock className="w-3 h-3 text-amber-400" /> End Time
+              <span className="text-[11px] font-bold font-mono uppercase tracking-wider text-[#4C4541] flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-[#4C4541]" /> End Time
               </span>
               <div>
                 <input
                   type="date"
                   {...register('endDate')}
-                  className="w-full h-9 px-2.5 rounded-lg bg-[#181a1d] border border-white/10 text-xs text-slate-200 outline-none focus:border-[#c26e47]"
+                  className="w-full h-9 px-2.5 rounded-lg bg-[#FCF0DA]/50 border-2 border-[#4C4541] text-xs font-mono font-bold text-[#4C4541] outline-none"
                 />
                 {errors.endDate && (
-                  <p className="text-[11px] text-red-400 mt-0.5">{errors.endDate.message}</p>
+                  <p className="text-[11px] font-mono text-red-600 mt-0.5">{errors.endDate.message}</p>
                 )}
               </div>
               <div>
@@ -326,10 +326,10 @@ export default function BookingFormModal({
                   type="time"
                   step="900"
                   {...register('endTime')}
-                  className="w-full h-9 px-2.5 rounded-lg bg-[#181a1d] border border-white/10 text-xs text-slate-200 outline-none focus:border-[#c26e47]"
+                  className="w-full h-9 px-2.5 rounded-lg bg-[#FCF0DA]/50 border-2 border-[#4C4541] text-xs font-mono font-bold text-[#4C4541] outline-none"
                 />
                 {errors.endTime && (
-                  <p className="text-[11px] text-red-400 mt-0.5">{errors.endTime.message}</p>
+                  <p className="text-[11px] font-mono text-red-600 mt-0.5">{errors.endTime.message}</p>
                 )}
               </div>
             </div>
@@ -337,51 +337,50 @@ export default function BookingFormModal({
 
           {/* Notes / Special Material Requirements */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-slate-400" />
+            <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#4C4541] mb-1.5 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-[#4C4541]" />
               <span>Project Notes / Filament or Material (Optional)</span>
             </label>
             <Textarea
               {...register('notes')}
               rows={2}
               placeholder="e.g. PLA filament, nozzle 0.4mm, bringing my own acrylic sheet"
-              className="bg-[#121416] border-white/10 text-xs"
+              className="bg-white border-2 border-[#4C4541] rounded-xl text-xs text-[#4C4541] shadow-[2px_2px_0_#4C4541]"
             />
           </div>
 
           {/* Rules notice */}
-          <div className="text-[11px] text-slate-400 bg-white/[0.03] p-2.5 rounded-xl border border-white/5 flex items-start gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#e28743] shrink-0 mt-0.5" />
-            <span>
+          <div className="text-xs text-[#4C4541] bg-[#AEAC78]/25 p-3 rounded-2xl border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] flex items-start gap-2">
+            <CheckCircle2 className="w-4 h-4 text-[#4C4541] shrink-0 mt-0.5" />
+            <span className="font-medium leading-relaxed">
               Bookings are verified transactionally. Duration must be between 15 mins and 4 hours. You can cancel your reservation any time before it starts.
             </span>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
-            <Button
+          <div className="flex items-center justify-end gap-3 pt-3 border-t-2 border-[#4C4541]/15">
+            <button
               type="button"
-              variant="outline"
               onClick={onClose}
               disabled={isSubmitting}
-              className="text-xs"
+              className="px-5 py-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/20 font-mono text-xs font-bold uppercase shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
             >
               Cancel
-            </Button>
-            <Button
+            </button>
+            <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-gradient-to-r from-[#c26e47] to-[#d97736] hover:from-[#b05f3b] hover:to-[#c6682b] text-white text-xs font-semibold px-5"
+              className="px-6 py-2.5 rounded-full border-2 border-[#4C4541] bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541] font-mono text-xs font-bold uppercase shadow-[3px_3px_0_#4C4541] transition-all active:translate-y-0.5 active:shadow-none cursor-pointer flex items-center gap-2"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <div className="w-3.5 h-3.5 border-2 border-[#FCF0DA]/40 border-t-[#FCF0DA] rounded-full animate-spin" />
                   <span>Verifying Slot...</span>
                 </div>
               ) : (
                 <span>Confirm Reservation</span>
               )}
-            </Button>
+            </button>
           </div>
         </form>
       </div>
