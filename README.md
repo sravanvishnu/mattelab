@@ -2,7 +2,7 @@
 
   <img src="public/logo.png" alt="MatteLab Logo" width="120" />
 
-  # 🛠️ MatteLab — Makerspace & Innovation Hub
+  # MatteLab — Makerspace & Innovation Hub
   ### College of Engineering Trikaripur (CETKR)
 
   <p align="center">
@@ -36,16 +36,16 @@
 
 ---
 
-## ✨ Features
+## Features
 
-### 1. 🎨 Brutalist-Editorial Campus Design
+### 1. Brutalist-Editorial Campus Design
 - **Signature Visual Identity**: Tailored color palette combining warm cream canvas (`#FCF0DA`), olive sage (`#AEAC78`), warm honey gold (`#F2C46A`), and deep espresso charcoal (`#4C4541`).
 - **Kinetic Curtain Entrance**: 10 staggered vertical slices that unmask on page load with custom easing physics.
 - **Morphing Island Header**: Seamlessly morphs from a full-width edge-to-edge bar at the top of the viewport into a floating docked capsule pill upon scrolling (`scrollY > 15`).
 - **Dark & Light Mode**: Theme toggle with automatic system preference detection and persistent `localStorage` synchronization.
 - **Adaptive Mobile Dock**: Sticky bottom navigation tailored for mobile viewports with notification badges.
 
-### 2. 🔐 Authentication & Role-Based Access Control (RBAC)
+### 2. Authentication & Role-Based Access Control (RBAC)
 - **Google OAuth 2.0**: Zero-friction login with college Google credentials.
 - **Automatic User Provisioning**: Auto-creates user profiles in Firestore on first sign-in.
 - **Multi-Tier Roles**:
@@ -53,26 +53,26 @@
   - `organizer`: Propose workshops with expedited review flags and oversee activities.
   - `admin`: Full moderation privileges — approve/reject event proposals, create instant events, add/edit/deactivate equipment, and delete reservations.
 
-### 3. 📅 Workshop & Event Management Hub
+### 3. Workshop & Event Management Hub
 - **Community Workshop Proposals**: Students and clubs can propose events with equipment requests, capacity caps, and venue selections.
 - **Strict Guidelines Agreement**: Built-in enforcement of safety, workbench etiquette, and academic purpose guidelines before submission.
 - **Schema Validation**: Powered by **Zod** and **React Hook Form** to ensure valid event timings, deadlines, and seat capacity (1–500).
 - **Admin Moderation Queue**: Organizers and admins can review pending submissions, approve to publish to the catalog, or reject with explanatory feedback.
 - **One-Click Event Registration**: Real-time spot reservations with remaining seat counters and the ability to release spots.
 
-### 4. 🖨️ Machinery & Space Reservation (FullCalendar)
+### 4. Machinery & Space Reservation (FullCalendar)
 - **Interactive Calendar Schedule**: Powered by `@fullcalendar/react` with DayGrid and TimeGrid views showing live bookings.
 - **Concurrency-Safe Firestore Transactions**: Uses atomic transactions to prevent double-booking collisions (`existing.start < new.end && existing.end > new.start`).
 - **Resource Management**: Filter and manage machinery (3D printers, laser cutters, CNCs, soldering stations) and spaces (testing bays, workbench stations).
 - **Time Constraints**: Enforces lab operating hours (08:30 AM – 08:00 PM) and reservation limits (15 minutes to 4 hours).
 
-### 5. 🤖 Interactive Makerspace Mascot
+### 5. Interactive Makerspace Mascot
 - **Contextual Helper & Companion**: Floating interactive canvas mascot widget.
 - **Live Lab Occupancy Sensing**: Reactively listens to Firestore to compute lab status (`free`, `busy`, or `closed` outside operating hours).
 - **Dynamic Dialogues**: Sparks maker creativity with thought-provoking hardware prompts, safety reminders, and instant schedule shortcuts.
 - **Accessibility Friendly**: Supports mute state persistence and respects `prefers-reduced-motion`.
 
-### 6. 👤 Maker Identity & Registrations Dashboard
+### 6. Maker Identity & Registrations Dashboard
 - **My Registrations**: Dedicated dashboard tracking all upcoming workshop tickets and active machinery reservations.
 - **Self-Service Cancellation**: Clean cancellation workflow that frees resources for fellow students.
 - **Maker Profile**: Displays verified account details, role badges, and participation history.
@@ -111,7 +111,7 @@
 
 ---
 
-## 🏗️ Architecture & Project Structure
+##  Architecture & Project Structure
 
 ```text
 mattelab/
@@ -175,7 +175,7 @@ mattelab/
 
 ---
 
-## ⚙️ Key Services & Functions
+## Key Services & Functions
 
 ### 1. `src/services/bookings.js`
 Handles resource reservations using atomic transactions to guarantee that overlapping bookings are never created:
@@ -394,7 +394,6 @@ All events and equipment reservations in MatteLab must adhere to:
 
 - **Institution**: [College of Engineering Trikaripur (CETKR)](https://cetkr.ac.in)
 - **Communities**: [TinkerHub CETKR](https://tinkerhub.org) & IEDC CETKR
-- **Design Inspiration**: Brutalist & modern editorial laboratory aesthetics
 
 ---
 
