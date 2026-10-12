@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,19 +24,27 @@
     "date-fns": "^4.4.0",
     "firebase": "^11.0.2",
     "lucide-react": "^0.475.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-hook-form": "^7.89.0",
     "tailwind-merge": "^3.7.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.6.1",
     "postcss": "^8.5.29",
     "tailwindcss": "^3.4.17",
-    "vite": "^6.0.7"
+    "@babel/core": "^7.29.7",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  },
+  "allowScripts": {
+    "@firebase/util@1.12.1": true,
+    "protobufjs@7.6.6": true
   }
 }
