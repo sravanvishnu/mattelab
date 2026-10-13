@@ -71,7 +71,7 @@ export default function Footer({
   ];
 
   return (
-    <footer className="w-full px-3 sm:px-6 lg:px-8 pb-8 pt-10 select-none">
+    <footer className="w-full px-3 sm:px-6 lg:px-8 pb-24 sm:pb-8 pt-10 select-none">
       <div className="relative mx-auto max-w-[1400px]">
         {/* Top-Right Tab: Back to Top */}
         <div className="flex justify-end pr-4 sm:pr-8">
@@ -318,7 +318,7 @@ export default function Footer({
               "DREAM IT · SOLDER IT · BUILD IT"
              ======================================================== */}
           <div className="my-8 sm:my-10 lg:my-12 select-none overflow-hidden">
-            <div role="heading" aria-level="2" className="font-condensed text-[clamp(1.75rem,5.2vw,5.5rem)] font-black uppercase tracking-tight text-white/90 leading-none whitespace-nowrap">
+            <div role="heading" aria-level="2" className="font-condensed text-[clamp(1.35rem,5.2vw,5.5rem)] font-black uppercase tracking-tight text-white/90 leading-tight break-words sm:whitespace-nowrap">
               {punchyStatement}
             </div>
           </div>

@@ -250,8 +250,14 @@ html.dark .overview-inner-body section:first-of-type {
 
 /* Mobile bottom bar in Dark Mode */
 html.dark .mobile-bottom-bar {
-  background: #141211 !important;
-  border-top: 1.5px solid rgba(242, 196, 106, 0.2) !important;
+  background: rgba(26, 24, 22, 0.96) !important;
+  border-color: rgba(242, 196, 106, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 2px 2px 0 rgba(242, 196, 106, 0.3) !important;
+}
+
+html.dark .mobile-nav-btn.active {
+  background: #F2C46A !important;
+  color: #1C1917 !important;
 }
 
 /* FullCalendar in Dark Mode */
@@ -2021,19 +2027,24 @@ select {
     grid-template-columns: 1fr;
   }
 
-  /* Mobile Bottom Navigation Bar - Editorial Brutalist Grounding Bar */
+  /* Mobile Bottom Navigation Bar - Android Floating Brutalist Dock */
   .mobile-bottom-bar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #4C4541;
-    border-top: 1.5px solid rgba(252, 240, 218, 0.15);
-    padding: 6px 2px max(8px, env(safe-area-inset-bottom));
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: 12px;
+    right: 12px;
+    max-width: 440px;
+    margin: 0 auto;
+    background: rgba(76, 69, 65, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 2px solid rgba(252, 240, 218, 0.22);
+    border-radius: 9999px;
+    padding: 4px;
     z-index: 50;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 2px 2px 0 #4C4541;
   }
 
   .mobile-nav-btn {
@@ -2041,29 +2052,32 @@ select {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    padding: 6px 2px;
-    min-height: 48px;
+    gap: 2px;
+    padding: 5px 2px;
+    min-height: 44px;
     border: none;
+    border-radius: 9999px;
     background: transparent;
     color: rgba(252, 240, 218, 0.65);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 600;
     font-family: var(--font-heading);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     position: relative;
   }
 
   .mobile-nav-btn:active {
-    transform: scale(0.94);
+    transform: scale(0.92);
   }
 
   .mobile-nav-btn.active {
-    color: #F2C46A;
-    font-weight: 700;
+    background: #F2C46A;
+    color: #4C4541;
+    font-weight: 800;
+    box-shadow: 1px 1px 0 rgba(76, 69, 65, 0.8);
   }
 
   .mobile-nav-icon-wrapper {
@@ -2075,25 +2089,23 @@ select {
 
   .mobile-dot-badge {
     position: absolute;
-    top: -5px;
-    right: -10px;
-    background: #F2C46A;
+    top: -4px;
+    right: -8px;
+    background: #AEAC78;
     color: #4C4541;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 800;
-    padding: 1px 5px;
-    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    padding: 1px 4px;
+    border-radius: 9999px;
     border: 1px solid #4C4541;
-    line-height: 1.1;
+    line-height: 1;
   }
 
-  .mobile-active-pip {
-    position: absolute;
-    bottom: 1px;
-    width: 14px;
-    height: 2px;
-    background: #F2C46A;
-    border-radius: 9999px;
+  .mobile-nav-btn.active .mobile-dot-badge {
+    background: #4C4541;
+    color: #FCF0DA;
+    border-color: #4C4541;
   }
 }
 
@@ -2121,6 +2133,20 @@ select {
   color: #4C4541 !important;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .fullcalendar-dark-theme .fc-toolbar-title {
+    font-size: 1.25rem !important;
+  }
+  .fullcalendar-dark-theme .fc-button {
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.7rem !important;
+  }
+  .fullcalendar-dark-theme .fc-header-toolbar {
+    margin-bottom: 0.75rem !important;
+    gap: 0.5rem;
+  }
 }
 
 .fullcalendar-dark-theme .fc-button {

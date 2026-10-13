@@ -274,7 +274,7 @@ export default function App() {
       />
 
       {/* Main Full-Width Content Viewport with mobile bottom navigation clearance */}
-      <div className="w-full flex-1 pt-[88px] sm:pt-[96px] pb-24 md:pb-12">
+      <div className="w-full flex-1 pt-[68px] sm:pt-[96px] pb-24 md:pb-12">
         {activeTab === 'overview' ? (
           <Overview
             events={events}
@@ -284,7 +284,7 @@ export default function App() {
             onOpenCreateModal={() => setIsCreateModalOpen(true)}
           />
         ) : (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+          <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-8 w-full">
             {activeTab === 'events' && (
               <EventsView
                 events={events}

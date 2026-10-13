@@ -62,6 +62,28 @@ export default function ResourceCalendarView({
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isCancellingBooking, setIsCancellingBooking] = useState(false);
 
+  // Responsive mobile state for calendar viewport
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      const api = calendarRef.current.getApi();
+      if (api) {
+        api.changeView(isMobile ? 'timeGridDay' : 'timeGridWeek');
+      }
+    }
+  }, [isMobile]);
+
   // Current active resource object
   const currentResource = resources.find((r) => r.id === selectedResourceId);
 
@@ -300,20 +322,33 @@ export default function ResourceCalendarView({
           </div>
 
           <div className="text-[11px] font-editorial italic text-[#4C4541]/80 hidden sm:block">
-            Showing week view for <strong>{currentResource?.name || 'Selected Resource'}</strong>
+            Showing {isMobile ? 'day' : 'week'} view for <strong>{currentResource?.name || 'Selected Resource'}</strong>
           </div>
         </div>
 
-        {/* FullCalendar Week View */}
+        {/* FullCalendar Responsive View */}
         <div className="fullcalendar-dark-theme">
           <FullCalendar
             ref={calendarRef}
             plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
-            initialView="timeGridWeek"
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'timeGridWeek,dayGridMonth'
+            initialView={isMobile ? 'timeGridDay' : 'timeGridWeek'}
+            headerToolbar={
+              isMobile
+                ? {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridDay,dayGridMonth'
+                  }
+                : {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,dayGridMonth'
+                  }
+            }
+            views={{
+              timeGridDay: { buttonText: 'Day' },
+              timeGridWeek: { buttonText: 'Week' },
+              dayGridMonth: { buttonText: 'Month' }
             }}
             slotMinTime="08:00:00"
             slotMaxTime="22:00:00"

@@ -150,7 +150,7 @@ export default function MatteLabHero({
       ref={heroContainerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative w-full h-[84vh] min-h-[560px] max-h-[820px] overflow-hidden select-none transition-colors duration-500 ${isDarkDisplay ? 'bg-[#1C1917] text-[#FCF0DA]' : 'bg-[#FCF0DA] text-[#4C4541]'
+      className={`relative w-full h-auto py-12 sm:py-16 md:h-[84vh] md:min-h-[560px] md:max-h-[820px] overflow-hidden select-none transition-colors duration-500 ${isDarkDisplay ? 'bg-[#1C1917] text-[#FCF0DA]' : 'bg-[#FCF0DA] text-[#4C4541]'
         }`}
       style={{
         backgroundColor: isDarkDisplay ? '#1C1917' : '#FCF0DA',
@@ -266,7 +266,7 @@ export default function MatteLabHero({
       </div>
 
       {/* ANCHOR D: Bottom-Left Subtle Floating Pill (Theme & Replay Controls) */}
-      <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 z-30 inline-flex items-center gap-2 p-1.5 rounded-full bg-[#4C4541]/8 hover:bg-[#4C4541]/14 backdrop-blur-md border border-[#4C4541]/20 transition-all shadow-sm">
+      <div className="hidden sm:inline-flex absolute bottom-6 sm:bottom-8 left-6 sm:left-10 z-30 items-center gap-2 p-1.5 rounded-full bg-[#4C4541]/8 hover:bg-[#4C4541]/14 backdrop-blur-md border border-[#4C4541]/20 transition-all shadow-sm">
         <button
           type="button"
           onClick={toggleTheme}
@@ -341,7 +341,7 @@ export default function MatteLabHero({
         }}
       >
         <svg
-          className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[560px] h-auto opacity-50 transition-opacity"
+          className="w-[220px] sm:w-[380px] md:w-[480px] lg:w-[560px] h-auto opacity-40 sm:opacity-50 transition-opacity"
           viewBox="0 0 600 600"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -409,9 +409,9 @@ export default function MatteLabHero({
       >
         <div className="flex flex-col items-center justify-center max-w-[1100px] w-full mx-auto mt-2 sm:mt-4">
           {/* Row 1: Upper Ultra-bold Condensed Sans + Italic Serif */}
-          <div className="flex items-baseline justify-center gap-x-3 sm:gap-x-5 max-w-full">
+          <div className="flex items-baseline justify-center gap-x-2 sm:gap-x-5 max-w-full">
             <span
-              className="font-condensed font-black tracking-tight leading-[0.88] text-[clamp(2.8rem,7.2vw,8.5rem)] uppercase transition-colors whitespace-nowrap select-none"
+              className="font-condensed font-black tracking-tight leading-[0.88] text-[clamp(2.3rem,6.8vw,8.5rem)] uppercase transition-colors whitespace-nowrap select-none"
               style={{
                 color: isDarkDisplay ? '#FCF0DA' : '#4C4541',
                 letterSpacing: '-0.015em'
@@ -421,7 +421,7 @@ export default function MatteLabHero({
             </span>
 
             <span
-              className="font-editorial italic font-normal leading-none text-[clamp(1.8rem,4.8vw,5.2rem)] transition-colors -translate-y-1 sm:-translate-y-2 whitespace-nowrap select-none"
+              className="font-editorial italic font-normal leading-none text-[clamp(1.5rem,4.5vw,5.2rem)] transition-colors -translate-y-0.5 sm:-translate-y-2 whitespace-nowrap select-none"
               style={{
                 color: isDarkDisplay ? '#F2C46A' : '#4C4541'
               }}
@@ -433,7 +433,7 @@ export default function MatteLabHero({
           {/* Row 2: Lower Ultra-bold Condensed Sans */}
           <div className="flex items-center justify-center -mt-1 sm:-mt-2 md:-mt-4 max-w-full">
             <span
-              className="font-condensed font-black tracking-tight leading-[0.88] text-[clamp(2.8rem,7.2vw,8.5rem)] uppercase transition-colors whitespace-nowrap select-none"
+              className="font-condensed font-black tracking-tight leading-[0.88] text-[clamp(2.3rem,6.8vw,8.5rem)] uppercase transition-colors whitespace-nowrap select-none"
               style={{
                 color: isDarkDisplay ? '#FCF0DA' : '#4C4541',
                 letterSpacing: '-0.015em'
@@ -444,11 +444,11 @@ export default function MatteLabHero({
           </div>
 
           {/* Interactive Action Hub Pill */}
-          <div className="mt-7 sm:mt-9 flex flex-wrap items-center justify-center gap-3 z-30">
+          <div className="mt-6 sm:mt-9 flex flex-wrap items-center justify-center gap-2 sm:gap-3 z-30">
             <button
               type="button"
               onClick={onCtaClick}
-              className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#4C4541] hover:bg-[#393431] text-[#FCF0DA] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] hover:shadow-[4px_4px_0_#4C4541] cursor-pointer flex items-center gap-2 border-2 border-[#4C4541]"
+              className="px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-[#4C4541] hover:bg-[#393431] text-[#FCF0DA] font-mono text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] hover:shadow-[4px_4px_0_#4C4541] cursor-pointer flex items-center gap-2 border-2 border-[#4C4541]"
               style={{
                 backgroundColor: isDarkDisplay ? '#F2C46A' : '#4C4541',
                 color: isDarkDisplay ? '#4C4541' : '#FCF0DA',
@@ -456,14 +456,14 @@ export default function MatteLabHero({
               }}
             >
               <span>{ctaText}</span>
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={15} />
             </button>
 
             {onExploreEvents && (
               <button
                 type="button"
                 onClick={onExploreEvents}
-                className="px-5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-white hover:bg-[#FCF0DA] text-[#4C4541] border-2 border-[#4C4541] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] cursor-pointer"
+                className="px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full bg-white hover:bg-[#FCF0DA] text-[#4C4541] border-2 border-[#4C4541] font-mono text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] cursor-pointer"
                 style={{
                   borderColor: isDarkDisplay ? 'rgba(242,196,106,0.4)' : '#4C4541',
                   backgroundColor: isDarkDisplay ? 'transparent' : '#ffffff',
@@ -478,7 +478,7 @@ export default function MatteLabHero({
               <button
                 type="button"
                 onClick={onExploreResources}
-                className="px-5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-[#AEAC78]/25 hover:bg-[#AEAC78]/40 text-[#4C4541] border-2 border-[#4C4541] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] cursor-pointer"
+                className="px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full bg-[#AEAC78]/25 hover:bg-[#AEAC78]/40 text-[#4C4541] border-2 border-[#4C4541] font-mono text-[11px] sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[2.5px_2.5px_0_#4C4541] cursor-pointer"
                 style={{
                   borderColor: isDarkDisplay ? 'rgba(242,196,106,0.35)' : '#4C4541',
                   color: isDarkDisplay ? '#FCF0DA' : '#4C4541'

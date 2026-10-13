@@ -65,11 +65,11 @@ export default function Header({
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${isScrolled
             ? isDark
-              ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#1A1816]/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.85),0_0_0_1px_rgba(242,196,106,0.15)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
-              : 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
+              ? 'top-2 sm:top-4 w-[calc(100%-1rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#1A1816]/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.85),0_0_0_1px_rgba(242,196,106,0.15)] px-3.5 sm:px-7 h-[52px] sm:h-[62px]'
+              : 'top-2 sm:top-4 w-[calc(100%-1rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-3.5 sm:px-7 h-[52px] sm:h-[62px]'
             : isDark
-              ? 'top-0 w-full max-w-full rounded-none bg-[#1C1917]/95 backdrop-blur-md border-b border-white/12 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
-              : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
+              ? 'top-0 w-full max-w-full rounded-none bg-[#1C1917]/95 backdrop-blur-md border-b border-white/12 shadow-none px-3.5 sm:px-10 lg:px-12 h-[56px] sm:h-[70px]'
+              : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-3.5 sm:px-10 lg:px-12 h-[56px] sm:h-[70px]'
           } ${className}`}
       >
         {/* ========================================================
@@ -99,7 +99,7 @@ export default function Header({
                 <img
                   src={mattelabLogo}
                   alt="MatteLab"
-                  className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                  className="h-7 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                 />
               </div>
 
@@ -110,7 +110,7 @@ export default function Header({
                     : 'opacity-0 scale-90 pointer-events-none absolute left-0'
                   }`}
               >
-                <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center">
+                <span className="font-heading font-extrabold text-base sm:text-xl tracking-tight text-white flex items-center">
                   {brandName}
                   <span className="text-white group-hover:text-[#F2C46A] transition-colors">.</span>
                 </span>
@@ -188,7 +188,7 @@ export default function Header({
             - User avatar profile ring
             - Acid-lime sculpted pill CTA button with trailing arrow
            ======================================================== */}
-        <div className="flex items-center gap-3 sm:gap-4 justify-end flex-shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-4 justify-end flex-shrink-0">
           {/* Organizer Status Pill (Desktop only) */}
           {isOrganizer && (
             <span className="hidden lg:inline-flex items-center gap-1.5 text-[10px] font-bold text-amber-300 bg-amber-500/15 px-2.5 py-1 rounded-full border border-amber-500/30">
@@ -247,11 +247,12 @@ export default function Header({
           <button
             type="button"
             onClick={onCtaClick}
-            className="group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] text-xs sm:text-sm font-bold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer flex items-center gap-1.5 shadow-sm hover:shadow-md hover:shadow-[#F2C46A]/30 whitespace-nowrap"
+            className="group px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] text-xs sm:text-sm font-bold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer flex items-center gap-1 sm:gap-1.5 shadow-sm hover:shadow-md hover:shadow-[#F2C46A]/30 whitespace-nowrap"
           >
-            <span>{ctaText}</span>
+            <span className="hidden sm:inline">{ctaText}</span>
+            <span className="inline sm:hidden">{ctaText.replace(' Workshop Event', '').replace(' Workshop', '').replace(' Event', '') || ctaText}</span>
             <ArrowUpRight
-              size={15}
+              size={14}
               className="transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] stroke-[2.2]"
             />
           </button>
@@ -277,7 +278,7 @@ export default function Header({
       {mobileMenuOpen && (
         <div
           className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl ${isDark ? 'bg-[#1C1917]/96 border-white/20' : 'bg-[#4C4541]/96 border-white/12'
-            } backdrop-blur-2xl border p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${isScrolled ? 'top-20' : 'top-[76px]'
+            } backdrop-blur-2xl border p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${isScrolled ? 'top-16 sm:top-20' : 'top-[64px] sm:top-[76px]'
             }`}
         >
           <div className="flex flex-col gap-1">

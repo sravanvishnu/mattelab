@@ -100,13 +100,13 @@ export default function MyRegistrationsView({
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 w-full sm:w-auto">
           {/* Sub-tabs switch with brutalist pill */}
-          <div className="flex items-center bg-white p-1 rounded-full border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541]">
+          <div className="flex items-center bg-white p-1 rounded-full border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] flex-1 sm:flex-initial">
             <button
               type="button"
               onClick={() => setActiveTab('events')}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${activeTab === 'events'
+              className={`flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-mono uppercase transition-all cursor-pointer text-center ${activeTab === 'events'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
@@ -116,25 +116,25 @@ export default function MyRegistrationsView({
             <button
               type="button"
               onClick={() => setActiveTab('equipment')}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'equipment'
+              className={`flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-mono uppercase transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer text-center ${activeTab === 'equipment'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
                 }`}
             >
-              <Wrench size={13} />
+              <Wrench size={12} />
               <span>Machinery ({myBookings.length})</span>
             </button>
           </div>
 
           <button
             type="button"
-            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${loading ? 'animate-spin' : ''
+            className={`p-2 sm:p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer shrink-0 ${loading ? 'animate-spin' : ''
               }`}
             onClick={onRefresh}
             title="Refresh registrations"
             aria-label="Refresh registrations"
           >
-            <RotateCw size={15} />
+            <RotateCw size={14} />
           </button>
         </div>
       </div>

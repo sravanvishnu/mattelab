@@ -37,10 +37,10 @@ export default function ProfileView({
         </p>
       </div>
 
-      <div className="max-w-3xl mx-auto rounded-[28px] border-2 border-[#4C4541] bg-white p-6 sm:p-10 shadow-[5px_5px_0_#4C4541] text-[#4C4541]">
+      <div className="max-w-3xl mx-auto rounded-[22px] sm:rounded-[28px] border-2 border-[#4C4541] bg-white p-4 sm:p-10 shadow-[3px_3px_0_#4C4541] sm:shadow-[5px_5px_0_#4C4541] text-[#4C4541]">
         {/* Profile Card Header */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b-2 border-[#4C4541]/20">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#4C4541] bg-[#FCF0DA] overflow-hidden flex items-center justify-center text-2xl sm:text-3xl font-bold font-condensed text-[#4C4541] shadow-[2.5px_2.5px_0_#4C4541] flex-shrink-0">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 pb-6 sm:pb-8 border-b-2 border-[#4C4541]/20">
+          <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-[#4C4541] bg-[#FCF0DA] overflow-hidden flex items-center justify-center text-xl sm:text-3xl font-bold font-condensed text-[#4C4541] shadow-[2.5px_2.5px_0_#4C4541] flex-shrink-0">
             {currentUser?.photoURL ? (
               <img
                 src={currentUser.photoURL}
@@ -54,42 +54,42 @@ export default function ProfileView({
           </div>
 
           <div className="text-center sm:text-left flex-1">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
               <h3 className="font-condensed text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#4C4541] leading-none">
                 {name}
               </h3>
-              <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${role === 'organizer' || role === 'admin'
+              <span className={`px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase border border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${role === 'organizer' || role === 'admin'
                   ? 'bg-[#F2C46A] text-[#4C4541]'
                   : 'bg-[#AEAC78] text-[#4C4541]'
                 }`}>
                 {role === 'organizer' ? 'Organizer' : role === 'admin' ? 'Administrator' : 'Student Maker'}
               </span>
             </div>
-            <p className="font-mono text-xs sm:text-sm text-[#4C4541]/70 mt-2">{email}</p>
+            <p className="font-mono text-xs sm:text-sm text-[#4C4541]/70 mt-1 sm:mt-2">{email}</p>
           </div>
         </div>
 
         {/* Profile Details List */}
-        <div className="py-6 space-y-4">
+        <div className="py-4 sm:py-6 space-y-3 sm:space-y-4">
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <User size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <User size={15} />
               <span>Full Name</span>
             </div>
-            <span className="font-bold text-[#4C4541]">{name}</span>
+            <span className="font-bold text-[#4C4541] text-right truncate max-w-[160px] sm:max-w-none">{name}</span>
           </div>
 
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <Mail size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <Mail size={15} />
               <span>Registered Email</span>
             </div>
-            <span className="font-mono text-[#4C4541]">{email}</span>
+            <span className="font-mono text-[#4C4541] text-right truncate max-w-[160px] sm:max-w-none">{email}</span>
           </div>
 
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <Shield size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <Shield size={15} />
               <span>System Role</span>
             </div>
             <div className="flex items-center gap-2">
@@ -103,27 +103,27 @@ export default function ProfileView({
           </div>
 
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <Building size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <Building size={15} />
               <span>Institution</span>
             </div>
-            <span className="font-semibold text-right">College of Engineering Trikaripur</span>
+            <span className="font-semibold text-right text-[11px] sm:text-sm">College of Engineering Trikaripur</span>
           </div>
 
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <CalendarCheck size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <CalendarCheck size={15} />
               <span>Active Registrations</span>
             </div>
             <span className="font-bold font-mono text-[#4C4541]">{myRegistrationsCount} Events Confirmed</span>
           </div>
 
           <div className="flex items-center justify-between py-2 border-b border-[#4C4541]/15 text-xs sm:text-sm">
-            <div className="flex items-center gap-3 text-[#4C4541]/70 font-mono">
-              <Sparkles size={16} />
+            <div className="flex items-center gap-2 sm:gap-3 text-[#4C4541]/70 font-mono">
+              <Sparkles size={15} />
               <span>Makerspace UID</span>
             </div>
-            <span className="font-mono text-xs text-[#4C4541]/70">{currentUser?.uid || '—'}</span>
+            <span className="font-mono text-[11px] sm:text-xs text-[#4C4541]/70 truncate max-w-[160px] sm:max-w-none">{currentUser?.uid || '—'}</span>
           </div>
         </div>
 
