@@ -113,7 +113,7 @@ export default function Footer({
               {/* Column 1: Headline, Inspiring Quote & Sculpted CTA (Span 5 on XL) */}
               <div className="xl:col-span-5 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-condensed text-3xl sm:text-4xl lg:text-[44px] font-bold uppercase tracking-tight text-white leading-[1.05]">
+                  <h2 className="font-condensed text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-white leading-[1.08]">
                     {headline}
                   </h2>
 
@@ -130,7 +130,7 @@ export default function Footer({
                     <button
                       type="button"
                       onClick={onOpenCreateModal}
-                      className="group px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-md hover:shadow-lg hover:shadow-[#F2C46A]/30"
+                      className="group px-5 py-2.5 rounded-full bg-[#F2C46A] hover:bg-[#e0b45c] text-[#4C4541] font-bold text-xs sm:text-sm tracking-tight transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-md hover:shadow-lg hover:shadow-[#F2C46A]/30"
                     >
                       <span>{ctaText}</span>
                       <ArrowUpRight
@@ -226,7 +226,7 @@ export default function Footer({
                     >
                       Workshops
                     </button>
-                    <span className="px-1.5 py-0.2 rounded-full bg-[#AEAC78] text-[#4C4541] text-[9px] font-black leading-tight">
+                    <span className="px-1.5 py-0.5 rounded-full bg-[#AEAC78] text-[#4C4541] text-[9px] font-black leading-tight">
                       NEW
                     </span>
                   </li>
@@ -317,10 +317,10 @@ export default function Footer({
               THE MONUMENTAL TYPOGRAPHIC STATEMENT
               "DREAM IT · SOLDER IT · BUILD IT"
              ======================================================== */}
-          <div className="my-10 sm:my-14 lg:my-16 select-none overflow-hidden">
-            <h1 className="font-condensed text-3xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[124px] font-black uppercase tracking-tight text-white leading-none whitespace-nowrap">
+          <div className="my-8 sm:my-10 lg:my-12 select-none overflow-hidden">
+            <div role="heading" aria-level="2" className="font-condensed text-[clamp(1.75rem,5.2vw,5.5rem)] font-black uppercase tracking-tight text-white/90 leading-none whitespace-nowrap">
               {punchyStatement}
-            </h1>
+            </div>
           </div>
 
           {/* ========================================================

@@ -63,15 +63,14 @@ export default function Header({
     <>
       {/* Morphing Header: Transition from full-width sides to centered floating capsule dock */}
       <header
-        className={`fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
-          isScrolled
+        className={`fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${isScrolled
             ? isDark
               ? 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#1A1816]/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.85),0_0_0_1px_rgba(242,196,106,0.15)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
               : 'top-3 sm:top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-[#4C4541]/95 backdrop-blur-xl border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] px-5 sm:px-7 h-[58px] sm:h-[62px]'
             : isDark
               ? 'top-0 w-full max-w-full rounded-none bg-[#1C1917]/95 backdrop-blur-md border-b border-white/12 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
               : 'top-0 w-full max-w-full rounded-none bg-[#FCF0DA]/95 backdrop-blur-md border-b border-[#4C4541]/15 shadow-none px-6 sm:px-10 lg:px-12 h-[66px] sm:h-[70px]'
-        } ${className}`}
+          } ${className}`}
       >
         {/* ========================================================
             SECTION 1: LEFT - Logo
@@ -92,11 +91,10 @@ export default function Header({
             <div className="relative flex items-center">
               {/* State 1: Before Transition -> Seamless MatteLab Transparent Logo (NO BOX) */}
               <div
-                className={`transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  !isScrolled
+                className={`transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${!isScrolled
                     ? 'opacity-100 scale-100 pointer-events-auto'
                     : 'opacity-0 scale-90 pointer-events-none absolute left-0'
-                }`}
+                  }`}
               >
                 <img
                   src={mattelabLogo}
@@ -107,11 +105,10 @@ export default function Header({
 
               {/* State 2: After Transition -> Modern Editorial Wordmark (Shape style) */}
               <div
-                className={`transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  isScrolled
+                className={`transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${isScrolled
                     ? 'opacity-100 scale-100 pointer-events-auto'
                     : 'opacity-0 scale-90 pointer-events-none absolute left-0'
-                }`}
+                  }`}
               >
                 <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center">
                   {brandName}
@@ -122,9 +119,8 @@ export default function Header({
           </a>
 
           {!isScrolled && subtitle && (
-            <span className={`hidden xl:inline-block text-[11px] font-medium tracking-wider border-l pl-2.5 ml-1 transition-opacity duration-300 ${
-              isDark ? 'text-stone-400 border-white/20' : 'text-stone-500 border-stone-300'
-            }`}>
+            <span className={`hidden xl:inline-block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider border-l pl-2.5 ml-1 transition-opacity duration-300 ${isDark ? 'text-[#FCF0DA]/60 border-white/20' : 'text-[#4C4541]/70 border-[#4C4541]/30'
+              }`}>
               {subtitle}
             </span>
           )}
@@ -147,11 +143,10 @@ export default function Header({
                     <button
                       type="button"
                       onClick={() => onSelect?.(item.id)}
-                      className={`group relative py-1 text-[13px] sm:text-sm font-medium tracking-normal transition-colors duration-200 cursor-pointer flex items-center ${
-                        isActive
-                          ? (isDark ? 'text-[#F2C46A] font-semibold' : (isScrolled ? 'text-white' : 'text-slate-950 font-semibold'))
-                          : (isDark ? 'text-stone-300 hover:text-white' : (isScrolled ? 'text-[#9ca3af] hover:text-white' : 'text-stone-600 hover:text-slate-950'))
-                      }`}
+                      className={`group relative py-1 text-[13px] sm:text-sm font-medium tracking-normal transition-colors duration-200 cursor-pointer flex items-center ${isActive
+                          ? (isDark ? 'text-[#F2C46A] font-bold' : (isScrolled ? 'text-[#F2C46A] font-bold' : 'text-[#4C4541] font-bold'))
+                          : (isDark ? 'text-stone-300 hover:text-white' : (isScrolled ? 'text-stone-300 hover:text-white' : 'text-[#4C4541]/75 hover:text-[#4C4541]'))
+                        }`}
                     >
                       <span>{item.label}</span>
 
@@ -167,7 +162,7 @@ export default function Header({
 
                       {/* Admin Highlight Indicator */}
                       {item.highlight && (
-                        <span className="ml-1.5 text-[9px] font-bold uppercase text-[#4C4541] bg-[#AEAC78]/30 px-1.5 py-0.5 rounded-full border border-[#AEAC78]/50">
+                        <span className="ml-1.5 text-[9px] font-bold uppercase text-[#4C4541] bg-[#AEAC78]/40 px-1.5 py-0.5 rounded-full border border-[#AEAC78]">
                           Admin
                         </span>
                       )}
@@ -175,9 +170,8 @@ export default function Header({
                       {/* Active-state Razor Underline Indicator */}
                       {isActive && (
                         <span
-                          className={`absolute -bottom-1 left-0 right-0 h-[2px] rounded-full transition-all duration-300 ${
-                            isDark ? 'bg-[#F2C46A]' : (isScrolled ? 'bg-white' : 'bg-slate-950')
-                          }`}
+                          className={`absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full transition-all duration-300 ${isDark ? 'bg-[#F2C46A]' : (isScrolled ? 'bg-[#F2C46A]' : 'bg-[#4C4541]')
+                            }`}
                         />
                       )}
                     </button>
@@ -219,9 +213,8 @@ export default function Header({
             ) : (
               <Moon
                 size={18}
-                className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-active:rotate-90 stroke-[1.8] ${
-                  isScrolled ? 'text-neutral-200' : 'text-[#4C4541]'
-                }`}
+                className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-active:rotate-90 stroke-[1.8] ${isScrolled ? 'text-neutral-200' : 'text-[#4C4541]'
+                  }`}
               />
             )}
           </button>
@@ -231,11 +224,10 @@ export default function Header({
             <button
               type="button"
               onClick={() => onSelect?.('profile')}
-              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-sm cursor-pointer overflow-hidden transition-all duration-200 hover:scale-105 ${
-                isScrolled
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-sm cursor-pointer overflow-hidden transition-all duration-200 hover:scale-105 ${isScrolled
                   ? 'bg-neutral-800 text-white ring-1 ring-white/20 hover:ring-white'
-                  : 'bg-stone-200 text-stone-900 ring-1 ring-stone-300 hover:ring-stone-500'
-              }`}
+                  : (isDark ? 'bg-[#282421] text-[#FCF0DA] border-2 border-white/20' : 'bg-white text-[#4C4541] border-2 border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541]')
+                }`}
               title={`${displayName} — View Profile`}
             >
               {user?.photoURL ? (
@@ -269,11 +261,10 @@ export default function Header({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-1.5 rounded-full transition-colors cursor-pointer ${
-                isScrolled
+              className={`p-1.5 rounded-full transition-colors cursor-pointer ${isScrolled
                   ? 'text-slate-300 hover:text-white hover:bg-white/10'
-                  : 'text-stone-700 hover:text-slate-950 hover:bg-black/5'
-              }`}
+                  : (isDark ? 'text-[#FCF0DA] hover:bg-white/10' : 'text-[#4C4541] hover:bg-black/5')
+                }`}
               aria-label="Toggle Mobile Menu"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -285,11 +276,9 @@ export default function Header({
       {/* Mobile Dropdown Drawer when open */}
       {mobileMenuOpen && (
         <div
-          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl ${
-            isDark ? 'bg-[#1C1917]/96 border-white/20' : 'bg-[#4C4541]/96 border-white/12'
-          } backdrop-blur-2xl border p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${
-            isScrolled ? 'top-20' : 'top-[76px]'
-          }`}
+          className={`fixed z-40 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-3xl ${isDark ? 'bg-[#1C1917]/96 border-white/20' : 'bg-[#4C4541]/96 border-white/12'
+            } backdrop-blur-2xl border p-3.5 shadow-2xl space-y-2 animate-in slide-in-from-top-2 duration-200 transition-all ${isScrolled ? 'top-20' : 'top-[76px]'
+            }`}
         >
           <div className="flex flex-col gap-1">
             {items.map((item) => {
@@ -303,11 +292,10 @@ export default function Header({
                     onSelect?.(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
-                    isActive
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors cursor-pointer ${isActive
                       ? 'bg-white/15 text-white shadow-sm'
                       : 'text-neutral-300 hover:bg-white/5'
-                  }`}
+                    }`}
                 >
                   <span>{item.label}</span>
                   {item.badge && item.badge > 0 && (

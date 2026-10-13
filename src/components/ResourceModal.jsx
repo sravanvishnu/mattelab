@@ -71,7 +71,7 @@ export default function ResourceModal({
               <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541] leading-none">
+              <h3 className="font-condensed text-xl sm:text-2xl font-bold uppercase text-[#4C4541] leading-none">
                 {isEditing ? 'Edit Resource' : 'Add New Resource'}
               </h3>
               <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
@@ -122,11 +122,10 @@ export default function ResourceModal({
               <button
                 type="button"
                 onClick={() => setType('machine')}
-                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                  type === 'machine'
+                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${type === 'machine'
                     ? 'bg-[#4C4541] text-[#FCF0DA]'
                     : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-                }`}
+                  }`}
               >
                 <Wrench size={15} />
                 <span>Machine</span>
@@ -135,11 +134,10 @@ export default function ResourceModal({
               <button
                 type="button"
                 onClick={() => setType('space')}
-                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                  type === 'space'
+                className={`flex items-center justify-center gap-2.5 p-3 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${type === 'space'
                     ? 'bg-[#4C4541] text-[#FCF0DA]'
                     : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-                }`}
+                  }`}
               >
                 <Building2 size={15} />
                 <span>Lab Space</span>
@@ -169,11 +167,10 @@ export default function ResourceModal({
               <button
                 type="button"
                 onClick={() => setStatus('active')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                  status === 'active'
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${status === 'active'
                     ? 'bg-[#AEAC78] text-[#4C4541]'
                     : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-                }`}
+                  }`}
               >
                 <CheckCircle2 size={15} />
                 <span>Active (Available)</span>
@@ -182,11 +179,10 @@ export default function ResourceModal({
               <button
                 type="button"
                 onClick={() => setStatus('inactive')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                  status === 'inactive'
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-2xl border-2 border-[#4C4541] text-xs font-bold font-mono uppercase transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${status === 'inactive'
                     ? 'bg-[#F2C46A] text-[#4C4541]'
                     : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-                }`}
+                  }`}
               >
                 <AlertCircle size={15} />
                 <span>Maintenance</span>
@@ -226,8 +222,8 @@ export default function ResourceModal({
               {isSubmitting
                 ? 'Saving...'
                 : isEditing
-                ? 'Save Changes'
-                : 'Create Resource'}
+                  ? 'Save Changes'
+                  : 'Create Resource'}
             </button>
           </div>
         </form>

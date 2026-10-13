@@ -190,11 +190,10 @@ export default function EventsView({
         <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar">
           <button
             type="button"
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-              filterMode === 'all'
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterMode === 'all'
                 ? 'bg-[#4C4541] text-[#FCF0DA]'
                 : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-            }`}
+              }`}
             onClick={() => setFilterMode('all')}
           >
             All ({events.length})
@@ -202,11 +201,10 @@ export default function EventsView({
 
           <button
             type="button"
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-              filterMode === 'open'
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterMode === 'open'
                 ? 'bg-[#4C4541] text-[#FCF0DA]'
                 : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-            }`}
+              }`}
             onClick={() => setFilterMode('open')}
           >
             Open for Signups
@@ -214,11 +212,10 @@ export default function EventsView({
 
           <button
             type="button"
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-              filterMode === 'registered'
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterMode === 'registered'
                 ? 'bg-[#4C4541] text-[#FCF0DA]'
                 : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-            }`}
+              }`}
             onClick={() => setFilterMode('registered')}
           >
             Registered ({registeredEventIds.size})
@@ -226,11 +223,10 @@ export default function EventsView({
 
           <button
             type="button"
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-              filterMode === 'proposals'
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterMode === 'proposals'
                 ? 'bg-[#4C4541] text-[#FCF0DA]'
                 : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-            }`}
+              }`}
             onClick={() => setFilterMode('proposals')}
           >
             Submissions ({myProposals.length})
@@ -239,17 +235,16 @@ export default function EventsView({
           {isAdmin && (
             <button
               type="button"
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                filterMode === 'approvals'
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterMode === 'approvals'
                   ? 'bg-[#F2C46A] text-[#4C4541]'
                   : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
               onClick={() => setFilterMode('approvals')}
             >
               <div className="flex items-center gap-1.5">
                 <ShieldCheck size={13} />
                 <span>Approvals</span>
-                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#4C4541] text-[#FCF0DA]">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#4C4541] text-[#FCF0DA]">
                   {pendingEvents.length}
                 </span>
               </div>
@@ -258,9 +253,8 @@ export default function EventsView({
 
           <button
             type="button"
-            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
-              loading ? 'animate-spin' : ''
-            }`}
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${loading ? 'animate-spin' : ''
+              }`}
             onClick={onRefresh}
             title="Refresh events list"
             aria-label="Refresh events"
@@ -306,17 +300,17 @@ export default function EventsView({
             {filterMode === 'approvals'
               ? 'No Pending Event Approvals'
               : filterMode === 'proposals'
-              ? 'You have not proposed any events yet'
-              : 'No events found'}
+                ? 'You have not proposed any events yet'
+                : 'No events found'}
           </h3>
           <p className="text-xs sm:text-sm text-[#4C4541]/80 max-w-md mx-auto mt-2 leading-relaxed font-sans">
             {filterMode === 'approvals'
               ? 'All student and organizer event proposals have been reviewed and published.'
               : filterMode === 'proposals'
-              ? 'Have an idea for a robotics workshop, IoT build, or coding hack session? Propose an event now!'
-              : searchQuery
-              ? `No events matching "${searchQuery}". Try clearing search keywords.`
-              : 'There are currently no upcoming events scheduled in this filter.'}
+                ? 'Have an idea for a robotics workshop, IoT build, or coding hack session? Propose an event now!'
+                : searchQuery
+                  ? `No events matching "${searchQuery}". Try clearing search keywords.`
+                  : 'There are currently no upcoming events scheduled in this filter.'}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

@@ -31,7 +31,7 @@ export default function ConfirmModal({
           </button>
         </div>
         <div className="py-4">
-          <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541] leading-none">{title}</h3>
+          <h3 className="font-condensed text-xl sm:text-2xl font-bold uppercase text-[#4C4541] leading-none">{title}</h3>
           <p className="text-xs sm:text-sm text-[#4C4541]/85 font-sans mt-2.5 leading-relaxed">{message}</p>
         </div>
         <div className="pt-4 border-t-2 border-[#4C4541]/20 flex items-center justify-end gap-3">
@@ -45,11 +45,10 @@ export default function ConfirmModal({
           </button>
           <button
             type="button"
-            className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer ${
-              isDanger
+            className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border-2 border-[#4C4541] shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer ${isDanger
                 ? 'bg-rose-600 hover:bg-rose-500 text-white'
                 : 'bg-[#4C4541] hover:bg-[#F2C46A] text-[#FCF0DA] hover:text-[#4C4541]'
-            }`}
+              }`}
             onClick={onConfirm}
             disabled={isLoading}
           >

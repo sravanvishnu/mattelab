@@ -202,7 +202,7 @@ export default function ResourceCalendarView({
               [ LIVE SCHEDULE ] · EQUIPMENT & BENCH BOOKINGS
             </span>
           </div>
-          <h2 className="font-condensed text-3xl sm:text-4xl font-bold uppercase tracking-tight text-[#4C4541] flex flex-wrap items-center gap-2.5">
+          <h2 className="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#4C4541] flex flex-wrap items-center gap-2.5">
             <span>Equipment Calendar</span>
             {currentResource && (
               <span className="px-3 py-0.5 rounded-full bg-[#F2C46A] border-2 border-[#4C4541] text-[#4C4541] text-xs font-mono font-bold shadow-[1.5px_1.5px_0_#4C4541]">
@@ -255,16 +255,15 @@ export default function ResourceCalendarView({
               key={res.id}
               type="button"
               onClick={() => setSelectedResourceId(res.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all shrink-0 cursor-pointer border-2 border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${
-                isSelected
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all shrink-0 cursor-pointer border-2 border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${isSelected
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               {isMachine ? <Wrench className="w-3.5 h-3.5" /> : <Building2 className="w-3.5 h-3.5" />}
               <span>{res.name}</span>
               {res.status === 'inactive' && (
-                <span className="px-1.5 py-0.2 rounded-full bg-red-100 text-red-800 border border-red-300 text-[10px]">
+                <span className="px-1.5 py-0.5 rounded-full bg-red-100 text-red-800 border border-red-300 text-[10px]">
                   Maintenance
                 </span>
               )}

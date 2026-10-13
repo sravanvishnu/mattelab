@@ -125,7 +125,7 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
               <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="font-condensed text-2xl sm:text-3xl font-bold uppercase leading-none text-[#4C4541]">
+              <h3 className="font-condensed text-xl sm:text-2xl font-bold uppercase leading-none text-[#4C4541]">
                 {isAdmin ? 'Create or Schedule Event' : 'Propose Community Event'}
               </h3>
               <p className="font-mono text-xs text-[#4C4541]/70 mt-0.5">
@@ -430,8 +430,8 @@ export default function CreateEventModal({ isOpen, onClose, onEventCreated }) {
                 {isSubmitting
                   ? 'Submitting...'
                   : isAdmin && watch('publishImmediately')
-                  ? 'Publish Event'
-                  : 'Submit Proposal'}
+                    ? 'Publish Event'
+                    : 'Submit Proposal'}
               </span>
             </button>
           </div>

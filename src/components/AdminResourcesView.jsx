@@ -173,7 +173,7 @@ export default function AdminResourcesView({
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
             <span>[ 04 / HARDWARE ] · MAKERSPACE FACILITIES</span>
           </div>
-          <h2 className="font-condensed text-3xl sm:text-5xl font-bold tracking-tight text-[#4C4541] uppercase">
+          <h2 className="font-condensed text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#4C4541] uppercase">
             Makerspace Resources & Equipment
           </h2>
           <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
@@ -187,11 +187,10 @@ export default function AdminResourcesView({
             <button
               type="button"
               onClick={() => setViewMode('inventory')}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${
-                viewMode === 'inventory'
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${viewMode === 'inventory'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               Equipment List
             </button>
@@ -201,11 +200,10 @@ export default function AdminResourcesView({
                 setCalendarTargetResourceId(resources[0]?.id || null);
                 setViewMode('calendar');
               }}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                viewMode === 'calendar'
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${viewMode === 'calendar'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               <Calendar size={13} />
               <span>Week Calendar</span>
@@ -214,9 +212,8 @@ export default function AdminResourcesView({
 
           <button
             type="button"
-            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
-              loading ? 'animate-spin' : ''
-            }`}
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${loading ? 'animate-spin' : ''
+              }`}
             onClick={onRefresh}
             title="Refresh resource list"
             aria-label="Refresh resource list"
@@ -246,7 +243,7 @@ export default function AdminResourcesView({
               <Layers size={16} />
             </div>
           </div>
-          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+          <div className="font-condensed text-3xl sm:text-4xl font-bold text-[#4C4541] leading-none">
             {stats.total}
           </div>
           <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Lab inventory</p>
@@ -259,7 +256,7 @@ export default function AdminResourcesView({
               <Cpu size={16} />
             </div>
           </div>
-          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+          <div className="font-condensed text-3xl sm:text-4xl font-bold text-[#4C4541] leading-none">
             {stats.activeMachines}
           </div>
           <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Ready for booking</p>
@@ -272,7 +269,7 @@ export default function AdminResourcesView({
               <Building2 size={16} />
             </div>
           </div>
-          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+          <div className="font-condensed text-3xl sm:text-4xl font-bold text-[#4C4541] leading-none">
             {stats.activeSpaces}
           </div>
           <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">Available stations</p>
@@ -285,7 +282,7 @@ export default function AdminResourcesView({
               <AlertCircle size={16} />
             </div>
           </div>
-          <div className="font-condensed text-4xl sm:text-5xl font-bold text-[#4C4541] leading-none">
+          <div className="font-condensed text-3xl sm:text-4xl font-bold text-[#4C4541] leading-none">
             {stats.inactive}
           </div>
           <p className="mt-1 text-xs text-[#4C4541]/70 font-medium">In maintenance</p>
@@ -316,11 +313,10 @@ export default function AdminResourcesView({
               key={tab.id}
               type="button"
               onClick={() => setFilterType(tab.id)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${
-                filterType === tab.id
+              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold font-mono uppercase border-2 border-[#4C4541] transition-all cursor-pointer shadow-[1.5px_1.5px_0_#4C4541] ${filterType === tab.id
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'bg-white text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -334,7 +330,7 @@ export default function AdminResourcesView({
           <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FCF0DA] border-2 border-[#4C4541] flex items-center justify-center text-[#4C4541] mb-4 shadow-[2px_2px_0_#4C4541]">
             <Wrench size={28} />
           </div>
-          <h4 className="font-condensed text-2xl sm:text-3xl font-bold uppercase text-[#4C4541]">No resources found</h4>
+          <h4 className="font-condensed text-xl sm:text-2xl font-bold uppercase text-[#4C4541]">No resources found</h4>
           <p className="text-xs sm:text-sm text-[#4C4541]/80 mt-2 max-w-sm mx-auto font-sans leading-relaxed">
             {searchQuery
               ? `No matching items for "${searchQuery}". Try clearing search keywords.`
@@ -403,16 +399,14 @@ export default function AdminResourcesView({
                         onClick={() => isAdmin && handleToggleStatus(res)}
                         disabled={!isAdmin}
                         title={isAdmin ? 'Click to toggle status' : undefined}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] transition-all ${
-                          isActive
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] transition-all ${isActive
                             ? 'bg-[#AEAC78] text-[#4C4541]'
                             : 'bg-[#F2C46A] text-[#4C4541]'
-                        } ${!isAdmin ? 'cursor-default' : 'cursor-pointer hover:opacity-85'}`}
+                          } ${!isAdmin ? 'cursor-default' : 'cursor-pointer hover:opacity-85'}`}
                       >
                         <span
-                          className={`w-2 h-2 rounded-full ${
-                            isActive ? 'bg-[#4C4541]' : 'bg-[#4C4541]'
-                          }`}
+                          className={`w-2 h-2 rounded-full ${isActive ? 'bg-[#4C4541]' : 'bg-[#4C4541]'
+                            }`}
                         />
                         <span>{isActive ? 'Active' : 'Maintenance'}</span>
                       </button>

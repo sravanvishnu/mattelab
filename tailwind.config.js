@@ -88,9 +88,11 @@ export default {
         },
       },
       fontFamily: {
-        condensed: ["'Bebas Neue'", 'sans-serif'],
-        editorial: ["'Newsreader'", 'Georgia', 'serif'],
-        heading: ["'Outfit'", 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        condensed: ["'Bebas Neue'", 'Outfit', 'sans-serif'],
+        editorial: ["'Newsreader'", "'Playfair Display'", 'Georgia', 'serif'],
+        heading: ["'Outfit'", '-apple-system', 'sans-serif'],
+        mono: ["'JetBrains Mono'", 'ui-monospace', 'monospace'],
       },
       borderRadius: {
         lg: "var(--radius, 0.75rem)",

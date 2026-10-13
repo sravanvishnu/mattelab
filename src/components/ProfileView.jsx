@@ -29,7 +29,7 @@ export default function ProfileView({
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AEAC78]/25 border border-[#4C4541]/30 text-[#4C4541] text-xs font-mono font-bold tracking-wider uppercase mb-2">
           <span>[ 04 / ID ] · MAKER IDENTITY</span>
         </div>
-        <h2 className="font-condensed text-3xl sm:text-5xl font-bold tracking-tight text-[#4C4541] uppercase">
+        <h2 className="font-condensed text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#4C4541] uppercase">
           Makerspace Member Profile
         </h2>
         <p className="font-editorial italic text-sm sm:text-base text-[#4C4541]/80 mt-1 max-w-2xl font-normal">
@@ -40,7 +40,7 @@ export default function ProfileView({
       <div className="max-w-3xl mx-auto rounded-[28px] border-2 border-[#4C4541] bg-white p-6 sm:p-10 shadow-[5px_5px_0_#4C4541] text-[#4C4541]">
         {/* Profile Card Header */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b-2 border-[#4C4541]/20">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-3 border-[#4C4541] bg-[#FCF0DA] overflow-hidden flex items-center justify-center text-3xl font-bold font-condensed text-[#4C4541] shadow-[3px_3px_0_#4C4541] flex-shrink-0">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#4C4541] bg-[#FCF0DA] overflow-hidden flex items-center justify-center text-2xl sm:text-3xl font-bold font-condensed text-[#4C4541] shadow-[2.5px_2.5px_0_#4C4541] flex-shrink-0">
             {currentUser?.photoURL ? (
               <img
                 src={currentUser.photoURL}
@@ -55,14 +55,13 @@ export default function ProfileView({
 
           <div className="text-center sm:text-left flex-1">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
-              <h3 className="font-condensed text-3xl sm:text-5xl font-bold uppercase tracking-tight text-[#4C4541] leading-none">
+              <h3 className="font-condensed text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#4C4541] leading-none">
                 {name}
               </h3>
-              <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${
-                role === 'organizer' || role === 'admin'
+              <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border border-[#4C4541] shadow-[1.5px_1.5px_0_#4C4541] ${role === 'organizer' || role === 'admin'
                   ? 'bg-[#F2C46A] text-[#4C4541]'
                   : 'bg-[#AEAC78] text-[#4C4541]'
-              }`}>
+                }`}>
                 {role === 'organizer' ? 'Organizer' : role === 'admin' ? 'Administrator' : 'Student Maker'}
               </span>
             </div>
@@ -132,7 +131,7 @@ export default function ProfileView({
         <div className="pt-4 border-t-2 border-[#4C4541]/20 flex items-center justify-end">
           <button
             type="button"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 border-2 border-[#4C4541] text-xs font-bold font-mono uppercase shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-900 border-2 border-[#4C4541] text-xs font-bold font-mono uppercase shadow-[2px_2px_0_#4C4541] transition-all cursor-pointer"
             onClick={onPromptLogout}
           >
             <LogOut size={16} />

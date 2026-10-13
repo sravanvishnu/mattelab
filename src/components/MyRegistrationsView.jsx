@@ -11,7 +11,8 @@ import {
   Wrench,
   Ban,
   Building2,
-  AlertTriangle
+  AlertTriangle,
+  CheckCircle2
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -105,22 +106,20 @@ export default function MyRegistrationsView({
             <button
               type="button"
               onClick={() => setActiveTab('events')}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${
-                activeTab === 'events'
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all cursor-pointer ${activeTab === 'events'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               Events ({myRegistrations.length})
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('equipment')}
-              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                activeTab === 'equipment'
+              className={`px-4 py-2 rounded-full text-xs font-bold font-mono uppercase transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'equipment'
                   ? 'bg-[#4C4541] text-[#FCF0DA]'
                   : 'text-[#4C4541] hover:bg-[#F2C46A]/20'
-              }`}
+                }`}
             >
               <Wrench size={13} />
               <span>Machinery ({myBookings.length})</span>
@@ -129,9 +128,8 @@ export default function MyRegistrationsView({
 
           <button
             type="button"
-            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${
-              loading ? 'animate-spin' : ''
-            }`}
+            className={`p-2.5 rounded-full border-2 border-[#4C4541] bg-white text-[#4C4541] hover:bg-[#F2C46A]/30 shadow-[1.5px_1.5px_0_#4C4541] transition-all cursor-pointer ${loading ? 'animate-spin' : ''
+              }`}
             onClick={onRefresh}
             title="Refresh registrations"
             aria-label="Refresh registrations"

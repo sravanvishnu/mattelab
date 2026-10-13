@@ -212,7 +212,7 @@ export default function BookingFormModal({
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-condensed text-2xl font-bold uppercase tracking-wide text-[#4C4541]">
+              <h3 className="font-condensed text-xl font-bold uppercase tracking-wide text-[#4C4541]">
                 Reserve Equipment / Space
               </h3>
               <p className="font-editorial italic text-xs text-[#4C4541]/80">
